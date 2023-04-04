@@ -8,7 +8,7 @@ Contains the following features:
 * Notes (supports notifications, and can be hidden).
 * Time, date and weather widgets.
 * System info widget:
-  * Wireless bluetooth device battery (uses [https://www.bluetoothgoodies.com/](Bluetooth battery monitor) api).
+  * Wireless bluetooth device battery (uses [https://www.bluetoothgoodies.com](Bluetooth battery monitor) api).
   * Cpu usage.
   * Cpu temperature.
   * Ram usage / available.
