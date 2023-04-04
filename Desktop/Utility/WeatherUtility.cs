@@ -19,7 +19,7 @@ static class WeatherUtility
                 return new();
 
             using var client = new HttpClient();
-            var json = await client.GetStringAsync($"https://api.openweathermap.org/data/2.5/weather?q={Settings.Weather.Current.Value.SearchLocation}&units={Settings.Weather.Current.Value.Unit}&appid={Settings.Weather.Current.Value.ApiKey}");
+            var json = await client.GetStringAsync(Settings.Weather.Current.Value.Endpoint);
             var result = JsonSerializer.Deserialize<Result>(json);
 
             return new()

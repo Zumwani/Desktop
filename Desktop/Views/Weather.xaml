@@ -41,7 +41,9 @@
                     <StackPanel Margin="12">
 
                         <TextBlock Margin="0,12">
-                            <Run Text="https://api.openweathermap.org/data/2.5/weather?q="/><Run Text="{settings:Weather Path=Value.SearchLocation}"/><Run Text="&amp;units="/><Run Text="{settings:Weather Path=Value.Unit}"/><Run Text="&amp;appid="/><Run Text="{settings:Weather Path=Value.ApiKey}"/>
+                            <Hyperlink Click="Hyperlink_Click">
+                                <Run Text="{settings:Weather Path=Value.Endpoint, Mode=OneWay}"/>
+                            </Hyperlink>
                         </TextBlock>
                         
                         <TextBlock Text="Api key:" Margin="0,0,0,6"/>

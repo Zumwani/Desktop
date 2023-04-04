@@ -65,6 +65,9 @@ public class Weather : Setting<Weather.Config, Weather>
             !string.IsNullOrWhiteSpace(ApiKey) ||
             !string.IsNullOrWhiteSpace(Unit);
 
+        [SafeForDependencyAnalysis]
+        public string Endpoint => $"https://api.openweathermap.org/data/2.5/weather?q={SearchLocation}&units={Unit}&appid={ApiKey}";
+
     }
 
 }
