@@ -12,11 +12,13 @@ public class WeatherExtension : Binding
     public class Helper
     {
         public Models.Weather Weather { get; private set; }
-        public Helper() => ActionUtility.Invoke(TimeSpan.FromMinutes(1), async () => Weather = await WeatherUtility.Get());
-
+        public Helper() => ActionUtility.Invoke(TimeSpan.FromMinutes(1), Update);
+        public async void Update() => Weather = await WeatherUtility.Get();
     }
 
     static readonly Helper helper = new();
+
+    public static void Update() => helper.Update();
 
     public WeatherExtension()
     {

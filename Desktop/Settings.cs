@@ -2,6 +2,7 @@
 using System.Windows.Media;
 using Common.Settings.Types;
 using Desktop.Models;
+using PostSharp.Patterns.Model;
 
 namespace Desktop.Settings;
 
@@ -22,18 +23,6 @@ public class WallpaperStretch : Setting<Stretch, WallpaperStretch>
 
 public class WallpaperOffset : Setting<Thickness, WallpaperOffset>
 { }
-
-//public class Bounds : Setting<Rect, Bounds>
-//{
-
-//    public override Rect DefaultValue =>
-//        new(
-//            x: (SystemParameters.FullPrimaryScreenWidth / 2) - 400,
-//            y: (SystemParameters.FullPrimaryScreenHeight / 2) - 300,
-//            width: 800,
-//            height: 600);
-
-//}
 
 public class Left : Setting<double, Left>
 {
@@ -57,3 +46,25 @@ public class Height : Setting<double, Height>
 
 public class ShowHiddenNotes : Setting<bool, ShowHiddenNotes>
 { }
+
+public class Weather : Setting<Weather.Config, Weather>
+{
+
+    public override Config? DefaultValue => new();
+
+    [NotifyPropertyChanged]
+    public class Config
+    {
+
+        public string? SearchLocation { get; set; }
+        public string? ApiKey { get; set; }
+        public string? Unit { get; set; } = "metric";
+
+        public bool IsValid =>
+            !string.IsNullOrWhiteSpace(SearchLocation) ||
+            !string.IsNullOrWhiteSpace(ApiKey) ||
+            !string.IsNullOrWhiteSpace(Unit);
+
+    }
+
+}

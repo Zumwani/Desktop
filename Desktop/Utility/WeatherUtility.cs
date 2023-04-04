@@ -15,8 +15,11 @@ static class WeatherUtility
         try
         {
 
+            if (Settings.Weather.Current.Value is null || !Settings.Weather.Current.Value.IsValid)
+                return new();
+
             using var client = new HttpClient();
-            var json = await client.GetStringAsync("https://api.openweathermap.org/data/2.5/weather?q=lindesberg&units=metric&appid=39cba963c6e14e95929f371cef19f99a");
+            var json = await client.GetStringAsync($"https://api.openweathermap.org/data/2.5/weather?q={Settings.Weather.Current.Value.SearchLocation}&units={Settings.Weather.Current.Value.Unit}&appid={Settings.Weather.Current.Value.ApiKey}");
             var result = JsonSerializer.Deserialize<Result>(json);
 
             return new()
