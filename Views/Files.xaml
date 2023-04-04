@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="Desktop.Views.Files"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Desktop.Views"
+             xmlns:popups="clr-namespace:Desktop.Views.Popups"
+             xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:commands="clr-namespace:Desktop.Commands"
+             xmlns:models="clr-namespace:Desktop.Models"
+             xmlns:converters="clr-namespace:Desktop.Converters"
+             DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+
+    <StackPanel Background="#01000000">
+
+        <StackPanel.ContextMenu>
+            <ContextMenu>
+                <wpfui:MenuItem Header="Create folder..." SymbolIcon="FolderAdd48" Click="CreateFolderItem_Click"/>
+                <wpfui:MenuItem Header="Create file..." SymbolIcon="DocumentAdd48" Click="CreateFileItem_Click"/>
+                <Separator/>
+                <wpfui:MenuItem Header="Open desktop..." SymbolIcon="Desktop32" Command="{commands:OpenDesktop}"/>
+                <wpfui:MenuItem Header="Open downloads..." SymbolIcon="ArrowDownload48" Command="{commands:OpenDownloads}"/>
+                <Separator/>
+                <wpfui:MenuItem Header="Change wallpaper..." SymbolIcon="Wallpaper24" Command="{commands:ChangeWallpaper}"/>
+            </ContextMenu>
+        </StackPanel.ContextMenu>
+
+        <popups:FilePopup x:Name="FilePopup"/>
+
+        <wpfui:Button Icon="Recycle32" Content="Recycle bin" Command="{commands:OpenRecycleBin}"/>
+        
+        <ItemsControl ItemsSource="{local:Files}" MaxWidth="200">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type models:FileItem}">
+                    <wpfui:Button HorizontalAlignment="Left" Command="{commands:Open}">
+
+                        <DockPanel ToolTip="{Binding Path}">
+                            <Image DockPanel.Dock="Left" Source="{Binding Icon, FallbackValue={x:Null}, TargetNullValue={x:Null}}" Height="16" Width="16" Common.IsVisible="{Binding Icon, Converter={converters:HasValue}}"/>
+                            <TextBlock Text="{Binding Title}" Margin="6,0,0,0" TextTrimming="CharacterEllipsis"/>
+                        </DockPanel>
+
+                        <wpfui:Button.ContextMenu>
+                            <ContextMenu DataContext="{Binding RelativeSource={RelativeSource Mode=Self}, Path=PlacementTarget.DataContext}">
+                                <wpfui:MenuItem Header="Open..." Command="{commands:Open}" SymbolIcon="Open48"/>
+                                <Separator/>
+                                <wpfui:MenuItem Header="Open with..." Command="{commands:OpenWith}" SymbolIcon="OpenOff48" Loaded="OpenWithItem_Loaded"/>
+                                <wpfui:MenuItem Header="Open folder..." Command="{commands:OpenFolder}" SymbolIcon="OpenFolder48"/>
+                                <Separator/>
+                                <wpfui:MenuItem Header="Rename..." Click="RenameItem_Click" SymbolIcon="Rename28"/>
+                                <Separator/>
+                                <wpfui:MenuItem Header="Delete..." Command="{commands:Delete}" SymbolIcon="Delete48"/>
+                            </ContextMenu>
+                        </wpfui:Button.ContextMenu>
+
+                    </wpfui:Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+    </StackPanel>
+
+</UserControl>

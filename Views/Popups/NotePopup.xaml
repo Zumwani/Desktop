@@ -1,0 +1,67 @@
+﻿<Popup x:Class="Desktop.Views.Popups.NotePopup"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:local="clr-namespace:Desktop.Views.Popups"
+       xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+       xmlns:mahApps="http://metro.mahapps.com/winfx/xaml/controls"
+       xmlns:models="clr-namespace:Desktop.Models"
+       xmlns:sys="clr-namespace:System;assembly=mscorlib"
+       DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
+       StaysOpen="False" AllowsTransparency="True" PopupAnimation="Fade" Placement="MousePoint">
+    
+    <Popup.Resources>
+        <ObjectDataProvider x:Key="Enum.TimeUnit" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="models:TimeUnit"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Popup.Resources>
+    
+    <Border Background="#202020" BorderThickness="1" BorderBrush="DimGray" CornerRadius="8">
+        <StackPanel>
+
+            <TextBox Text="{Binding Note.Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" TextWrapping="Wrap" AcceptsTab="True" SpellCheck.IsEnabled="True"/>
+
+            <wpfui:CardExpander Header="Notify" IsExpanded="{Binding Path=Note.HasNotification, Mode=TwoWay}">
+                <StackPanel>
+
+                    <WrapPanel>
+                        <ToggleButton Content="Monday"    IsChecked="{Binding Path=Note.NotifyOnMonday,    Mode=TwoWay}"/>
+                        <ToggleButton Content="Tuesday"   IsChecked="{Binding Path=Note.NotifyOnTuesday,   Mode=TwoWay}"/>
+                        <ToggleButton Content="Wednesday" IsChecked="{Binding Path=Note.NotifyOnWednesday, Mode=TwoWay}"/>
+                        <ToggleButton Content="Thursday"  IsChecked="{Binding Path=Note.NotifyOnThursday,  Mode=TwoWay}"/>
+                        <ToggleButton Content="Friday"    IsChecked="{Binding Path=Note.NotifyOnFriday,    Mode=TwoWay}"/>
+                        <ToggleButton Content="Saturday"  IsChecked="{Binding Path=Note.NotifyOnSaturday,  Mode=TwoWay}"/>
+                        <ToggleButton Content="Sunday"    IsChecked="{Binding Path=Note.NotifyOnSunday,    Mode=TwoWay}"/>
+                    </WrapPanel>
+
+                    <DockPanel Margin="0,12">
+                        <TextBlock Text="At:" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                        <mahApps:TimePicker SelectedDateTime="{Binding Path=Note.NotifyAt, UpdateSourceTrigger=PropertyChanged}"/>
+                    </DockPanel>
+
+                    <wpfui:Card>
+                        <StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                                <TextBlock Text="Is permanent:" Margin="0,0,8,0"/>
+                                <wpfui:ToggleSwitch IsChecked="{Binding Note.PermanentNotification}"/>
+                            </StackPanel>
+
+                            <DockPanel Common.IsCollapsed="{Binding Note.PermanentNotification}">
+                                <TextBlock Text="Duration:" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                <mahApps:NumericUpDown Value="{Binding Note.NotifyDurationValue, UpdateSourceTrigger=PropertyChanged}"/>
+                                <ComboBox ItemsSource="{Binding Source={StaticResource Enum.TimeUnit}}" SelectedItem="{Binding Note.NotifyDurationUnit}" Margin="12,0,0,0" HorizontalAlignment="Left"/>
+                            </DockPanel>
+                        
+                        </StackPanel>
+                    </wpfui:Card>
+
+                </StackPanel>
+            </wpfui:CardExpander>
+            
+        </StackPanel>
+    </Border>
+
+
+</Popup>

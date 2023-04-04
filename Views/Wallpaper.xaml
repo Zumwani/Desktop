@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="Desktop.Views.Wallpaper"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Desktop.Views"
+             xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:settings="clr-namespace:Desktop.Settings"
+             DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+
+    <Grid>
+
+        <Image Source="{settings:Wallpaper Mode=OneWay}" Grid.ColumnSpan="3" Grid.RowSpan="2" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased">
+            <Image.Style>
+                <Style TargetType="Image">
+
+                    <Setter Property="Stretch" Value="None"/>
+
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsIdle}" Value="True">
+                            <Setter Property="Stretch" Value="Fill"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                
+                </Style>
+            </Image.Style>
+        </Image>
+
+        <Popup IsOpen="{Binding IsChangingWallpaper, Mode=TwoWay}" AllowsTransparency="True" PopupAnimation="Fade" StaysOpen="False" Placement="MousePoint">
+            <Border Background="#202020" BorderBrush="DimGray" BorderThickness="1" CornerRadius="8">
+                <StackPanel Margin="12">
+                    <TextBlock Text="Wallpaper:" Margin="0,0,0,6"/>
+                    <wpfui:TextBox Text="{settings:Wallpaper}" MinWidth="200"/>
+                </StackPanel>
+            </Border>
+        </Popup>
+        
+    </Grid>
+    
+</UserControl>

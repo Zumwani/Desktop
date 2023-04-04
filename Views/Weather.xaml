@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="Desktop.Views.Weather"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Desktop.Views"
+             xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:commands="clr-namespace:Desktop.Commands"
+             xmlns:converters="clr-namespace:Desktop.Converters"
+             DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+
+    <UserControl.Resources>
+
+        <Style TargetType="Rectangle">
+
+            <Setter Property="Width" Value="16"/>
+
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsIdle, Mode=OneWay}" Value="True">
+                    <Setter Property="Width" Value="22"/>
+                </DataTrigger>
+            </Style.Triggers>
+
+        </Style>
+
+    </UserControl.Resources>
+    
+    <wpfui:Button Command="{commands:OpenWeather}" Padding="6,0,6,0"
+                  Common.IsVisible="{local:Weather Temperature, Converter={converters:HasValue}}">
+
+        <DockPanel>
+
+            <Border Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DockPanel},Path=ActualHeight}" Width="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}" DockPanel.Dock="Left">
+                <Viewbox Margin="-10,-10,-10,-16">
+                    <Image Source="{local:Weather Icon, FallbackValue={x:Null}, TargetNullValue={x:Null}}" Stretch="None"/>
+                </Viewbox>
+            </Border>
+            <Rectangle DockPanel.Dock="Left" HorizontalAlignment="Stretch"/>
+            <TextBlock Text="{local:Weather Temperature, StringFormat='{}{0:N1} °C'}" VerticalAlignment="Center" FontSize="{Binding FontSize}"/>
+        </DockPanel>
+        
+    </wpfui:Button>
+    
+</UserControl>
