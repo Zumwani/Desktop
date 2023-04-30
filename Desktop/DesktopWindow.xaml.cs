@@ -13,6 +13,12 @@ namespace Desktop;
 public partial class DesktopWindow : UiWindow
 {
 
+    //TODO: Fix drag start from files
+    //TODO: Crashes when bluetooth device disconnected
+
+    public bool IsIdle => false;
+    public ViewModels.DesktopWindow View { get; } = new();
+
     public DesktopWindow()
     {
         InitializeWindow();
@@ -30,12 +36,10 @@ public partial class DesktopWindow : UiWindow
         hook.KeyUp += KeyUp;
     }
 
-    public bool IsInitialUpdate { get; private set; } = true;
-
     async void UiWindow_Loaded(object sender, RoutedEventArgs e)
     {
         await Task.Delay(1000);
-        IsInitialUpdate = false;
+        View.IsLoaded = true;
         TaskbarFix.Initialize();
         ResetBounds();
     }
@@ -83,8 +87,6 @@ public partial class DesktopWindow : UiWindow
 
     void SaveSize()
     {
-        //Settings.Bounds.Current.Value = new(PointToScreen(new()), PointToScreen(new(ActualWidth, ActualHeight)));
-        //Settings.Bounds.Current.Save(false);
         Settings.Left.Current.Value = Left;
         Settings.Top.Current.Value = Top;
         Settings.Width.Current.Value = Width;

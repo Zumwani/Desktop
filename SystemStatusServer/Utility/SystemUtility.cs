@@ -49,8 +49,8 @@ static class SystemUtility
         {
             UsedMemory = ramUsage.Value,
             AvailableMemory = TotalRam,
-            CPU = cpuUsage.Value,
-            Temperature = cpuTemp.Value,
+            CpuUsage = cpuUsage.Value,
+            CpuTemperature = cpuTemp.Value,
         };
 
     }

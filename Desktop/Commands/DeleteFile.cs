@@ -6,7 +6,7 @@ using Microsoft.VisualBasic.FileIO;
 
 namespace Desktop.Commands;
 
-public class Delete : Command<FileItem?>
+public class DeleteFile : Command<FileItem?>
 {
 
     public override void Execute(FileItem? file)

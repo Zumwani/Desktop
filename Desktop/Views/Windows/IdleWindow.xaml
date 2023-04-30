@@ -1,0 +1,49 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:viewModels="clr-namespace:Desktop.ViewModels"
+                    mc:Ignorable="d">
+
+    <DataTemplate DataType="{x:Type viewModels:IdleWindow}">
+        
+        <DataTemplate.Resources>
+
+            <Style TargetType="wpfui:MenuItem" BasedOn="{StaticResource {x:Type wpfui:MenuItem}}">
+                <Setter Property="CommandParameter" Value="{Binding}"/>
+            </Style>
+
+            <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
+                <Setter Property="CommandParameter" Value="{Binding}"/>
+            </Style>
+
+            <Style TargetType="ItemsControl" BasedOn="{StaticResource {x:Type ItemsControl}}">
+                <Setter Property="Background" Value="Transparent"/>
+            </Style>
+
+        </DataTemplate.Resources>
+
+        <Grid>
+
+            <Grid Common.IsVisible="{Binding IsIdle}" TextElement.FontSize="72">
+
+                <ContentPresenter Content="{Binding Wallpaper}" Margin="-12"/>
+                <ContentPresenter Content="{Binding Notifications}" Margin="0,12,0,0"/>
+
+                <ContentPresenter Content="{Binding Time}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                    <ContentPresenter Content="{Binding Weather}" Margin="22,0,0,0"/>
+                    <ContentPresenter Content="{Binding Date}" Margin="0,-22,0,0"/>
+                </StackPanel>
+
+                <ContentPresenter Content="{Binding SystemStatus}" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+
+            </Grid>
+
+            <Border Background="Black" Opacity="0.8" Margin="-12"/> <!--PreviewMouseDown="Window_PreviewMouseDown"-->
+
+        </Grid>
+    </DataTemplate>
+    
+</ResourceDictionary>

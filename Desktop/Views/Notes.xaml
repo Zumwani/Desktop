@@ -1,52 +1,25 @@
-﻿<UserControl x:Class="Desktop.Views.Notes"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:models="clr-namespace:Desktop.Models"
-             xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
-             xmlns:settings="clr-namespace:Desktop.Settings"
-             xmlns:commands="clr-namespace:Desktop.Commands"
-             xmlns:popups="clr-namespace:Desktop.Views.Popups"
-             DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewModels="clr-namespace:Desktop.ViewModels"
+                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+                    xmlns:commands="clr-namespace:Desktop.Commands"
+                    xmlns:settings="clr-namespace:Desktop.Settings">
 
-    <Border Width="200" DockPanel.Dock="Right">
-        
-        <Border.ContextMenu>
-            <ContextMenu Closed="ContextMenu_Closed">
-                <wpfui:MenuItem Header="Create note..." SymbolIcon="NoteAdd48" Click="CreateNote_Click"/>
-                <Separator/>
-                <wpfui:MenuItem Header="Show hidden notes..." SymbolIcon="Eye24" Common.IsCollapsed="{settings:ShowHiddenNotes Mode=OneWay}" Command="{commands:ShowHiddenNotes}" Transition.IsEnabled="False"/>
-                <wpfui:MenuItem Header="Hide hidden notes..." SymbolIcon="EyeOff24" Common.IsVisible="{settings:ShowHiddenNotes Mode=OneWay}" Command="{commands:HideHiddenNotes}" Transition.IsEnabled="False"/>
-            </ContextMenu>
-        </Border.ContextMenu>
+    <DataTemplate DataType="{x:Type viewModels:Notes}">
+        <Border Width="200" DockPanel.Dock="Right">
 
-        <Grid>
-            
-            <ItemsControl ItemsSource="{settings:Notes}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type models:Note}">
-                        <wpfui:Button HorizontalAlignment="Right" MaxHeight="200" Loaded="Note_Loaded" Unloaded="Note_Unloaded" Click="Note_Clicked">
-                            <wpfui:Button.ContextMenu>
-                                <ContextMenu Closed="ContextMenu_Closed">
-                                    <wpfui:MenuItem Header="Hide..." SymbolIcon="EyeOff24" Common.IsCollapsed="{Binding IsHidden, Mode=OneWay}" Command="{commands:HideNote}" Transition.IsEnabled="False"/>
-                                    <wpfui:MenuItem Header="Show..." SymbolIcon="Eye24" Common.IsVisible="{Binding IsHidden, Mode=OneWay}" Command="{commands:ShowNote}" Transition.IsEnabled="False"/>
-                                    <wpfui:MenuItem Header="Remove..." SymbolIcon="Note48" Command="{commands:RemoveNote}"/>
-                                    <Separator/>
-                                    <wpfui:MenuItem Header="Show hidden notes..." SymbolIcon="Eye24" Common.IsCollapsed="{settings:ShowHiddenNotes Mode=OneWay}" Command="{commands:ShowHiddenNotes}" Transition.IsEnabled="False"/>
-                                    <wpfui:MenuItem Header="Hide hidden notes..." SymbolIcon="EyeOff24" Common.IsVisible="{settings:ShowHiddenNotes Mode=OneWay}" Command="{commands:HideHiddenNotes}" Transition.IsEnabled="False"/>
-                                </ContextMenu>
-                            </wpfui:Button.ContextMenu>
-                            <TextBlock Text="{Binding Content}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" ToolTip="{Binding Content}"/>
-                        </wpfui:Button>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            <Border.ContextMenu>
+                <ContextMenu>
+                    <wpfui:MenuItem Header="Create note..." SymbolIcon="NoteAdd48" Command="{Binding CreateCommand}"/>
+                    <Separator/>
+                    <wpfui:MenuItem Header="Show hidden notes..." SymbolIcon="Eye24" Common.IsCollapsed="{settings:ShowHiddenNotes Mode=OneWay}" Command="{commands:ShowHiddenNotes}" Transition.IsEnabled="False"/>
+                    <wpfui:MenuItem Header="Hide hidden notes..." SymbolIcon="EyeOff24" Common.IsVisible="{settings:ShowHiddenNotes Mode=OneWay}" Command="{commands:HideHiddenNotes}" Transition.IsEnabled="False"/>
+                </ContextMenu>
+            </Border.ContextMenu>
 
-            <popups:NotePopup x:Name="NotePopup"/>
+            <ItemsControl ItemsSource="{Binding}" DataContext="{Binding Items}"/>
 
-        </Grid>
-        
-    </Border>
-
-</UserControl>
+        </Border>
+    </DataTemplate>
+    
+</ResourceDictionary>

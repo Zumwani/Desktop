@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Desktop.Models;
@@ -9,11 +10,10 @@ using Windows.UI.Notifications.Management;
 
 namespace Desktop.Utility;
 
-static class NotificationUtility
+static partial class NotificationUtility
 {
 
-    static readonly ObservableCollection<Notification> notifications = new();
-    public static ReadOnlyObservableCollection<Notification> Notifications { get; private set; } = new(notifications);
+    public static ObservableCollection<Notification> Notifications { get; } = new();
 
     static readonly Dictionary<Notification, CancellationTokenSource> tokens = new();
 
@@ -25,22 +25,34 @@ static class NotificationUtility
 
     public static void Hide(Notification notification)
     {
-
         if (tokens.Remove(notification, out var token))
             token.Cancel();
-        _ = notifications.Remove(notification);
+        _ = Notifications.Remove(notification);
+    }
 
-
+    public static void ClearAll()
+    {
+        Notifications.Clear();
+        tokens.Clear();
     }
 
     #region Notify
 
+    public static Task Notify(string message) =>
+        Notify(message, TimeSpan.FromSeconds(5));
+
+    public static Task Notify(string message, TimeSpan duration) =>
+        Notify(new Notification(message, duration));
+
     public static async Task Notify(Notification notification)
     {
 
+        if (!string.IsNullOrEmpty(notification.Header) && Notifications.Any(n => n.Header == notification.Header))
+            return;
+
         Hide(notification);
         tokens.Add(notification, new());
-        notifications.Add(notification);
+        Notifications.Add(notification);
 
         if (!notification.IsPermanent)
             _ = await Task.WhenAny(Cancelled(), DurationRanOut());
@@ -59,12 +71,6 @@ static class NotificationUtility
             await Task.Delay(notification.Duration);
 
     }
-
-    public static Task Notify(string message) =>
-        Notify(message, TimeSpan.FromSeconds(5));
-
-    public static Task Notify(string message, TimeSpan duration) =>
-        Notify(new Notification(message, duration));
 
     #endregion
     #region Note notifications
@@ -93,7 +99,7 @@ static class NotificationUtility
     };
 
     static bool IsWithinTriggerTimeSpan(Note note) =>
-        (DateTime.Now.TimeOfDay > note.NotifyAt.TimeOfDay) && (DateTime.Now.TimeOfDay < note.NotifyAt.TimeOfDay + note.NotifyDuration);
+        DateTime.Now.TimeOfDay > note.NotifyAt.TimeOfDay && DateTime.Now.TimeOfDay < note.NotifyAt.TimeOfDay + note.NotifyDuration;
 
     static void Notify(IEnumerable<Note> notes)
     {
@@ -128,9 +134,9 @@ static class NotificationUtility
         {
 
             var notifications =
-            (await listener.GetNotificationsAsync(Windows.UI.Notifications.NotificationKinds.Toast)).
-            Where(n => !list.Contains(n.Id)).
-            ToArray();
+                (await listener.GetNotificationsAsync(Windows.UI.Notifications.NotificationKinds.Toast)).
+                Where(n => !list.Contains(n.Id)).
+                ToArray();
 
             foreach (var notification in notifications)
             {
@@ -140,12 +146,10 @@ static class NotificationUtility
                 var binding = notification.Notification.Visual.GetBinding(Windows.UI.Notifications.KnownNotificationBindings.ToastGeneric);
                 var text = string.Join("\n", binding.GetTextElements().Select(t => t.Text));
 
-                _ = Notify(new Notification(text)).ContinueWith(async t =>
-                 {
-                     listener.RemoveNotification(notification.Id);
-                     await Task.Delay(1000);
-                     _ = list.Remove(notification.Id);
-                 });
+                listener.RemoveNotification(notification.Id);
+
+                var header = GetHeader(binding.GetTextElements()[0].Text);
+                _ = Notify(new Notification(text) { Header = header }).ContinueWith(t => _ = list.Remove(notification.Id));
 
             }
 
@@ -153,6 +157,12 @@ static class NotificationUtility
         }, TimeSpan.FromSeconds(0.5));
 
     }
+
+    [GeneratedRegex("^([^()]+)(?: \\(([^()]+)\\))?$")]
+    private static partial Regex HeaderRegex();
+
+    static string GetHeader(string str) =>
+           HeaderRegex().Matches(str).Last().Value;
 
     #endregion
 

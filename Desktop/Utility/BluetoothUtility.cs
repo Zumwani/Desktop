@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Desktop.Models;
 using Microsoft.Win32;
 
 namespace Desktop.Utility;
@@ -22,7 +23,7 @@ public static class BluetoothUtility
         Port = key?.GetValue("port") as int?;
     }
 
-    public static async Task<IEnumerable<Device>> Get()
+    public static async Task<IEnumerable<BluetoothDevice>> Get()
     {
 
         try
@@ -38,34 +39,17 @@ public static class BluetoothUtility
         catch
         { }
 
-        return Array.Empty<Device>();
+        return Array.Empty<BluetoothDevice>();
 
     }
 
-    public static async Task<Device?> Get(string? deviceName) =>
-        (await Get()).FirstOrDefault(d => d.Name == deviceName);
+    public static async Task<BluetoothDevice?> Get(string? deviceName) =>
+        (await Get()).Where(d => d.IsConnected).Cast<BluetoothDevice?>().FirstOrDefault(d => d?.Name == deviceName);
 
     struct Result
     {
         [JsonPropertyName("devices")]
-        public Device[] Devices { get; set; }
-    }
-
-    public struct Device
-    {
-
-        [JsonPropertyName("connected")]
-        public bool IsConnected { get; set; }
-
-        [JsonPropertyName("icon")]
-        public string Icon { get; set; }
-
-        [JsonPropertyName("level")]
-        public int Level { get; set; }
-
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
-
+        public BluetoothDevice[] Devices { get; set; }
     }
 
 }

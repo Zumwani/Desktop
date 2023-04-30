@@ -12,6 +12,9 @@ namespace Desktop;
 public partial class IdleWindow : Window
 {
 
+    public bool IsIdle => true;
+    public ViewModels.IdleWindow View { get; } = new();
+
     public IdleWindow()
     {
         ResetBounds();
@@ -30,7 +33,7 @@ public partial class IdleWindow : Window
 
     void UiWindow_Loaded(object sender, RoutedEventArgs e)
     {
-        ActionUtility.Invoke(() => { if (!GetIfMouseOver()) IsOpen = true; }, TimeSpan.FromSeconds(0.1));
+        ActionUtility.Invoke(() => { if (!GetIfMouseOver()) View.IsOpen = true; }, TimeSpan.FromSeconds(0.1));
         ResetBounds();
     }
 
@@ -38,14 +41,12 @@ public partial class IdleWindow : Window
         e.Cancel = !App.Current.Dispatcher.HasShutdownStarted;
 
     void Window_PreviewMouseDown(object sender, MouseButtonEventArgs e) =>
-        IsOpen = false;
+      View.IsOpen = false;
 
     void Window_PreviewDragEnter(object sender, DragEventArgs e) =>
-        IsOpen = false;
+      View.IsOpen = false;
 
     Rect rect;
-
-    public bool IsOpen { get; private set; } = true;
 
     [DllImport("user32.dll")]
     [return: MarshalAs(UnmanagedType.Bool)]

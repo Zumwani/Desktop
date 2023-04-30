@@ -5,7 +5,7 @@ using Desktop.Models;
 
 namespace Desktop.Commands;
 
-public class Open : Command<FileItem?>
+public class OpenFile : Command<FileItem?>
 {
 
     public override void Execute(FileItem? file)

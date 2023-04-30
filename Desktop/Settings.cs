@@ -1,15 +1,14 @@
-﻿using System.Windows;
+﻿using System.Text.Json.Serialization;
+using System.Windows;
 using System.Windows.Media;
 using Common.Settings.Types;
 using Desktop.Models;
+using Desktop.Utility;
 using PostSharp.Patterns.Model;
 
 namespace Desktop.Settings;
 
 public class Notes : CollectionSetting<Note, Notes>
-{ }
-
-public class Notifications : CollectionSetting<Notification, Notifications>
 { }
 
 public class BluetoothDevice : Setting<string, BluetoothDevice>
@@ -55,19 +54,10 @@ public class Weather : Setting<Weather.Config, Weather>
     [NotifyPropertyChanged]
     public class Config
     {
-
         public string? SearchLocation { get; set; }
         public string? ApiKey { get; set; }
-        public string? Unit { get; set; } = "metric";
-
-        public bool IsValid =>
-            !string.IsNullOrWhiteSpace(SearchLocation) ||
-            !string.IsNullOrWhiteSpace(ApiKey) ||
-            !string.IsNullOrWhiteSpace(Unit);
-
-        [SafeForDependencyAnalysis]
-        public string Endpoint => $"https://api.openweathermap.org/data/2.5/weather?q={SearchLocation}&units={Unit}&appid={ApiKey}";
-
+        public WeatherUnit Unit { get; set; }
+        [JsonIgnore, SafeForDependencyAnalysis] public string Units => Unit.ToString().ToLower();
     }
 
 }

@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewModels="clr-namespace:Desktop.ViewModels"
+                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+                    xmlns:commands="clr-namespace:Desktop.Commands">
+    
+    <DataTemplate DataType="{x:Type viewModels:Memory}">
+        <wpfui:Button Icon="Ram20" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" Command="{commands:OpenTaskManager}">
+            <TextBlock>
+                <Run Text="{Binding UsedMemory, StringFormat='{}{0:0.0}GB', TargetNullValue='--', FallbackValue='--', Mode=OneWay}"/>
+                <Run Text="/"/>
+                <Run Text="{Binding AvailableMemory, StringFormat='{}{0:0}GB', TargetNullValue='--', FallbackValue='--', Mode=OneWay}"/>
+            </TextBlock>
+        </wpfui:Button>
+    </DataTemplate>
+    
+</ResourceDictionary>

@@ -22,6 +22,7 @@ public class Notification
         EndTime = CreationTime + duration;
     }
 
+    public string? Header { get; set; }
     public string Content { get; set; }
 
     public bool IsPermanent { get; set; }

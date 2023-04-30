@@ -6,8 +6,28 @@ using Desktop.Models;
 
 namespace Desktop.Utility;
 
+public enum WeatherUnit
+{
+    Metric, Imperial
+}
+
 static class WeatherUtility
 {
+
+    public static string Url =>
+        $"https://api.openweathermap.org/data/2.5/weather?" +
+        $"q={Settings.Weather.Current.Value!.SearchLocation}" +
+        $"&units={Settings.Weather.Current.Value!.Units}" +
+        $"&appid={Settings.Weather.Current.Value!.ApiKey}";
+
+    public static bool IsValid =>
+        !string.IsNullOrWhiteSpace(Settings.Weather.Current.Value?.SearchLocation) &&
+        !string.IsNullOrWhiteSpace(Settings.Weather.Current.Value?.ApiKey);
+
+    public static int LocationID { get; private set; }
+
+    public static string WebsiteUrl =>
+        "https://openweathermap.org/city/" + LocationID;
 
     public static async Task<Weather> Get()
     {
@@ -15,12 +35,14 @@ static class WeatherUtility
         try
         {
 
-            if (Settings.Weather.Current.Value is null || !Settings.Weather.Current.Value.IsValid)
-                return new();
+            if (!IsValid)
+                return default;
 
             using var client = new HttpClient();
-            var json = await client.GetStringAsync(Settings.Weather.Current.Value.Endpoint);
+            var json = await client.GetStringAsync(Url);
             var result = JsonSerializer.Deserialize<Result>(json);
+
+            LocationID = result.ID;
 
             return new()
             {
@@ -41,6 +63,7 @@ static class WeatherUtility
 
         [JsonPropertyName("weather")] public WeatherResult[] Weather { get; set; }
         [JsonPropertyName("main")] public MainResults Main { get; set; }
+        [JsonPropertyName("id")] public int ID { get; set; }
 
     }
 

@@ -1,0 +1,35 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+                    xmlns:commands="clr-namespace:Desktop.Commands"
+                    xmlns:models="clr-namespace:Desktop.Models">
+
+    <DataTemplate DataType="{x:Type models:Notification}">
+
+        <wpfui:Button Appearance="Primary" Padding="0" Cursor="Hand" HorizontalContentAlignment="Stretch" HorizontalAlignment="Center" Margin="0,0,0,12">
+
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <wpfui:Button Content="x" HorizontalAlignment="Right" VerticalAlignment="Top" Panel.ZIndex="10"
+                                Common.IsVisible="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=wpfui:Button}, Path=IsMouseOver}"
+                                Cursor="Hand" Command="{commands:HideNotification}"/>
+
+                <TextBlock Text="{Binding Content, Mode=OneWay}" TextTrimming="CharacterEllipsis" Margin="12,12,12,4"/>
+
+                <ProgressBar Grid.Row="1" Height="6" Background="#AAFFFFFF" Foreground="CornflowerBlue" Margin="2"
+                                     Minimum="{Binding CreationTime.Ticks, Mode=OneWay}"
+                                     Maximum="{Binding EndTime.Ticks, Mode=OneWay}"
+                                     Value="{Binding RelativeSource={RelativeSource Mode=PreviousData}, Path=Date.Value.Ticks, Mode=OneWay}"
+                                     Common.IsHidden="{Binding IsPermanent}" Transition.IsEnabled="False"/>
+
+            </Grid>
+
+        </wpfui:Button>
+    </DataTemplate>
+
+</ResourceDictionary>

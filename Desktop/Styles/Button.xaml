@@ -9,6 +9,7 @@
         <Setter Property="Appearance" Value="Transparent"/>
         <Setter Property="MouseOverBackground" Value="#66202020"/>
         <Setter Property="PressedBackground" Value="#AA202020"/>
+        <Setter Property="Cursor" Value="Hand"/>
 
         <Setter Property="Effect">
             <Setter.Value>

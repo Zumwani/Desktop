@@ -15,10 +15,15 @@ public partial class NotePopup : Popup
 
     public new bool IsOpen => base.IsOpen;
 
-    public void Open(Note note)
+    public void Open(Note? note)
     {
+
+        if (note is null)
+            return;
+
         Note = note;
         base.IsOpen = true;
+
     }
 
 }

@@ -1,0 +1,87 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewModels="clr-namespace:Desktop.ViewModels"
+                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+                    xmlns:view="clr-namespace:Desktop.View">
+
+    <DataTemplate DataType="{x:Type viewModels:Weather}">
+
+        <DataTemplate.Resources>
+
+            <view:EnumProvider x:Key="Enum.WeatherUnit" EnumType="{viewModels:WeatherUnitEnumType}"/>
+
+        </DataTemplate.Resources>
+        
+        <wpfui:Button Command="{Binding ClickCommand}" Padding="6,0,6,0">
+
+            <Button.Resources>
+                <Style TargetType="Rectangle">
+
+                    <Setter Property="Width" Value="16"/>
+
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=IsIdle, Mode=OneWay}" Value="True">
+                            <Setter Property="Width" Value="22"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+
+                </Style>
+            </Button.Resources>
+
+            <wpfui:Button.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="View on openweathermap.org..." Command="{Binding ClickCommand}"/>
+                    <Separator/>
+                    <MenuItem Header="Set location..." Command="{Binding OpenPopupCommand}"/>
+                </ContextMenu>
+            </wpfui:Button.ContextMenu>
+
+            <Grid>
+
+                <Popup x:Name="locationPopup" StaysOpen="False" AllowsTransparency="True" PopupAnimation="Fade"
+                       IsOpen="{Binding IsPopupOpen}" MaxWidth="1200">
+                    <Border Background="#202020" BorderThickness="1" BorderBrush="DimGray" CornerRadius="8">
+                        <StackPanel Margin="12">
+
+                            <TextBlock Margin="0,12" TextWrapping="Wrap">
+                                <Hyperlink Command="{Binding UrlClickCommand}">
+                                    <Run Text="{Binding Url, Mode=OneWay}"/>
+                                </Hyperlink>
+                            </TextBlock>
+
+                            <TextBlock Text="Api key:" Margin="0,0,0,6"/>
+                            <wpfui:TextBox Text="{Binding Config.ApiKey, UpdateSourceTrigger=PropertyChanged}"/>
+
+                            <TextBlock Text="Location (string search query):" Margin="0,12,0,6"/>
+                            <wpfui:TextBox Text="{Binding Config.SearchLocation, UpdateSourceTrigger=PropertyChanged}"/>
+
+                            <TextBlock Text="Unit:" Margin="0,12,0,6"/>
+                            <ComboBox ItemsSource="{Binding Source={StaticResource Enum.WeatherUnit}}" SelectedItem="{Binding Config.Unit, UpdateSourceTrigger=PropertyChanged}"/>
+
+                            <wpfui:Button Content="Reload" Margin="0,12,0,0" Command="{Binding ReloadCommand}"/>
+
+                        </StackPanel>
+                    </Border>
+                </Popup>
+
+                <DockPanel>
+                    
+                    <Border Height="{Binding ElementName=TextBlock, Path=ActualHeight, Mode=OneWay}" 
+                            DockPanel.Dock="Left" Margin="6,8,6,6"
+                            LayoutTransform="{Binding ElementName=TextBlock, Path=LayoutTransform}">
+                        <Viewbox Margin="-12,-12,-2,-16">
+                            <Image Source="{Binding Icon, Mode=OneWay, FallbackValue={x:Null}, TargetNullValue={x:Null}}"/>
+                        </Viewbox>
+                    </Border>
+                    
+                    <TextBlock x:Name="TextBlock" VerticalAlignment="Center" Margin="-4,-2,2,0"
+                               Text="{Binding Temperature, Mode=OneWay, StringFormat='{}{0:N1} °C', TargetNullValue='No location set'}"/>
+                                    
+                </DockPanel>
+
+            </Grid>
+
+        </wpfui:Button>
+    </DataTemplate>
+
+</ResourceDictionary>
