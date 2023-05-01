@@ -14,7 +14,7 @@
                         <Setter Property="Stretch" Value="None"/>
 
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsIdle}" Value="True">
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=IsIdle}" Value="True">
                                 <Setter Property="Stretch" Value="Fill"/>
                             </DataTrigger>
                         </Style.Triggers>

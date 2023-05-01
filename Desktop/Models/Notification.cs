@@ -22,7 +22,9 @@ public class Notification
         EndTime = CreationTime + duration;
     }
 
+    public int DuplicateHeaderCount { get; set; } = 1;
     public string? Header { get; set; }
+    public bool IsVisible { get; set; } = true;
     public string Content { get; set; }
 
     public bool IsPermanent { get; set; }

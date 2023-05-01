@@ -14,6 +14,7 @@ public class Notifications
     public Date Date { get; } = new Date();
 
     public RelayCommand ClearNotificationsCommand { get; } = new(NotificationUtility.ClearAll);
+    public RelayCommand TestCommand { get; } = new(() => NotificationUtility.Notify("test"));
 
     [SafeForDependencyAnalysis]
     public ObservableCollection<Notification> Items => NotificationUtility.Notifications;

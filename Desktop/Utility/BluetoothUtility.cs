@@ -43,8 +43,8 @@ public static class BluetoothUtility
 
     }
 
-    public static async Task<BluetoothDevice?> Get(string? deviceName) =>
-        (await Get()).Where(d => d.IsConnected).Cast<BluetoothDevice?>().FirstOrDefault(d => d?.Name == deviceName);
+    public static BluetoothDevice? Find(this IEnumerable<BluetoothDevice> list, string? deviceName) =>
+        list.Where(d => d.IsConnected).Cast<BluetoothDevice?>().FirstOrDefault(d => d?.Name == deviceName);
 
     struct Result
     {

@@ -24,22 +24,6 @@
         </ContextMenu>
     </Window.ContextMenu>
 
-    <Window.Resources>
-
-        <Style TargetType="wpfui:MenuItem" BasedOn="{StaticResource {x:Type wpfui:MenuItem}}">
-            <Setter Property="CommandParameter" Value="{Binding}"/>
-        </Style>
-        
-        <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
-            <Setter Property="CommandParameter" Value="{Binding}"/>
-        </Style>
-
-        <Style TargetType="ItemsControl" BasedOn="{StaticResource {x:Type ItemsControl}}">
-            <Setter Property="Background" Value="Transparent"/>
-        </Style>
-
-    </Window.Resources>
-
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" GlassFrameThickness="0" ResizeBorderThickness="0" CornerRadius="8"/>
     </WindowChrome.WindowChrome>
@@ -56,8 +40,8 @@
 
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding IsMouseOver}" Value="True"/>
-                        <Condition Binding="{Binding IsShiftDown}" Value="True"/>
+                        <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsMouseOver}" Value="True"/>
+                        <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsShiftDown}" Value="True"/>
                     </MultiDataTrigger.Conditions>
 
                     <Setter Property="Cursor" Value="Hand"/>

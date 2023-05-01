@@ -21,7 +21,7 @@
                 </ContextMenu>
             </StackPanel.ContextMenu>
             
-            <wpfui:Button Icon="Recycle32" Content="Recycle bin" Command="{commands:OpenRecycleBin}"/>
+            <wpfui:Button Icon="Recycle32" Content="Recycle bin" Command="{commands:OpenRecycleBin}" ToolTip="Open recycle bin..."/>
 
             <ItemsControl ItemsSource="{Binding Items}" MaxWidth="200"/>
 

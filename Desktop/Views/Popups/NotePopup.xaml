@@ -1,26 +1,23 @@
 ﻿<Popup x:Class="Desktop.Views.Popups.NotePopup"
        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-       xmlns:local="clr-namespace:Desktop.Views.Popups"
        xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
        xmlns:mahApps="http://metro.mahapps.com/winfx/xaml/controls"
        xmlns:models="clr-namespace:Desktop.Models"
-       xmlns:sys="clr-namespace:System;assembly=mscorlib"
+       xmlns:helpers="clr-namespace:Desktop.ViewModels.Helpers"
        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
        StaysOpen="False" AllowsTransparency="True" PopupAnimation="Fade" Placement="MousePoint">
     
     <Popup.Resources>
-        <ObjectDataProvider x:Key="Enum.TimeUnit" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="models:TimeUnit"/>
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
+        <helpers:EnumProvider x:Key="Enum.TimeUnit" EnumType="{x:Type models:TimeUnit}"/>
     </Popup.Resources>
     
     <Border Background="#202020" BorderThickness="1" BorderBrush="DimGray" CornerRadius="8">
         <StackPanel>
 
-            <TextBox Text="{Binding Note.Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" TextWrapping="Wrap" AcceptsTab="True" SpellCheck.IsEnabled="True"/>
+            <TextBox Text="{Binding Note.Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     AcceptsReturn="True" AcceptsTab="True"  SpellCheck.IsEnabled="True"
+                     TextWrapping="Wrap" helpers:TextBlockUtility.SelectAllOnTripleClick="True"/>
 
             <wpfui:CardExpander Header="Notify" IsExpanded="{Binding Path=Note.HasNotification, Mode=TwoWay}">
                 <StackPanel>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -34,6 +35,9 @@ public static class FileUtility
 
     static FileItem Create(string path) =>
         new() { Path = path, Title = Path.GetFileName(path), Icon = GetIcon(path) };
+
+    public static void Open(string path) =>
+        Process.Start(new ProcessStartInfo(path) { UseShellExecute = true });
 
     #region Watcher
 

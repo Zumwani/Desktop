@@ -2,11 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
                     xmlns:commands="clr-namespace:Desktop.Commands"
-                    xmlns:models="clr-namespace:Desktop.Models">
+                    xmlns:models="clr-namespace:Desktop.Models"
+                    xmlns:helpers="clr-namespace:Desktop.ViewModels.Helpers">
 
     <DataTemplate DataType="{x:Type models:Notification}">
 
-        <wpfui:Button Appearance="Primary" Padding="0" Cursor="Hand" HorizontalContentAlignment="Stretch" HorizontalAlignment="Center" Margin="0,0,0,12">
+        <wpfui:Button Common.IsVisible="{Binding IsVisible, Mode=OneWay}"
+                      Appearance="Primary" Padding="0" Margin="0,0,0,12" HorizontalContentAlignment="Stretch" HorizontalAlignment="Center">
 
             <Grid>
 
@@ -19,12 +21,15 @@
                                 Common.IsVisible="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=wpfui:Button}, Path=IsMouseOver}"
                                 Cursor="Hand" Command="{commands:HideNotification}"/>
 
-                <TextBlock Text="{Binding Content, Mode=OneWay}" TextTrimming="CharacterEllipsis" Margin="12,12,12,4"/>
+                <TextBlock TextTrimming="CharacterEllipsis" Margin="12,12,12,4">
+                    <Run Text="{Binding DuplicateHeaderCount, Mode=OneWay}"/>
+                    <Run Text="{Binding Content, Mode=OneWay}"/><Run Text=":"/>
+                </TextBlock>
 
                 <ProgressBar Grid.Row="1" Height="6" Background="#AAFFFFFF" Foreground="CornflowerBlue" Margin="2"
                                      Minimum="{Binding CreationTime.Ticks, Mode=OneWay}"
                                      Maximum="{Binding EndTime.Ticks, Mode=OneWay}"
-                                     Value="{Binding RelativeSource={RelativeSource Mode=PreviousData}, Path=Date.Value.Ticks, Mode=OneWay}"
+                                     Value="{Binding Source={x:Static helpers:Helper.DateTime}, Path=Value.Ticks, Mode=OneWay}"
                                      Common.IsHidden="{Binding IsPermanent}" Transition.IsEnabled="False"/>
 
             </Grid>

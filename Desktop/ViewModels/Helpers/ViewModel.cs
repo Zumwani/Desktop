@@ -8,10 +8,10 @@ public abstract class ViewModel : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public void OnPropertyChanged([CallerMemberName] string propertyName = "") =>
+    public virtual void OnPropertyChanged([CallerMemberName] string propertyName = "") =>
         PropertyChanged?.Invoke(this, new(propertyName));
 
-    public void OnPropertyChanged() =>
+    public virtual void OnPropertyChanged() =>
         PropertyChanged?.Invoke(this, new(string.Empty));
 
 }

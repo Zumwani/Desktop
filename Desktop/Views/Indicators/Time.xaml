@@ -2,11 +2,10 @@
                     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:commands="clr-namespace:Desktop.Commands"
-                    xmlns:viewModels="clr-namespace:Desktop.ViewModels"
-                    xmlns:view="clr-namespace:Desktop.View">
+                    xmlns:viewModels="clr-namespace:Desktop.ViewModels">
 
     <DataTemplate DataType="{x:Type viewModels:Time}">
-        <wpfui:Button Command="{commands:OpenCalendar}">
+        <wpfui:Button Command="{commands:OpenCalendar}" ToolTip="Open calendar...">
             <TextBlock Text="{Binding Value, Mode=OneWay, StringFormat=t}">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">

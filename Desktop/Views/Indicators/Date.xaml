@@ -5,7 +5,7 @@
                     xmlns:commands="clr-namespace:Desktop.Commands">
 
     <DataTemplate DataType="{x:Type viewModels:Date}">
-        <wpfui:Button Command="{commands:OpenCalendar}">
+        <wpfui:Button Command="{commands:OpenCalendar}" ToolTip="Open calendar...">
             <TextBlock>
                 <Run Text="{Binding Value, Mode=OneWay, StringFormat=d}"/><Run Text=","/>
                 <Run Text="{Binding Value, Mode=OneWay, StringFormat=ddd}"/>

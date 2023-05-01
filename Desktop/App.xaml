@@ -2,7 +2,6 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
-             xmlns:view="clr-namespace:Desktop.View"
              ShutdownMode="OnMainWindowClose">
     
     <Application.Resources>
@@ -18,6 +17,10 @@
                 <wpfui:ThemesDictionary Theme="Dark"/>
 
                 <ResourceDictionary Source="Styles/Button.xaml"/>
+                <ResourceDictionary Source="Styles/MenuItem.xaml"/>
+                <ResourceDictionary Source="Styles/Popup.xaml"/>
+                <ResourceDictionary Source="Styles/TextBlock.xaml"/>
+                <ResourceDictionary Source="Styles/ListBox.xaml"/>
 
                 <ResourceDictionary Source="Views/Indicators/BluetoothBattery.xaml"/>
                 <ResourceDictionary Source="Views/Indicators/CpuTemperature.xaml"/>
@@ -42,29 +45,9 @@
 
             </ResourceDictionary.MergedDictionaries>
 
-            <Style TargetType="{x:Type TextBlock}">
-                
-                <Setter Property="FontSize" Value="16"/>
-                <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+            <Color x:Key="Theme.Color.Background">#202020</Color>
+            <SolidColorBrush x:Key="Theme.Brush.Background" Color="{StaticResource Theme.Color.Background}"/>
 
-                <Setter Property="LayoutTransform">
-                    <Setter.Value>
-                        <ScaleTransform ScaleX="1" ScaleY="1"/>
-                    </Setter.Value>
-                </Setter>
-
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=IsIdle}" Value="{x:True}">
-                        <Setter Property="LayoutTransform">
-                            <Setter.Value>
-                                <ScaleTransform ScaleX="4" ScaleY="4"/>
-                            </Setter.Value>
-                        </Setter>
-                    </DataTrigger>
-                </Style.Triggers>
-                
-            </Style>
-            
         </ResourceDictionary>
     </Application.Resources>
     

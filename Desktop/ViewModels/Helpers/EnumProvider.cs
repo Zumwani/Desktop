@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Data;
 
-namespace Desktop.View;
+namespace Desktop.ViewModels.Helpers;
 
 public class EnumProvider : ObjectDataProvider
 {

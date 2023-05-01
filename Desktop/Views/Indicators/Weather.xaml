@@ -2,17 +2,17 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:Desktop.ViewModels"
                     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
-                    xmlns:view="clr-namespace:Desktop.View">
+                    xmlns:helpers="clr-namespace:Desktop.ViewModels.Helpers">
 
     <DataTemplate DataType="{x:Type viewModels:Weather}">
 
         <DataTemplate.Resources>
 
-            <view:EnumProvider x:Key="Enum.WeatherUnit" EnumType="{viewModels:WeatherUnitEnumType}"/>
+            <helpers:EnumProvider x:Key="Enum.WeatherUnit" EnumType="{viewModels:WeatherUnitEnumType}"/>
 
         </DataTemplate.Resources>
         
-        <wpfui:Button Command="{Binding ClickCommand}" Padding="6,0,6,0">
+        <wpfui:Button x:Name="button" Padding="6,0,6,0" Common.ContextMenuOnLeftClick="True">
 
             <Button.Resources>
                 <Style TargetType="Rectangle">
@@ -29,7 +29,7 @@
             </Button.Resources>
 
             <wpfui:Button.ContextMenu>
-                <ContextMenu>
+                <ContextMenu Placement="Top">
                     <MenuItem Header="View on openweathermap.org..." Command="{Binding ClickCommand}"/>
                     <Separator/>
                     <MenuItem Header="Set location..." Command="{Binding OpenPopupCommand}"/>

@@ -14,7 +14,15 @@ public partial class DesktopWindow : UiWindow
 {
 
     //TODO: Fix drag start from files
-    //TODO: Crashes when bluetooth device disconnected
+    //TODO: Improve icon on shortcut
+    //TODO: Fix popups
+    //TODO: Notes not saving content sometimes
+    //TODO: Fix files
+    //TODO: IsMouseOver not working in style for some reason
+    //TODO: Common.Utility throwing index out of range
+    //TODO: Fix better solution than Window.IsIdle
+    //TODO: Move and rename helpers
+    //TODO: Hide notification count when only 1
 
     public bool IsIdle => false;
     public ViewModels.DesktopWindow View { get; } = new();

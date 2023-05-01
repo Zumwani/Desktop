@@ -1,8 +1,9 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections;
+using System.Text.Json.Serialization;
 
 namespace Desktop.Models;
 
-public struct BluetoothDevice
+public struct BluetoothDevice : IEqualityComparer
 {
 
     [JsonPropertyName("connected")]
@@ -16,5 +17,9 @@ public struct BluetoothDevice
 
     [JsonPropertyName("name")]
     public string Name { get; set; }
+
+    public new bool Equals(object? x, object? y) => x is not null && y is not null && ((BluetoothDevice)x).Name == ((BluetoothDevice)y).Name;
+
+    public int GetHashCode(object obj) => Name.GetHashCode();
 
 }

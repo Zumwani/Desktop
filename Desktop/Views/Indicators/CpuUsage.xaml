@@ -5,7 +5,7 @@
                     xmlns:commands="clr-namespace:Desktop.Commands">
 
     <DataTemplate DataType="{x:Type viewModels:CpuUsage}">
-        <wpfui:Button Icon="DataArea24" HorizontalAlignment="Right" Command="{commands:OpenTaskManager}">
+        <wpfui:Button Icon="DataArea24" HorizontalAlignment="Right" Command="{commands:OpenTaskManager}" FontSize="16" ToolTip="Open task manager...">
             <TextBlock Text="{Binding Value, Mode=OneWay, StringFormat='{}{0:N0}%', TargetNullValue='--', FallbackValue='--'}"/>
         </wpfui:Button>
     </DataTemplate>

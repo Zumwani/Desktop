@@ -5,7 +5,8 @@
                     xmlns:commands="clr-namespace:Desktop.Commands">
     
     <DataTemplate DataType="{x:Type viewModels:Memory}">
-        <wpfui:Button Icon="Ram20" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" Command="{commands:OpenTaskManager}">
+        <wpfui:Button Icon="Ram20" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" Command="{commands:OpenTaskManager}" FontSize="16"
+                       ToolTip="Open task manager...">
             <TextBlock>
                 <Run Text="{Binding UsedMemory, StringFormat='{}{0:0.0}GB', TargetNullValue='--', FallbackValue='--', Mode=OneWay}"/>
                 <Run Text="/"/>

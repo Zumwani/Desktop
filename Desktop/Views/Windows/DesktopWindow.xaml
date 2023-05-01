@@ -7,7 +7,7 @@
                     mc:Ignorable="d">
 
     <DataTemplate DataType="{x:Type viewModels:DesktopWindow}">
-        <Grid TextElement.FontSize="18">
+        <Grid>
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>

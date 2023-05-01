@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Desktop.Models;
@@ -23,11 +23,17 @@ static partial class NotificationUtility
         InitializeWindowsNotificationsListener();
     }
 
-    public static void Hide(Notification notification)
+    public static async void Hide(Notification notification)
     {
+
         if (tokens.Remove(notification, out var token))
             token.Cancel();
+
+        notification.IsVisible = false;
+        await Task.Delay(250);
+
         _ = Notifications.Remove(notification);
+
     }
 
     public static void ClearAll()
@@ -35,6 +41,9 @@ static partial class NotificationUtility
         Notifications.Clear();
         tokens.Clear();
     }
+
+    public static bool Find(string header, [NotNullWhen(true)] out Notification? notification) =>
+        (notification = Notifications.FirstOrDefault(n => n.Header == header)) is not null;
 
     #region Notify
 
@@ -47,10 +56,12 @@ static partial class NotificationUtility
     public static async Task Notify(Notification notification)
     {
 
-        if (!string.IsNullOrEmpty(notification.Header) && Notifications.Any(n => n.Header == notification.Header))
+        if (!string.IsNullOrEmpty(notification.Header) && Find(notification.Header, out var existingNotification))
+        {
+            notification.DuplicateHeaderCount += 1;
             return;
+        }
 
-        Hide(notification);
         tokens.Add(notification, new());
         Notifications.Add(notification);
 
@@ -146,10 +157,11 @@ static partial class NotificationUtility
                 var binding = notification.Notification.Visual.GetBinding(Windows.UI.Notifications.KnownNotificationBindings.ToastGeneric);
                 var text = string.Join("\n", binding.GetTextElements().Select(t => t.Text));
 
-                listener.RemoveNotification(notification.Id);
-
-                var header = GetHeader(binding.GetTextElements()[0].Text);
+                var header = binding.GetTextElements()[0].Text;
                 _ = Notify(new Notification(text) { Header = header }).ContinueWith(t => _ = list.Remove(notification.Id));
+
+                await Task.Delay(5000);
+                listener.RemoveNotification(notification.Id);
 
             }
 
@@ -157,12 +169,6 @@ static partial class NotificationUtility
         }, TimeSpan.FromSeconds(0.5));
 
     }
-
-    [GeneratedRegex("^([^()]+)(?: \\(([^()]+)\\))?$")]
-    private static partial Regex HeaderRegex();
-
-    static string GetHeader(string str) =>
-           HeaderRegex().Matches(str).Last().Value;
 
     #endregion
 
