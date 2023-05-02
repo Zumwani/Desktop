@@ -58,7 +58,7 @@ static partial class NotificationUtility
 
         if (!string.IsNullOrEmpty(notification.Header) && Find(notification.Header, out var existingNotification))
         {
-            notification.DuplicateHeaderCount += 1;
+            existingNotification.DuplicateHeaderCount += 1;
             return;
         }
 

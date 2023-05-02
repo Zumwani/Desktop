@@ -116,6 +116,10 @@
 
     </Style>
 
+    <Style x:Key="Styles.Button.IconRight" TargetType="{x:Type wpfui:Button}" BasedOn="{StaticResource Styles.Button}">
+        <Setter Property="Tag" Value="IconRight"/>
+    </Style>
+    
     <Style TargetType="wpfui:Button" BasedOn="{StaticResource Styles.Button}"/>
 
 </ResourceDictionary>

@@ -10,6 +10,7 @@
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="MinHeight" Value="200"/>
         <Setter Property="MinWidth" Value="200"/>
+        <Setter Property="Padding" Value="6"/>
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">

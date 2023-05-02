@@ -7,7 +7,7 @@
 
     <DataTemplate DataType="{x:Type viewModels:Notes}">
         <wpfui:Card DockPanel.Dock="Right" HorizontalAlignment="Right">
-
+            
             <wpfui:Card.ContextMenu>
                 <ContextMenu>
                     <wpfui:MenuItem Header="Create note..." SymbolIcon="NoteAdd48" Command="{Binding CreateCommand}"/>
@@ -19,7 +19,9 @@
                 </ContextMenu>
             </wpfui:Card.ContextMenu>
 
-            <ItemsControl ItemsSource="{Binding}" DataContext="{Binding Items}"/>
+            <wpfui:DynamicScrollViewer>
+                <ItemsControl ItemsSource="{Binding}" DataContext="{Binding Items}"/>
+            </wpfui:DynamicScrollViewer>
 
         </wpfui:Card>
     </DataTemplate>

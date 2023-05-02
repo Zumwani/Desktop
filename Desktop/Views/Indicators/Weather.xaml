@@ -30,7 +30,7 @@
                 </ContextMenu>
             </wpfui:Button.ContextMenu>
 
-            <DockPanel>
+            <DockPanel IsHitTestVisible="False">
 
                 <Border Height="{Binding ElementName=TextBlock, Path=ActualHeight, Mode=OneWay}" 
                         DockPanel.Dock="Left" Margin="6,8,6,6"

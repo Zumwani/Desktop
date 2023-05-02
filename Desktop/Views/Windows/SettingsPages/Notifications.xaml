@@ -10,6 +10,7 @@
             <StackPanel>
 
                 <CheckBox Content="Collapse notifications when multiple detected from same source"/>
+                <CheckBox Content="Show clear all button"/>
 
             </StackPanel>
         </wpfui:Card>

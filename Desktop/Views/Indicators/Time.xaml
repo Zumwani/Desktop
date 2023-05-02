@@ -5,8 +5,33 @@
                     xmlns:viewModels="clr-namespace:Desktop.ViewModels">
 
     <DataTemplate DataType="{x:Type viewModels:Time}">
-        <wpfui:Button ToolTip="Open calendar..." Common.ContextMenuOnLeftClick="True" Common.CenterContextMenu="True">
-         
+        <wpfui:Button ToolTip="Open calendar..." Common.ContextMenuOnLeftClick="True" Common.CenterContextMenu="True" MinWidth="200">
+            
+            <wpfui:Button.Style>
+                <Style TargetType="wpfui:Button" BasedOn="{StaticResource {x:Type wpfui:Button}}">
+
+                    <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+                    <Setter Property="Height" Value="100"/>
+
+                    <Setter Property="LayoutTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                        </Setter.Value>
+                    </Setter>
+
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=IsIdle}" Value="{x:True}">
+                            <Setter Property="LayoutTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="2" ScaleY="2"/>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+
+                </Style>
+            </wpfui:Button.Style>
+            
             <wpfui:Button.ContextMenu>
                 <ContextMenu>
                     <wpfui:MenuItem SymbolIcon="WindowNew24" Header="Open calendar..." Command="{commands:OpenCalendar}"/>
@@ -14,22 +39,10 @@
                     <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{commands:ConfigureDateAndTime}"/>
                 </ContextMenu>
             </wpfui:Button.ContextMenu>
-            
-            <TextBlock Text="{Binding Value, Mode=OneWay, StringFormat=t}">
-                <TextBlock.Style>
-                    <Style TargetType="TextBlock">
 
-                        <Setter Property="FontSize" Value="92"/>
-
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=IsIdle}" Value="True">
-                                <Setter Property="FontSize" Value="142"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                        
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
+            <Viewbox Margin="-8,-36,-8,-26">
+                <TextBlock Text="{Binding Value, Mode=OneWay, StringFormat=t}" Margin="0,-0,0,0"/>
+            </Viewbox>
             
         </wpfui:Button>
     </DataTemplate>
