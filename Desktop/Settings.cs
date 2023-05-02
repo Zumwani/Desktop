@@ -61,3 +61,8 @@ public class Weather : Setting<Weather.Config, Weather>
     }
 
 }
+
+public class CalendarUri : Setting<string, CalendarUri>
+{
+    public override string? DefaultValue => "https://calendar.google.com";
+}

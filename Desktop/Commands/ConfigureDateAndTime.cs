@@ -3,10 +3,10 @@ using Desktop.Utility;
 
 namespace Desktop.Commands;
 
-public class OpenCalendar : Command
+public class ConfigureDateAndTime : Command
 {
 
     public override void Execute() =>
-        FileUtility.Open(Settings.CalendarUri.Current.Value);
+        FileUtility.Open("ms-settings:dateandtime");
 
 }

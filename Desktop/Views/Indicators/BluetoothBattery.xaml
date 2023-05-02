@@ -16,7 +16,7 @@
                     <MenuItem Header="Bluetooth battery monitor">
                         <MenuItem IsEnabled="False" Header="Bluetooth battery monitor (pro) is required for bluetooth device indicator."/>
                         <MenuItem Header="View bluetoothgoodies.com..." Command="{Binding OpenMainPageCommand}"/>
-                        <MenuItem Header="API docs..." Command="{Binding OpenAPIPageCommand}"/>
+                        <MenuItem Header="Instructions for setup..." Command="{Binding OpenAPIPageCommand}"/>
                     </MenuItem>
                     
                     <MenuItem Header="Selected device:" ItemsSource="{Binding AvailableDevices}" DisplayMemberPath="Name"

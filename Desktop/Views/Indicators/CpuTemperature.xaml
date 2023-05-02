@@ -5,8 +5,19 @@
                     xmlns:commands="clr-namespace:Desktop.Commands">
     
     <DataTemplate DataType="{x:Type viewModels:CpuTemperature}">
-        <wpfui:Button Icon="Temperature24" HorizontalAlignment="Right" Command="{commands:OpenTaskManager}" FontSize="16" ToolTip="Open task manager...">
+        <wpfui:Button Icon="Temperature24" HorizontalAlignment="Right" FontSize="16" ToolTip="CPU temperature"
+                      Common.ContextMenuOnLeftClick="True" Common.CenterContextMenu="True">
+
+            <wpfui:Button.ContextMenu>
+                <ContextMenu>
+                    <wpfui:MenuItem SymbolIcon="WindowNew24" Header="Open task manager..." Command="{commands:OpenTaskManager}"/>
+                    <Separator/>
+                    <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{commands:ConfigureSystemInfo}"/>
+                </ContextMenu>
+            </wpfui:Button.ContextMenu>
+
             <TextBlock Text="{Binding Value, Mode=OneWay, StringFormat='{}{0}℃', TargetNullValue='--', FallbackValue='--'}"/>
+            
         </wpfui:Button>
     </DataTemplate>
     

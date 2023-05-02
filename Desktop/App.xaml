@@ -21,6 +21,7 @@
                 <ResourceDictionary Source="Styles/Popup.xaml"/>
                 <ResourceDictionary Source="Styles/TextBlock.xaml"/>
                 <ResourceDictionary Source="Styles/ListBox.xaml"/>
+                <ResourceDictionary Source="Styles/Card.xaml"/>
 
                 <ResourceDictionary Source="Views/Indicators/BluetoothBattery.xaml"/>
                 <ResourceDictionary Source="Views/Indicators/CpuTemperature.xaml"/>

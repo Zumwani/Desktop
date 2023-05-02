@@ -18,9 +18,9 @@
     <Window.ContextMenu>
         <ContextMenu>
             <wpfui:MenuItem Header="Change wallpaper..." SymbolIcon="Wallpaper24" Command="{commands:ChangeWallpaper}"/>
-            <wpfui:MenuItem Header="Restart system status server" SymbolIcon="Wallpaper24" Command="{commands:RestartSystemStatusServer}"/>
+            <wpfui:MenuItem Header="Restart system info server" SymbolIcon="Server24" Command="{commands:RestartSystemStatusServer}"/>
             <Separator/>
-            <wpfui:MenuItem Header="Quit" SymbolIcon="Power28" Command="{commands:Quit}"/>
+            <wpfui:MenuItem Header="Quit app" SymbolIcon="Power28" Command="{commands:Quit}"/>
         </ContextMenu>
     </Window.ContextMenu>
 

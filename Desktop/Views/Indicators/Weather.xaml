@@ -7,9 +7,7 @@
     <DataTemplate DataType="{x:Type viewModels:Weather}">
 
         <DataTemplate.Resources>
-
             <helpers:EnumProvider x:Key="Enum.WeatherUnit" EnumType="{viewModels:WeatherUnitEnumType}"/>
-
         </DataTemplate.Resources>
         
         <wpfui:Button x:Name="button" Padding="6,0,6,0" Common.ContextMenuOnLeftClick="True">
@@ -30,9 +28,9 @@
 
             <wpfui:Button.ContextMenu>
                 <ContextMenu Placement="Top">
-                    <MenuItem Header="View on openweathermap.org..." Command="{Binding ClickCommand}"/>
+                    <wpfui:MenuItem SymbolIcon="WindowNew24" Header="View on openweathermap.org..." Command="{Binding ClickCommand}"/>
                     <Separator/>
-                    <MenuItem Header="Set location..." Command="{Binding OpenPopupCommand}"/>
+                    <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{Binding OpenPopupCommand}"/>
                 </ContextMenu>
             </wpfui:Button.ContextMenu>
 

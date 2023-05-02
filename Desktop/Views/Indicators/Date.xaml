@@ -5,11 +5,21 @@
                     xmlns:commands="clr-namespace:Desktop.Commands">
 
     <DataTemplate DataType="{x:Type viewModels:Date}">
-        <wpfui:Button Command="{commands:OpenCalendar}" ToolTip="Open calendar...">
+        <wpfui:Button ToolTip="Open calendar..." Common.ContextMenuOnLeftClick="True" Common.CenterContextMenu="True">
+
+            <wpfui:Button.ContextMenu>
+                <ContextMenu>
+                    <wpfui:MenuItem SymbolIcon="WindowNew24" Header="Open calendar..." Command="{commands:OpenCalendar}"/>
+                    <Separator/>
+                    <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{commands:ConfigureDateAndTime}"/>
+                </ContextMenu>
+            </wpfui:Button.ContextMenu>
+
             <TextBlock>
                 <Run Text="{Binding Value, Mode=OneWay, StringFormat=d}"/><Run Text=","/>
                 <Run Text="{Binding Value, Mode=OneWay, StringFormat=ddd}"/>
             </TextBlock>
+            
         </wpfui:Button>
     </DataTemplate>
     

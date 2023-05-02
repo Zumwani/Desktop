@@ -5,13 +5,23 @@
                     xmlns:commands="clr-namespace:Desktop.Commands">
     
     <DataTemplate DataType="{x:Type viewModels:Memory}">
-        <wpfui:Button Icon="Ram20" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" Command="{commands:OpenTaskManager}" FontSize="16"
-                       ToolTip="Open task manager...">
+        <wpfui:Button Icon="Ram20" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" FontSize="16"
+                      ToolTip="Memory usage / Available" Common.ContextMenuOnLeftClick="True" Common.CenterContextMenu="True">
+            
+            <wpfui:Button.ContextMenu>
+                <ContextMenu>
+                    <wpfui:MenuItem SymbolIcon="WindowNew24" Header="Open task manager..." Command="{commands:OpenTaskManager}"/>
+                    <Separator/>
+                    <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{commands:ConfigureSystemInfo}"/>
+                </ContextMenu>
+            </wpfui:Button.ContextMenu>
+
             <TextBlock>
                 <Run Text="{Binding UsedMemory, StringFormat='{}{0:0.0}GB', TargetNullValue='--', FallbackValue='--', Mode=OneWay}"/>
                 <Run Text="/"/>
                 <Run Text="{Binding AvailableMemory, StringFormat='{}{0:0}GB', TargetNullValue='--', FallbackValue='--', Mode=OneWay}"/>
             </TextBlock>
+            
         </wpfui:Button>
     </DataTemplate>
     

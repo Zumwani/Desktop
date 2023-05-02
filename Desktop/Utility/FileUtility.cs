@@ -36,8 +36,8 @@ public static class FileUtility
     static FileItem Create(string path) =>
         new() { Path = path, Title = Path.GetFileName(path), Icon = GetIcon(path) };
 
-    public static void Open(string path) =>
-        Process.Start(new ProcessStartInfo(path) { UseShellExecute = true });
+    public static void Open(string path, string args = "") =>
+        Process.Start(new ProcessStartInfo(path) { UseShellExecute = true, Arguments = args });
 
     #region Watcher
 

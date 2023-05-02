@@ -3,7 +3,8 @@
                     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
                     xmlns:commands="clr-namespace:Desktop.Commands"
                     xmlns:models="clr-namespace:Desktop.Models"
-                    xmlns:helpers="clr-namespace:Desktop.ViewModels.Helpers">
+                    xmlns:helpers="clr-namespace:Desktop.ViewModels.Helpers"
+                    xmlns:converters="clr-namespace:Desktop.Converters">
 
     <DataTemplate DataType="{x:Type models:Notification}">
 
@@ -22,8 +23,8 @@
                                 Cursor="Hand" Command="{commands:HideNotification}"/>
 
                 <TextBlock TextTrimming="CharacterEllipsis" Margin="12,12,12,4">
-                    <Run Text="{Binding DuplicateHeaderCount, Mode=OneWay}"/>
-                    <Run Text="{Binding Content, Mode=OneWay}"/><Run Text=":"/>
+                    <TextBlock Text="{Binding DuplicateHeaderCount, Mode=OneWay}" Common.IsVisible="{Binding DuplicateHeaderCount, Converter={converters:IsOver}, ConverterParameter=1}"/>
+                    <Run Text="{Binding Content, Mode=OneWay}"/>
                 </TextBlock>
 
                 <ProgressBar Grid.Row="1" Height="6" Background="#AAFFFFFF" Foreground="CornflowerBlue" Margin="2"

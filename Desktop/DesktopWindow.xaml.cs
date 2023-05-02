@@ -18,11 +18,13 @@ public partial class DesktopWindow : UiWindow
     //TODO: Fix popups
     //TODO: Notes not saving content sometimes
     //TODO: Fix files
-    //TODO: IsMouseOver not working in style for some reason
-    //TODO: Common.Utility throwing index out of range
+    //TODO: Common.Utility throwing index out of range, after move
     //TODO: Fix better solution than Window.IsIdle
     //TODO: Move and rename helpers
-    //TODO: Hide notification count when only 1
+    //TODO: Update after hibernation
+    //TODO: Add option to open windows calendar instead of google, also allow setting custom url
+    //TODO: Add option to switch to farenheit
+    //TODO: Add settings window
 
     public bool IsIdle => false;
     public ViewModels.DesktopWindow View { get; } = new();

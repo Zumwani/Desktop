@@ -5,27 +5,37 @@
                     xmlns:commands="clr-namespace:Desktop.Commands">
 
     <DataTemplate DataType="{x:Type viewModels:Files}">
-        <StackPanel Background="#01000000">
+        <wpfui:Card HorizontalAlignment="Left">
 
-            <StackPanel.ContextMenu>
+            <wpfui:Card.ContextMenu>
                 <ContextMenu>
-                    <wpfui:MenuItem Header="Create folder..." SymbolIcon="FolderAdd48"/>
-                    <!--Click="CreateFolderItem_Click"-->
-                    <wpfui:MenuItem Header="Create file..." SymbolIcon="DocumentAdd48"/>
-                    <!--Click="CreateFileItem_Click"-->
-                    <Separator/>
-                    <wpfui:MenuItem Header="Open desktop..." SymbolIcon="Desktop32" Command="{commands:OpenDesktop}"/>
-                    <wpfui:MenuItem Header="Open downloads..." SymbolIcon="ArrowDownload48" Command="{commands:OpenDownloads}"/>
-                    <Separator/>
-                    <wpfui:MenuItem Header="Change wallpaper..." SymbolIcon="Wallpaper24" Command="{commands:ChangeWallpaper}"/>
+                    <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..."/>
                 </ContextMenu>
-            </StackPanel.ContextMenu>
+            </wpfui:Card.ContextMenu>
             
-            <wpfui:Button Icon="Recycle32" Content="Recycle bin" Command="{commands:OpenRecycleBin}" ToolTip="Open recycle bin..."/>
+            <StackPanel Background="#01000000">
 
-            <ItemsControl ItemsSource="{Binding Items}" MaxWidth="200"/>
+                <StackPanel.ContextMenu>
+                    <ContextMenu>
+                        <wpfui:MenuItem Header="Create folder..." SymbolIcon="FolderAdd48"/>
+                        <!--Click="CreateFolderItem_Click"-->
+                        <wpfui:MenuItem Header="Create file..." SymbolIcon="DocumentAdd48"/>
+                        <!--Click="CreateFileItem_Click"-->
+                        <Separator/>
+                        <wpfui:MenuItem Header="Open desktop..." SymbolIcon="Desktop32" Command="{commands:OpenDesktop}"/>
+                        <wpfui:MenuItem Header="Open downloads..." SymbolIcon="ArrowDownload48" Command="{commands:OpenDownloads}"/>
+                        <Separator/>
+                        <wpfui:MenuItem Header="Change wallpaper..." SymbolIcon="Wallpaper24" Command="{commands:ChangeWallpaper}"/>
+                    </ContextMenu>
+                </StackPanel.ContextMenu>
+            
+                <wpfui:Button Icon="Recycle32" Content="Recycle bin" Command="{commands:OpenRecycleBin}" ToolTip="Open recycle bin..."/>
 
-        </StackPanel>
+                <ItemsControl ItemsSource="{Binding Items}" MaxWidth="200"/>
+
+            </StackPanel>
+            
+        </wpfui:Card>
     </DataTemplate>
     
 </ResourceDictionary>
