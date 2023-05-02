@@ -1,0 +1,59 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewModels="clr-namespace:Desktop.ViewModels.SettingPages"
+                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml">
+
+    <DataTemplate DataType="{x:Type viewModels:General}">
+
+        <StackPanel>
+
+            <wpfui:Card>
+                <StackPanel>
+                    <CheckBox Content="Autostart"/>
+                    <CheckBox Content="Dim screen when not active"/>
+                    <wpfui:Button Content="Create startmenu shortcut"/>
+                </StackPanel>
+            </wpfui:Card>
+
+            <wpfui:Card>
+                <StackPanel>
+                    
+                    <CheckBox Content="Show wallpaper"/>
+                    <CheckBox Content="Show files"/>
+                    <CheckBox Content="Show notes"/>
+                    <CheckBox Content="Show time"/>
+                    <CheckBox Content="Show date"/>
+                    <CheckBox Content="Show weather"/>
+                    <CheckBox Content="Show notifications"/>
+                    <CheckBox Content="Show bluetooth battery indicator"/>
+                    <CheckBox Content="Show cpu usage"/>
+                    <CheckBox Content="Show cpu temperature"/>
+                    <CheckBox Content="Show memory"/>
+                    
+                </StackPanel>
+            </wpfui:Card>
+            
+            <wpfui:CardExpander Header="Idle mode">
+                <StackPanel>
+
+                    <CheckBox Content="Is enabled"/>
+                    <TextBlock Text="Delay before opening:"/>
+
+                    <CheckBox Content="Show wallpaper"/>
+                    <CheckBox Content="Show time"/>
+                    <CheckBox Content="Show date"/>
+                    <CheckBox Content="Show weather"/>
+                    <CheckBox Content="Show notifications"/>
+                    <CheckBox Content="Show bluetooth battery indicator"/>
+                    <CheckBox Content="Show cpu usage"/>
+                    <CheckBox Content="Show cpu temperature"/>
+                    <CheckBox Content="Show memory"/>
+
+                </StackPanel>
+            </wpfui:CardExpander>
+            
+        </StackPanel>
+        
+    </DataTemplate>
+    
+</ResourceDictionary>

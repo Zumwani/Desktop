@@ -22,10 +22,10 @@
                                 Common.IsVisible="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=wpfui:Button}, Path=IsMouseOver}"
                                 Cursor="Hand" Command="{commands:HideNotification}"/>
 
-                <TextBlock TextTrimming="CharacterEllipsis" Margin="12,12,12,4">
+                <StackPanel Orientation="Horizontal" Margin="12,12,12,4">
                     <TextBlock Text="{Binding DuplicateHeaderCount, Mode=OneWay}" Common.IsVisible="{Binding DuplicateHeaderCount, Converter={converters:IsOver}, ConverterParameter=1}"/>
-                    <Run Text="{Binding Content, Mode=OneWay}"/>
-                </TextBlock>
+                    <TextBlock Text="{Binding Content, Mode=OneWay}" TextTrimming="CharacterEllipsis"/>
+                </StackPanel>
 
                 <ProgressBar Grid.Row="1" Height="6" Background="#AAFFFFFF" Foreground="CornflowerBlue" Margin="2"
                                      Minimum="{Binding CreationTime.Ticks, Mode=OneWay}"

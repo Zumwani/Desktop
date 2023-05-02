@@ -1,0 +1,11 @@
+﻿<Window x:Class="Desktop.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Desktop" WindowStartupLocation="CenterScreen"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}, Path=View}"
+        Width="1000" Height="600" Topmost="True"
+        Common.IsVisible="{Binding IsOpen}">
+
+    <ContentPresenter Content="{Binding}"/>
+
+</Window>

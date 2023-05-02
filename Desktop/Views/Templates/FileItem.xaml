@@ -25,6 +25,8 @@
                     <!--Click="RenameItem_Click"-->
                     <Separator/>
                     <wpfui:MenuItem Header="Delete..." Command="{commands:DeleteFile}" SymbolIcon="Delete48"/>
+                    <Separator/>
+                    <wpfui:MenuItem Header="Configure..." Command="{commands:ConfigureFiles}" SymbolIcon="Settings48"/>
                 </ContextMenu>
             </wpfui:Button.ContextMenu>
 

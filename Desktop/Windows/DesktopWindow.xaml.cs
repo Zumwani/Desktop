@@ -24,7 +24,7 @@ public partial class DesktopWindow : UiWindow
     //TODO: Update after hibernation
     //TODO: Add option to open windows calendar instead of google, also allow setting custom url
     //TODO: Add option to switch to farenheit
-    //TODO: Add settings window
+    //TODO: Finish settings window
 
     public bool IsIdle => false;
     public ViewModels.DesktopWindow View { get; } = new();

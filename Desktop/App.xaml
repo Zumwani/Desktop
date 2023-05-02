@@ -43,6 +43,7 @@
                 
                 <ResourceDictionary Source="Views/Windows/DesktopWindow.xaml"/>
                 <ResourceDictionary Source="Views/Windows/IdleWindow.xaml"/>
+                <ResourceDictionary Source="Views/Windows/SettingsWindow.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
 

@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewModels="clr-namespace:Desktop.ViewModels.SettingPages"
+                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml">
+
+    <DataTemplate DataType="{x:Type viewModels:Files}">
+
+        <wpfui:Card>
+            <StackPanel>
+
+                <CheckBox Content="Show recycle bin"/>
+                <TextBlock Text="Sources:"/>
+
+            </StackPanel>
+        </wpfui:Card>
+        
+    </DataTemplate>
+    
+</ResourceDictionary>

@@ -7,6 +7,6 @@ public class OpenCalendar : Command
 {
 
     public override void Execute() =>
-        FileUtility.Open(Settings.CalendarUri.Current.Value);
+        FileUtility.Open(Settings.CalendarUri.Current.Value!);
 
 }

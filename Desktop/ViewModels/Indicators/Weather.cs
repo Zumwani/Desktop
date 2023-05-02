@@ -28,7 +28,7 @@ public class Weather : IntervalViewModel
     public bool IsPopupOpen { get; set; }
 
     [SafeForDependencyAnalysis]
-    public Settings.Weather.Config Config => Settings.Weather.Current.Value ??= new();
+    public Desktop.Settings.Weather.Config Config => Desktop.Settings.Weather.Current.Value ??= new();
 
     [SafeForDependencyAnalysis]
     public string Url => WeatherUtility.Url;

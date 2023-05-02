@@ -1,0 +1,52 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+                    xmlns:viewModels="clr-namespace:Desktop.ViewModels.SettingPages">
+
+    <DataTemplate DataType="{x:Type viewModels:SettingsWindow}">
+
+        <DataTemplate.Resources>
+
+            <ResourceDictionary>
+                
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="SettingsPages/DateAndTime.xaml"/>
+                    <ResourceDictionary Source="SettingsPages/Files.xaml"/>
+                    <ResourceDictionary Source="SettingsPages/General.xaml"/>
+                    <ResourceDictionary Source="SettingsPages/Notes.xaml"/>
+                    <ResourceDictionary Source="SettingsPages/Notifications.xaml"/>
+                    <ResourceDictionary Source="SettingsPages/SystemInfo.xaml"/>
+                    <ResourceDictionary Source="SettingsPages/Weather.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+
+            </ResourceDictionary>
+        </DataTemplate.Resources>
+        
+        <DockPanel>
+
+            <ListBox DockPanel.Dock="Left" ItemsSource="{Binding Pages}" Margin="4,0,12,0" SelectedItem="{Binding SelectedPage, Mode=TwoWay}" Background="Transparent" BorderThickness="0">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                    <ToggleButton Height="64" Width="200" HorizontalContentAlignment="Left" Margin="0,4" Padding="22,0,0,0" IsChecked="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsSelected, Mode=TwoWay}" BorderThickness="0" Cursor="Hand">
+                                        <DockPanel>
+                                            <wpfui:SymbolIcon DockPanel.Dock="Left" Symbol="{Binding Icon}" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                            <TextBlock VerticalAlignment="Center" Text="{Binding Title}"/>
+                                        </DockPanel>
+                                    </ToggleButton>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+
+            <ContentPresenter Content="{Binding SelectedPage}"/>
+
+        </DockPanel>
+        
+    </DataTemplate>
+    
+</ResourceDictionary>

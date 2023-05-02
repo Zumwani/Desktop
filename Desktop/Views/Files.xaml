@@ -25,7 +25,7 @@
                         <wpfui:MenuItem Header="Open desktop..." SymbolIcon="Desktop32" Command="{commands:OpenDesktop}"/>
                         <wpfui:MenuItem Header="Open downloads..." SymbolIcon="ArrowDownload48" Command="{commands:OpenDownloads}"/>
                         <Separator/>
-                        <wpfui:MenuItem Header="Change wallpaper..." SymbolIcon="Wallpaper24" Command="{commands:ChangeWallpaper}"/>
+                        <wpfui:MenuItem Header="Configure..." SymbolIcon="Settings48" Command="{commands:ConfigureFiles}"/>
                     </ContextMenu>
                 </StackPanel.ContextMenu>
             

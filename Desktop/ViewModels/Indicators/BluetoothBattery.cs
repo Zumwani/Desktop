@@ -19,7 +19,7 @@ public class BluetoothBattery : IntervalViewModel
 
     [SafeForDependencyAnalysis]
     public BluetoothDevice SelectedDevice => AvailableDevices.FirstOrDefault(d => d.Name == SelectedDeviceName);
-    public Settings.BluetoothDevice SelectedDeviceName { get; } = Settings.BluetoothDevice.Current;
+    public Desktop.Settings.BluetoothDevice SelectedDeviceName { get; } = Desktop.Settings.BluetoothDevice.Current;
 
     public RelayCommand OpenAPIPageCommand { get; } = new(() => FileUtility.Open("https://www.bluetoothgoodies.com/info/battery-monitor-api/"));
     public RelayCommand OpenMainPageCommand { get; } = new(() => FileUtility.Open("https://www.bluetoothgoodies.com/"));

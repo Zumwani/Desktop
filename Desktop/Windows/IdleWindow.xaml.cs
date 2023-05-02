@@ -24,7 +24,7 @@ public partial class IdleWindow : Window
 
     void ResetBounds()
     {
-        rect = ShellUtility.Screens.Screen.FromWindowHandle(App.Current.MainWindow.Handle()).Bounds.ToRect();
+        rect = ShellUtility.Screens.Screen.FromWindowHandle(Application.Current.MainWindow.Handle()).Bounds.ToRect();
         Left = rect.Left - 1;
         Top = rect.Top - 1;
         Width = rect.Width + 2;
@@ -38,7 +38,7 @@ public partial class IdleWindow : Window
     }
 
     protected override void OnClosing(CancelEventArgs e) =>
-        e.Cancel = !App.Current.Dispatcher.HasShutdownStarted;
+        e.Cancel = !Application.Current.Dispatcher.HasShutdownStarted;
 
     void Window_PreviewMouseDown(object sender, MouseButtonEventArgs e) =>
       View.IsOpen = false;

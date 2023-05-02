@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewModels="clr-namespace:Desktop.ViewModels.SettingPages"
+                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml">
+
+    <DataTemplate DataType="{x:Type viewModels:Notifications}">
+        <StackPanel>
+            
+        <wpfui:Card>
+            <StackPanel>
+
+                <CheckBox Content="Collapse notifications when multiple detected from same source"/>
+
+            </StackPanel>
+        </wpfui:Card>
+
+            <wpfui:CardExpander Header="Windows notifications">
+                <StackPanel>
+                    
+                    <CheckBox Content="Override windows notifications"/>
+                    <TextBlock Text="Delay before removing from windows"/>
+                    
+                    <TextBlock Text="Duration before removing from desktop"/>
+                    <TextBlock Text="Don't automatically remove"/>
+                    
+                </StackPanel>
+            </wpfui:CardExpander>
+            
+        </StackPanel>
+    </DataTemplate>
+    
+</ResourceDictionary>

@@ -2,15 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:Desktop.ViewModels"
                     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
-                    xmlns:helpers="clr-namespace:Desktop.ViewModels.Helpers">
+                    xmlns:helpers="clr-namespace:Desktop.ViewModels.Helpers" xmlns:commands="clr-namespace:Desktop.Commands">
 
     <DataTemplate DataType="{x:Type viewModels:Weather}">
 
-        <DataTemplate.Resources>
-            <helpers:EnumProvider x:Key="Enum.WeatherUnit" EnumType="{viewModels:WeatherUnitEnumType}"/>
-        </DataTemplate.Resources>
-        
-        <wpfui:Button x:Name="button" Padding="6,0,6,0" Common.ContextMenuOnLeftClick="True">
+        <wpfui:Button Padding="6,0,6,0" Common.ContextMenuOnLeftClick="True">
 
             <Button.Resources>
                 <Style TargetType="Rectangle">
@@ -30,54 +26,24 @@
                 <ContextMenu Placement="Top">
                     <wpfui:MenuItem SymbolIcon="WindowNew24" Header="View on openweathermap.org..." Command="{Binding ClickCommand}"/>
                     <Separator/>
-                    <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{Binding OpenPopupCommand}"/>
+                    <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{commands:ConfigureWeather}"/>
                 </ContextMenu>
             </wpfui:Button.ContextMenu>
 
-            <Grid>
+            <DockPanel>
 
-                <Popup x:Name="locationPopup" StaysOpen="False" AllowsTransparency="True" PopupAnimation="Fade"
-                       IsOpen="{Binding IsPopupOpen}" MaxWidth="1200">
-                    <Border Background="#202020" BorderThickness="1" BorderBrush="DimGray" CornerRadius="8">
-                        <StackPanel Margin="12">
+                <Border Height="{Binding ElementName=TextBlock, Path=ActualHeight, Mode=OneWay}" 
+                        DockPanel.Dock="Left" Margin="6,8,6,6"
+                        LayoutTransform="{Binding ElementName=TextBlock, Path=LayoutTransform}">
+                    <Viewbox Margin="-12,-12,-2,-16">
+                        <Image Source="{Binding Icon, Mode=OneWay, FallbackValue={x:Null}, TargetNullValue={x:Null}}"/>
+                    </Viewbox>
+                </Border>
 
-                            <TextBlock Margin="0,12" TextWrapping="Wrap">
-                                <Hyperlink Command="{Binding UrlClickCommand}">
-                                    <Run Text="{Binding Url, Mode=OneWay}"/>
-                                </Hyperlink>
-                            </TextBlock>
+                <TextBlock x:Name="TextBlock" VerticalAlignment="Center" Margin="-4,-2,2,0"
+                            Text="{Binding Temperature, Mode=OneWay, StringFormat='{}{0:N1} °C', TargetNullValue='No location set'}"/>
 
-                            <TextBlock Text="Api key:" Margin="0,0,0,6"/>
-                            <wpfui:TextBox Text="{Binding Config.ApiKey, UpdateSourceTrigger=PropertyChanged}"/>
-
-                            <TextBlock Text="Location (string search query):" Margin="0,12,0,6"/>
-                            <wpfui:TextBox Text="{Binding Config.SearchLocation, UpdateSourceTrigger=PropertyChanged}"/>
-
-                            <TextBlock Text="Unit:" Margin="0,12,0,6"/>
-                            <ComboBox ItemsSource="{Binding Source={StaticResource Enum.WeatherUnit}}" SelectedItem="{Binding Config.Unit, UpdateSourceTrigger=PropertyChanged}"/>
-
-                            <wpfui:Button Content="Reload" Margin="0,12,0,0" Command="{Binding ReloadCommand}"/>
-
-                        </StackPanel>
-                    </Border>
-                </Popup>
-
-                <DockPanel>
-                    
-                    <Border Height="{Binding ElementName=TextBlock, Path=ActualHeight, Mode=OneWay}" 
-                            DockPanel.Dock="Left" Margin="6,8,6,6"
-                            LayoutTransform="{Binding ElementName=TextBlock, Path=LayoutTransform}">
-                        <Viewbox Margin="-12,-12,-2,-16">
-                            <Image Source="{Binding Icon, Mode=OneWay, FallbackValue={x:Null}, TargetNullValue={x:Null}}"/>
-                        </Viewbox>
-                    </Border>
-                    
-                    <TextBlock x:Name="TextBlock" VerticalAlignment="Center" Margin="-4,-2,2,0"
-                               Text="{Binding Temperature, Mode=OneWay, StringFormat='{}{0:N1} °C', TargetNullValue='No location set'}"/>
-                                    
-                </DockPanel>
-
-            </Grid>
+            </DockPanel>
 
         </wpfui:Button>
     </DataTemplate>
