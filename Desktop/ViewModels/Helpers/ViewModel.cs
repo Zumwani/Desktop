@@ -11,7 +11,4 @@ public abstract class ViewModel : INotifyPropertyChanged
     public virtual void OnPropertyChanged([CallerMemberName] string propertyName = "") =>
         PropertyChanged?.Invoke(this, new(propertyName));
 
-    public virtual void OnPropertyChanged() =>
-        PropertyChanged?.Invoke(this, new(string.Empty));
-
 }

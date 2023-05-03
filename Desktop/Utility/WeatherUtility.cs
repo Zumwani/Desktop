@@ -2,7 +2,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using Desktop.Models;
+using Desktop.Config;
 
 namespace Desktop.Utility;
 
@@ -16,20 +16,22 @@ static class WeatherUtility
 
     public static string Url =>
         $"https://api.openweathermap.org/data/2.5/weather?" +
-        $"q={Settings.Weather.Current.Value!.SearchLocation}" +
-        $"&units={Settings.Weather.Current.Value!.Units}" +
-        $"&appid={Settings.Weather.Current.Value!.ApiKey}";
+        $"q={Config.SearchLocation}" +
+        $"&units={Config.Unit.ToString().ToLower()}" +
+        $"&appid={Config.ApiKey}";
 
     public static bool IsValid =>
-        !string.IsNullOrWhiteSpace(Settings.Weather.Current.Value?.SearchLocation) &&
-        !string.IsNullOrWhiteSpace(Settings.Weather.Current.Value?.ApiKey);
+        !string.IsNullOrWhiteSpace(Config.SearchLocation) &&
+        !string.IsNullOrWhiteSpace(Config.ApiKey);
 
     public static int LocationID { get; private set; }
 
     public static string WebsiteUrl =>
         "https://openweathermap.org/city/" + LocationID;
 
-    public static async Task<Weather> Get()
+    static Config.Weather Config { get; } = ConfigManager.Weather;
+
+    public static async Task<Models.Weather> Get()
     {
 
         try
@@ -46,7 +48,7 @@ static class WeatherUtility
 
             return new()
             {
-                Temperature = result.Main.FeelsLike,
+                Temperature = Config.UseFeelsLikeTemperature ? result.Main.FeelsLike : result.Main.Temp,
                 Icon = new($"http://openweathermap.org/img/w/{result.Weather[0].Icon}.png"),
             };
 
@@ -75,6 +77,7 @@ static class WeatherUtility
     struct MainResults
     {
         [JsonPropertyName("feels_like")] public float FeelsLike { get; set; }
+        [JsonPropertyName("temp")] public float Temp { get; set; }
     }
 
 }

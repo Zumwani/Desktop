@@ -1,21 +1,36 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:Desktop.ViewModels.SettingPages"
-                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml">
+                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+                    xmlns:converters="clr-namespace:Desktop.Converters">
 
     <DataTemplate DataType="{x:Type viewModels:DateAndTime}">
         <StackPanel>
 
+            <wpfui:Button Icon="Settings48" Content="Open windows settings..." Command="{Binding OpenWindowsSettingsCommand}" Margin="0,0,0,8"/>
+
             <wpfui:Card>
                 <StackPanel>
 
-                    <TextBlock Text="Use windows format for date"/>
-                    <TextBlock Text="Use windows format for time"/>
+                    <CheckBox Content="Use windows format for date" IsChecked="{Binding Config.UseWindowsFormatForDate}"/>
+                    <CheckBox Content="Use windows format for time" IsChecked="{Binding Config.UseWindowsFormatForTime}"/>
 
-                    <TextBlock Text="Date format"/>
-                    <TextBlock Text="Time format"/>
+                    <TextBlock Text="Date format" Margin="0,8"/>
+                    <TextBox Text="{Binding Config.DateFormat}" IsEnabled="{Binding Config.UseWindowsFormatForDate, Converter={converters:InvertBool}}"/>
 
-                    <wpfui:Button Content="Open windows date and time settings"/>
+                    <TextBlock Text="Time format" Margin="0,8"/>
+                    <TextBox Text="{Binding Config.TimeFormat}" IsEnabled="{Binding Config.UseWindowsFormatForTime, Converter={converters:InvertBool}}"/>
+
+                    <wpfui:Button Content="Open windows date and time settings" Command="{Binding OpenWindowsSettingsCommand}" Margin="0,12,0,0"/>
+
+                </StackPanel>
+            </wpfui:Card>
+
+            <wpfui:Card Margin="0,8,0,0">
+                <StackPanel>
+
+                    <TextBlock Text="Calendar app:"/>
+                    <TextBox Text="{Binding Config.CalendarUri}"/>
 
                 </StackPanel>
             </wpfui:Card>

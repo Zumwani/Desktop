@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace Desktop;
@@ -7,10 +6,8 @@ namespace Desktop;
 public static class IdleUtility
 {
 
-    static readonly TimeSpan Delay = Debugger.IsAttached ? TimeSpan.FromSeconds(5) : TimeSpan.FromMinutes(5);
-
-    public static bool IsIdle() =>
-        IdleTimeDetector.GetIdleTimeInfo() >= Delay.TotalMilliseconds;
+    public static bool IsIdle(TimeSpan delay) =>
+        IdleTimeDetector.GetIdleTimeInfo() >= delay.TotalMilliseconds;
 
     static class IdleTimeDetector
     {

@@ -21,20 +21,32 @@
             </Grid.RowDefinitions>
 
             <ContentPresenter Content="{Binding Wallpaper}" Grid.ColumnSpan="3" Grid.RowSpan="2"/>
-            <ContentPresenter Content="{Binding Files}" Grid.Column="0"/>
+            <Border Common.IsVisible="{Binding Config.ShowFiles}" Grid.Column="0">
+                <ContentPresenter Content="{Binding Files}"/>
+            </Border>
 
-            <ContentPresenter Content="{Binding Notifications}" Grid.Column="1"/>
-            <ContentPresenter Content="{Binding Notes}" Grid.Column="2"/>
+            <Border Common.IsVisible="{Binding Config.ShowNotifications}" Grid.Column="1">
+                <ContentPresenter Content="{Binding Notifications}"/>
+            </Border>
+            <Border Common.IsVisible="{Binding Config.ShowNotes}" Grid.Column="2">
+                <ContentPresenter Content="{Binding Notes}"/>
+            </Border>
 
             <wpfui:Card Grid.Row="1" Grid.RowSpan="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Bottom">
                 <StackPanel>
 
                     <DockPanel Panel.ZIndex="1" Background="#01FFFFFF">
-                        <ContentPresenter Content="{Binding Weather}" DockPanel.Dock="Right"/>
-                        <ContentPresenter Content="{Binding Date}"/>
+                        <Border Common.IsVisible="{Binding Config.ShowWeather}" DockPanel.Dock="Right">
+                            <ContentPresenter Content="{Binding Weather}"/>
+                        </Border>
+                        <Border Common.IsVisible="{Binding Config.ShowDate}">
+                            <ContentPresenter Content="{Binding Date}"/>
+                        </Border>
                     </DockPanel>
 
-                    <ContentPresenter Content="{Binding Time}"/>
+                    <Border Common.IsVisible="{Binding Config.ShowTime}">
+                        <ContentPresenter Content="{Binding Time}"/>
+                    </Border>
 
                 </StackPanel>
             </wpfui:Card>

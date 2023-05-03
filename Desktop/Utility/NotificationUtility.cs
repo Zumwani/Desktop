@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Desktop.Config;
 using Desktop.Models;
 using Windows.UI.Notifications.Management;
 
@@ -88,7 +89,7 @@ static partial class NotificationUtility
 
     static readonly Dictionary<Note, Notification> noteNotifications = new();
 
-    static IEnumerable<Note> NonActiveNotes => Settings.Notes.Current.Where(n => !noteNotifications.ContainsKey(n));
+    static IEnumerable<Note> NonActiveNotes => ConfigManager.Notes.Items.Where(n => !noteNotifications.ContainsKey(n));
 
     static void InitializeNoteNotifications() =>
         ActionUtility.Invoke(

@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 using Common.Utility;
+using Desktop.Config;
 using PostSharp.Patterns.Model;
 
 namespace Desktop;
@@ -20,6 +21,7 @@ public partial class IdleWindow : Window
         ResetBounds();
         InitializeComponent();
         Show();
+        ConfigManager.DesktopWindow.PropertyChanged += (s, e) => ResetBounds();
     }
 
     void ResetBounds()

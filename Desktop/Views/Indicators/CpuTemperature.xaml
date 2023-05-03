@@ -5,7 +5,8 @@
                     xmlns:commands="clr-namespace:Desktop.Commands">
     
     <DataTemplate DataType="{x:Type viewModels:CpuTemperature}">
-        <wpfui:Button Icon="Temperature24" HorizontalAlignment="Right" FontSize="16" ToolTip="CPU temperature"
+        <wpfui:Button Icon="Temperature24" HorizontalAlignment="Right" ToolTip="CPU temperature"
+                      Style="{StaticResource Styles.Button.IconRight}"
                       Common.ContextMenuOnLeftClick="True" Common.CenterContextMenu="True">
 
             <wpfui:Button.ContextMenu>

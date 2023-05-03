@@ -6,11 +6,21 @@
     <DataTemplate DataType="{x:Type viewModels:SystemInfo}">
         <StackPanel>
 
+            <wpfui:Button Content="Restart server" Command="{Binding RestartServerCommand}" Margin="0,0,0,8">
+                <wpfui:Button.ToolTip>
+                    <TextBlock TextWrapping="Wrap">
+                        <Run Text="Restart system info server."/>
+                        <LineBreak/>
+                        <LineBreak/>
+                        <Run Text="Local server is required, since some hardware sensors require admin."/>
+                    </TextBlock>
+                </wpfui:Button.ToolTip>   
+            </wpfui:Button>
+            
             <wpfui:Card>
                 <StackPanel>
                     <TextBlock Text="Update interval"/>
-                    <TextBlock Text="Local server is required due admin access required by some hardware sensors"/>
-                    <wpfui:Button Content="Restart server"/>
+                    <Label Content="TODO: Add timepicker"/>
                 </StackPanel>
             </wpfui:Card>
             

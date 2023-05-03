@@ -1,0 +1,35 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+                    xmlns:viewModels="clr-namespace:Desktop.ViewModels.SettingPages">
+
+    <DataTemplate DataType="{x:Type viewModels:IdleMode}">
+        <StackPanel>
+            
+            <wpfui:Card>
+                <StackPanel>
+                    
+                    <CheckBox Content="Is enabled" IsChecked="{Binding Config.IsEnabled}" Margin="0,0,0,8"/>
+                    <TextBlock Text="Delay before opening:"/>
+                    <Label Content="TODO: Add time picker"/>
+                    <CheckBox Content="Disable delay in debug mode" IsChecked="{Binding Config.DisableDelayInDebugMode}"/>
+
+                    <TextBlock Text="Wallpaper Stretch:" Margin="0,8,0,0"/>
+                    <ComboBox Text="Stretch" ItemsSource="{Binding Source={StaticResource Enum.Stretch}}" SelectedItem="{Binding Config.WallpaperStretch}" Margin="0,8"/>
+
+                    <CheckBox Content="Show time" IsChecked="{Binding Config.ShowWallpaper}"/>
+                    <CheckBox Content="Show date" IsChecked="{Binding Config.ShowDate}"/>
+                    <CheckBox Content="Show weather" IsChecked="{Binding Config.ShowWeather}"/>
+                    <CheckBox Content="Show notifications" IsChecked="{Binding Config.ShowNotifications}"/>
+                    <CheckBox Content="Show bluetooth battery indicator" IsChecked="{Binding Config.ShowBluetoothDeviceBattery}"/>
+                    <CheckBox Content="Show cpu usage" IsChecked="{Binding Config.ShowCpuUsage}"/>
+                    <CheckBox Content="Show cpu temperature" IsChecked="{Binding Config.ShowCpuTemperature}"/>
+                    <CheckBox Content="Show memory" IsChecked="{Binding Config.ShowMemory}" Margin="0,0,0,-6"/>
+                    
+                </StackPanel>
+            </wpfui:Card>
+            
+        </StackPanel>
+    </DataTemplate>
+    
+</ResourceDictionary>

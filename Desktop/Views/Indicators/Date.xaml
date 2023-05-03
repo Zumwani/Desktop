@@ -15,11 +15,8 @@
                 </ContextMenu>
             </wpfui:Button.ContextMenu>
 
-            <TextBlock>
-                <Run Text="{Binding Value, Mode=OneWay, StringFormat=d}"/><Run Text=","/>
-                <Run Text="{Binding Value, Mode=OneWay, StringFormat=ddd}"/>
-            </TextBlock>
-            
+            <TextBlock Text="{Binding Value}"/>
+
         </wpfui:Button>
     </DataTemplate>
     

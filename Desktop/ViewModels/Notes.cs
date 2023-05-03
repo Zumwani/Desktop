@@ -1,5 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System.Linq;
 using System.Windows.Data;
+using Desktop.Config;
 using Desktop.Models;
 using Desktop.ViewModels.Helpers;
 using Desktop.Views.Popups;
@@ -15,20 +16,24 @@ public class Notes : ViewModel
 
     readonly NotePopup popup = new();
 
+    public bool HasItems => Items.View.Cast<object>().Count() > 0;
+    public Config.Notes Config { get; } = ConfigManager.Notes;
+
     public Notes()
     {
 
         ClickCommand = new(popup.Open);
         CreateCommand = new(CreateNote);
 
-        Items = new CollectionViewSource { Source = Settings.Notes.Current };
-        Items.Filter += (s, e) => e.Accepted = Settings.ShowHiddenNotes.Current || !((Note)e.Item).IsHidden;
-        Settings.ShowHiddenNotes.Current.PropertyChanged += ShowHiddenNotesChanged;
+        Items = new CollectionViewSource { Source = Config.Items };
+        Items.Filter += (s, e) => e.Accepted = Config.ShowHiddenNotes || !((Note)e.Item).IsHidden;
+        Config.PropertyChanged += (s, e) =>
+        {
+            RefreshItems();
+            OnPropertyChanged(nameof(HasItems));
+        };
 
     }
-
-    void ShowHiddenNotesChanged(object? sender, PropertyChangedEventArgs e) =>
-        RefreshItems();
 
     void RefreshItems() =>
         Items.View.Refresh();
@@ -36,7 +41,7 @@ public class Notes : ViewModel
     void CreateNote()
     {
         var note = new Note() { Content = "New note" };
-        Settings.Notes.Current.Add(note);
+        Config.Items.Add(note);
         popup.Open(note);
     }
 

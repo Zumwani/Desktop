@@ -8,8 +8,19 @@
         <wpfui:Card>
             <StackPanel>
 
-                <CheckBox Content="Show recycle bin"/>
-                <TextBlock Text="Sources:"/>
+                <CheckBox Content="Show recycle bin" IsChecked="{Binding Config.ShowRecycleBin}"/>
+                
+                <TextBlock Text="Sources:" Margin="0,0,0,8"/>
+                <ListBox ItemsSource="{Binding Config.Sources}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel>
+                                <wpfui:Button Icon="Delete48" DockPanel.Dock="Right"/>
+                                <TextBlock Text="{Binding}"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
 
             </StackPanel>
         </wpfui:Card>

@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Shell;
+using Desktop.Config;
 using Desktop.Utility;
 using PostSharp.Patterns.Model;
 using WindowsHook;
@@ -13,21 +14,21 @@ namespace Desktop;
 public partial class DesktopWindow : UiWindow
 {
 
+    //TODO: Add support for Config.Files.Sources in FileUtility
+    //TODO: Move edit mode to settings, use button to enable and one to disable
     //TODO: Fix drag start from files
     //TODO: Improve icon on shortcut
-    //TODO: Fix popups
-    //TODO: Notes not saving content sometimes
+    //TODO: Notes not saving content when first added
     //TODO: Fix files
-    //TODO: Common.Utility throwing index out of range, after move
     //TODO: Fix better solution than Window.IsIdle
     //TODO: Move and rename helpers
-    //TODO: Update after hibernation
-    //TODO: Add option to open windows calendar instead of google, also allow setting custom url
-    //TODO: Add option to switch to farenheit
-    //TODO: Finish settings window
+    //TODO: Add option to switch to farenheit for system indicator
+    //TODO: Add time pickers to settings window
 
     public bool IsIdle => false;
     public ViewModels.DesktopWindow View { get; } = new();
+
+    public Config.DesktopWindow Config { get; } = ConfigManager.DesktopWindow;
 
     public DesktopWindow()
     {
@@ -56,10 +57,10 @@ public partial class DesktopWindow : UiWindow
 
     void ResetBounds()
     {
-        Left = Settings.Left.Current;
-        Top = Settings.Top.Current;
-        Width = Settings.Width.Current;
-        Height = Settings.Height.Current;
+        Left = Config.Left;
+        Top = Config.Top;
+        Width = Config.Width;
+        Height = Config.Height;
     }
 
     #endregion
@@ -97,10 +98,10 @@ public partial class DesktopWindow : UiWindow
 
     void SaveSize()
     {
-        Settings.Left.Current.Value = Left;
-        Settings.Top.Current.Value = Top;
-        Settings.Width.Current.Value = Width;
-        Settings.Height.Current.Value = Height;
+        Config.Left = Left;
+        Config.Top = Top;
+        Config.Width = Width;
+        Config.Height = Height;
     }
 
     #endregion

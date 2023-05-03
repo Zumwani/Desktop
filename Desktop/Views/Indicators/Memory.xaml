@@ -5,7 +5,7 @@
                     xmlns:commands="clr-namespace:Desktop.Commands">
     
     <DataTemplate DataType="{x:Type viewModels:Memory}">
-        <wpfui:Button Icon="Ram20" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" FontSize="16"
+        <wpfui:Button Icon="Ram20" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" Style="{StaticResource Styles.Button.IconRight}"
                       ToolTip="Memory usage / Available" Common.ContextMenuOnLeftClick="True" Common.CenterContextMenu="True">
             
             <wpfui:Button.ContextMenu>

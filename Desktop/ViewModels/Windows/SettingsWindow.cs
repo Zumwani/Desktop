@@ -1,12 +1,25 @@
-﻿using PostSharp.Patterns.Model;
+﻿using Desktop.Config;
+using Desktop.Utility;
+using Desktop.ViewModels.Helpers;
+using PostSharp.Patterns.Model;
 using Wpf.Ui.Common;
 
 namespace Desktop.ViewModels.SettingPages;
 
-public abstract class SettingsPage
+public abstract class SettingsPage : ViewModel
 {
     public abstract string Title { get; }
     public abstract SymbolRegular Icon { get; }
+}
+
+public abstract class SettingsPage<T> : SettingsPage where T : ConfigModule
+{
+
+    public SettingsPage() =>
+        ConfigUtility.Setup(this);
+
+    public T Config { get; } = ConfigManager.GetModule<T>();
+
 }
 
 [NotifyPropertyChanged]
@@ -18,9 +31,9 @@ public class SettingsWindow
     public SettingsPage[] Pages { get; } = new SettingsPage[]
     {
         new General(),
+        new IdleMode(),
         new Files(),
         new Notifications(),
-        new Notes(),
         new DateAndTime(),
         new Weather(),
         new SystemInfo(),

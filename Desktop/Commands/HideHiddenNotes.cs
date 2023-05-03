@@ -1,4 +1,5 @@
 ﻿using Common.Utility;
+using Desktop.Config;
 
 namespace Desktop.Commands;
 
@@ -6,6 +7,6 @@ public class HideHiddenNotes : Command
 {
 
     public override void Execute() =>
-        Settings.ShowHiddenNotes.Current.Value = false;
+        ConfigManager.Notes.ShowHiddenNotes = false;
 
 }

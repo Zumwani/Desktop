@@ -13,18 +13,24 @@
 
         <StackPanel>
 
+            <wpfui:Button Content="Reload" Command="{Binding ReloadCommand}" Margin="0,0,0,8"/>
+
             <wpfui:Card>
                 <StackPanel>
 
-                    <TextBlock Text="Update interval (timeout: 60 calls per minute)"/>
-
-                    <TextBlock Margin="0,12" TextWrapping="Wrap">
+                    <TextBlock TextWrapping="Wrap">
                         <Hyperlink Command="{Binding UrlClickCommand}">
-                            <Run Text="{Binding Url, Mode=OneWay}"/>
+                            <Run Text="https://api.openweathermap.org/data/2.5/weather"/>
+                            <LineBreak/>
+                            <Run Text="?q="/><Run Text="{Binding Config.SearchLocation, Mode=OneWay}"/>
+                            <LineBreak/>
+                            <Run Text="&amp;units="/><Run Text="{Binding Config.Unit}"/>
+                            <LineBreak/>
+                            <Run Text="&amp;appid="/><Run Text="{Binding Config.ApiKey}"/>
                         </Hyperlink>
                     </TextBlock>
 
-                    <TextBlock Text="Api key:" Margin="0,0,0,6"/>
+                    <TextBlock Text="Api key:" Margin="0,8,0,6"/>
                     <wpfui:TextBox Text="{Binding Config.ApiKey, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <TextBlock Text="Location (string search query):" Margin="0,12,0,6"/>
@@ -33,7 +39,17 @@
                     <TextBlock Text="Unit:" Margin="0,12,0,6"/>
                     <ComboBox ItemsSource="{Binding Source={StaticResource Enum.WeatherUnit}}" SelectedItem="{Binding Config.Unit, UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <wpfui:Button Content="Reload" Margin="0,12,0,0" Command="{Binding ReloadCommand}"/>
+                    <CheckBox Content="Use feels like temperature" IsChecked="{Binding Config.UseFeelsLikeTemperature}" Margin="0,8,0,2"/>
+
+                </StackPanel>
+            </wpfui:Card>
+            
+            <wpfui:Card Margin="0,8,0,0">
+                <StackPanel>
+
+                    <TextBlock Text="Update interval:"/>
+                    <Label Content="Timeout: 60 calls per minute."/>
+                    <Label Content="TODO: Add timepicker"/>
 
                 </StackPanel>
             </wpfui:Card>

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Media;
+using Desktop.Config;
 
 namespace Desktop.Utility;
 
@@ -32,7 +33,16 @@ static class TaskbarFix
         window.Width = SystemParameters.PrimaryScreenWidth;
         window.Top = SystemParameters.PrimaryScreenHeight - window.Height;
 
-        window.Show();
+        if (ConfigManager.General.ShowBorderAlongBottomOfPrimaryScreen)
+            window.Show();
+
+        ConfigManager.General.PropertyChanged += (s, e) =>
+        {
+            if (ConfigManager.General.ShowBorderAlongBottomOfPrimaryScreen)
+                window.Show();
+            else
+                window.Hide();
+        };
 
     }
 

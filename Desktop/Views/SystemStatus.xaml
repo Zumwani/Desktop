@@ -15,10 +15,10 @@
             </wpfui:Card.ContextMenu>
             
             <UniformGrid Columns="1">
-                <ContentPresenter Content="{Binding BluetoothBattery}"/>
-                <ContentPresenter Content="{Binding CpuUsage}"/>
-                <ContentPresenter Content="{Binding CpuTemperature}"/>
-                <ContentPresenter Content="{Binding Memory}"/>
+                <ContentPresenter Content="{Binding BluetoothBattery}" Common.IsVisible="{Binding Config.ShowBluetoothBattery}"/>
+                <ContentPresenter Content="{Binding CpuUsage}" Common.IsVisible="{Binding Config.ShowCpuUsage}"/>
+                <ContentPresenter Content="{Binding CpuTemperature}" Common.IsVisible="{Binding Config.ShowCpuTemperature}"/>
+                <ContentPresenter Content="{Binding Memory}" Common.IsVisible="{Binding Config.ShowMemory}"/>
             </UniformGrid>
             
         </wpfui:Card>

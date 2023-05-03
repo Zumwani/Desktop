@@ -1,4 +1,5 @@
-﻿using PostSharp.Patterns.Model;
+﻿using Desktop.Config;
+using PostSharp.Patterns.Model;
 
 namespace Desktop.ViewModels;
 
@@ -6,6 +7,8 @@ namespace Desktop.ViewModels;
 public class Wallpaper
 {
 
+    public Config.General GeneralConfig { get; } = ConfigManager.General;
+    public Config.IdleMode IdleConfig { get; } = ConfigManager.IdleMode;
     public bool IsChangingWallpaper { get; set; }
 
 }

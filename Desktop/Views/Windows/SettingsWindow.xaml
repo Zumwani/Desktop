@@ -13,39 +13,47 @@
                     <ResourceDictionary Source="SettingsPages/DateAndTime.xaml"/>
                     <ResourceDictionary Source="SettingsPages/Files.xaml"/>
                     <ResourceDictionary Source="SettingsPages/General.xaml"/>
-                    <ResourceDictionary Source="SettingsPages/Notes.xaml"/>
                     <ResourceDictionary Source="SettingsPages/Notifications.xaml"/>
                     <ResourceDictionary Source="SettingsPages/SystemInfo.xaml"/>
                     <ResourceDictionary Source="SettingsPages/Weather.xaml"/>
+                    <ResourceDictionary Source="SettingsPages/IdleMode.xaml"/>
                 </ResourceDictionary.MergedDictionaries>
 
+                <Style TargetType="{x:Type wpfui:Card}" BasedOn="{StaticResource {x:Type wpfui:Card}}">
+                    <Setter Property="Background" Value="#20FFFFFF"/>
+                    <Setter Property="Padding" Value="12"/>
+                    <Setter Property="Margin" Value="0"/>
+                </Style>
+                
             </ResourceDictionary>
         </DataTemplate.Resources>
-        
-        <DockPanel>
 
-            <ListBox DockPanel.Dock="Left" ItemsSource="{Binding Pages}" Margin="4,0,12,0" SelectedItem="{Binding SelectedPage, Mode=TwoWay}" Background="Transparent" BorderThickness="0">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListBoxItem}">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                    <ToggleButton Height="64" Width="200" HorizontalContentAlignment="Left" Margin="0,4" Padding="22,0,0,0" IsChecked="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsSelected, Mode=TwoWay}" BorderThickness="0" Cursor="Hand">
-                                        <DockPanel>
-                                            <wpfui:SymbolIcon DockPanel.Dock="Left" Symbol="{Binding Icon}" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                            <TextBlock VerticalAlignment="Center" Text="{Binding Title}"/>
-                                        </DockPanel>
-                                    </ToggleButton>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-            </ListBox>
+        <wpfui:DynamicScrollViewer>
+            <DockPanel>
 
-            <ContentPresenter Content="{Binding SelectedPage}"/>
+                <ListBox DockPanel.Dock="Left" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalAlignment="Top" ItemsSource="{Binding Pages}" Margin="4,0,4,0" SelectedItem="{Binding SelectedPage, Mode=TwoWay}" Background="Transparent" BorderThickness="0">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                        <ToggleButton Height="64" Width="200" HorizontalContentAlignment="Left" Margin="0,4" Padding="22,0,0,0" IsChecked="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsSelected, Mode=TwoWay}" BorderThickness="0" Cursor="Hand">
+                                            <DockPanel>
+                                                <wpfui:SymbolIcon DockPanel.Dock="Left" Symbol="{Binding Icon}" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                                <TextBlock VerticalAlignment="Center" Text="{Binding Title}"/>
+                                            </DockPanel>
+                                        </ToggleButton>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
 
-        </DockPanel>
+                <ContentPresenter Content="{Binding SelectedPage}" Margin="0,8,8,8"/>
+
+            </DockPanel>
+        </wpfui:DynamicScrollViewer>
         
     </DataTemplate>
     

@@ -10,7 +10,7 @@ public partial class SettingsWindow : Window
     public SettingsWindow() =>
         InitializeComponent();
 
-    public Desktop.ViewModels.SettingPages.SettingsWindow View { get; } = new();
+    public ViewModels.SettingPages.SettingsWindow View { get; } = new();
 
     static SettingsWindow? window;
     public static void Open<T>() where T : SettingsPage

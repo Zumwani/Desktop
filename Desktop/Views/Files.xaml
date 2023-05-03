@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:Desktop.ViewModels"
                     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
-                    xmlns:commands="clr-namespace:Desktop.Commands">
+                    xmlns:commands="clr-namespace:Desktop.Commands"
+                    xmlns:converters="clr-namespace:Desktop.Converters">
 
     <DataTemplate DataType="{x:Type viewModels:Files}">
         <wpfui:Card HorizontalAlignment="Left">
@@ -22,9 +23,17 @@
             </wpfui:Card.ContextMenu>
 
             <wpfui:DynamicScrollViewer>
-                <StackPanel>
-                    <wpfui:Button Icon="Recycle32" Content="Recycle bin" Command="{commands:OpenRecycleBin}" ToolTip="Open recycle bin..."/>
+                <StackPanel MinHeight="42" MinWidth="142">
+                    
+                    <Border Common.IsVisible="{Binding RelativeSource={RelativeSource AncestorType=wpfui:Card}, Path=IsMouseOver}">
+                        <TextBlock Text="No files available..." Common.IsCollapsed="{Binding HasItems}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8"/>
+                    </Border>
+                    
+                    <wpfui:Button Icon="Recycle32" Content="Recycle bin" Command="{commands:OpenRecycleBin}" ToolTip="Open recycle bin..."
+                                  Common.IsVisible="{Binding Config.ShowRecycleBin}"/>
+                    
                     <ItemsControl ItemsSource="{Binding Items}" MaxWidth="200"/>
+                    
                 </StackPanel>
             </wpfui:DynamicScrollViewer>
             

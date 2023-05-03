@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
+using Desktop.Config;
 using Desktop.Models;
 using Desktop.Utility;
 using Desktop.ViewModels.Helpers;
@@ -17,9 +18,7 @@ public class BluetoothBattery : IntervalViewModel
 
     public IEnumerable<BluetoothDevice> AvailableDevices { get; private set; } = Array.Empty<BluetoothDevice>();
 
-    [SafeForDependencyAnalysis]
-    public BluetoothDevice SelectedDevice => AvailableDevices.FirstOrDefault(d => d.Name == SelectedDeviceName);
-    public Desktop.Settings.BluetoothDevice SelectedDeviceName { get; } = Desktop.Settings.BluetoothDevice.Current;
+    public Config.SystemInfo Config { get; } = ConfigManager.SystemInfo;
 
     public RelayCommand OpenAPIPageCommand { get; } = new(() => FileUtility.Open("https://www.bluetoothgoodies.com/info/battery-monitor-api/"));
     public RelayCommand OpenMainPageCommand { get; } = new(() => FileUtility.Open("https://www.bluetoothgoodies.com/"));
@@ -35,7 +34,8 @@ public class BluetoothBattery : IntervalViewModel
             if (menuItem is null || menuItem.DataContext is not BluetoothDevice device || menuItem.Tag is not MenuItem parent)
                 return;
 
-            SelectedDeviceName.Value = device.Name;
+            Config.SelectedDevice = device;
+
             var items = parent.Items.Cast<BluetoothDevice>().Select(d => parent.ItemContainerGenerator.ContainerFromItem(d)).OfType<MenuItem>().ToArray();
             foreach (var item in items)
                 item.IsChecked = false;
@@ -43,9 +43,8 @@ public class BluetoothBattery : IntervalViewModel
 
         });
 
-        SelectedDeviceName.PropertyChanged += (s, e) =>
+        Config.PropertyChanged += (s, e) =>
         {
-            OnPropertyChanged(nameof(SelectedDevice));
             Helper.BluetoothDevices.Update();
             Update();
         };
@@ -55,7 +54,7 @@ public class BluetoothBattery : IntervalViewModel
     public override void Update()
     {
 
-        Value = Helper.BluetoothDevices.Value?.Find(SelectedDeviceName)?.BatteryLevel;
+        Value = Helper.BluetoothDevices.Value?.Find(Config.SelectedDevice?.Name)?.BatteryLevel;
 
         var devices = Helper.BluetoothDevices.Value;
         if (!(devices?.SequenceEqual(AvailableDevices) ?? false))

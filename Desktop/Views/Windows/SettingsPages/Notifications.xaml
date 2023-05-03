@@ -5,27 +5,27 @@
 
     <DataTemplate DataType="{x:Type viewModels:Notifications}">
         <StackPanel>
-            
-        <wpfui:Card>
-            <StackPanel>
 
-                <CheckBox Content="Collapse notifications when multiple detected from same source"/>
-                <CheckBox Content="Show clear all button"/>
+            <wpfui:Button Icon="Settings48" Content="Open windows settings..." Command="{Binding OpenWindowsSettingsCommand}" Margin="0,0,0,8"/>
 
-            </StackPanel>
-        </wpfui:Card>
-
-            <wpfui:CardExpander Header="Windows notifications">
+            <wpfui:Card>
                 <StackPanel>
-                    
-                    <CheckBox Content="Override windows notifications"/>
-                    <TextBlock Text="Delay before removing from windows"/>
-                    
-                    <TextBlock Text="Duration before removing from desktop"/>
-                    <TextBlock Text="Don't automatically remove"/>
-                    
+
+                    <CheckBox Content="Collapse notifications when multiple detected from same source" IsChecked="{Binding Config.CollapseNotificationsWhenMultipleRecievedFromSameSource}"/>
+                    <CheckBox Content="Show clear all button" IsChecked="{Binding Config.ShowClearAllButton}"/>
+
                 </StackPanel>
-            </wpfui:CardExpander>
+            </wpfui:Card>
+
+            <wpfui:Card Margin="0,-105,0,0">
+                <StackPanel>
+
+                    <CheckBox Content="Override windows notifications" IsChecked="{Binding Config.OverrideWindowsNotifications}"/>
+                    <TextBlock Text="Delay before removing from windows"/>
+                    <Label Content="TODO: Add timepicker"/>
+
+                </StackPanel>
+            </wpfui:Card>
             
         </StackPanel>
     </DataTemplate>

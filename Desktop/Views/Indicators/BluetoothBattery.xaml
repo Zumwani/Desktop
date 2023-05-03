@@ -6,9 +6,9 @@
     
     <DataTemplate DataType="{x:Type viewModels:BluetoothBattery}">
 
-        <wpfui:Button Icon="Headphones48" HorizontalAlignment="Right" FontSize="16"
+        <wpfui:Button Icon="Headphones48" HorizontalAlignment="Right" Style="{StaticResource Styles.Button.IconRight}"
                       Common.ContextMenuOnLeftClick="True" Common.CenterContextMenu="True"
-                      ToolTip="{Binding SelectedDeviceName.Value}">
+                      ToolTip="{Binding Config.SelectedDevice.Value.Name}">
 
             <wpfui:Button.ContextMenu>
                 <ContextMenu Placement="Left">
@@ -20,7 +20,7 @@
                     </MenuItem>
                     
                     <MenuItem Header="Selected device:" ItemsSource="{Binding AvailableDevices}" DisplayMemberPath="Name"
-                              helpers:MenuItemUtility.SelectedItem="{Binding SelectedDevice}">
+                              helpers:MenuItemUtility.SelectedItem="{Binding Config.SelectedDevice}">
            
                         <MenuItem.ItemContainerStyle>
                             <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
