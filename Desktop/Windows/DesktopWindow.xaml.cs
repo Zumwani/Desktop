@@ -14,16 +14,17 @@ namespace Desktop;
 public partial class DesktopWindow : UiWindow
 {
 
-    //TODO: Add support for Config.Files.Sources in FileUtility
+    //TODO: Fix better solution than Window.IsIdle
+    //TODO: Improve icon on shortcut
+    //TODO: Fix create startmenu shortcut
+    //TODO: Setup single instance (force close existing, if Debugger.IsAttached)
+
     //TODO: Move edit mode to settings, use button to enable and one to disable
     //TODO: Fix drag start from files
-    //TODO: Improve icon on shortcut
-    //TODO: Notes not saving content when first added
-    //TODO: Fix files
-    //TODO: Fix better solution than Window.IsIdle
     //TODO: Move and rename helpers
     //TODO: Add option to switch to farenheit for system indicator
-    //TODO: Add time pickers to settings window
+    //TODO: Fix tab button scroll bar in settings
+    //TODO: Update time and date format when changed in system
 
     public bool IsIdle => false;
     public ViewModels.DesktopWindow View { get; } = new();

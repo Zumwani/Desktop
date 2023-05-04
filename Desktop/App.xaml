@@ -52,7 +52,7 @@
 
             <Color x:Key="Theme.Color.Background">#202020</Color>
             <SolidColorBrush x:Key="Theme.Brush.Background" Color="{StaticResource Theme.Color.Background}"/>
-
+            
         </ResourceDictionary>
     </Application.Resources>
     

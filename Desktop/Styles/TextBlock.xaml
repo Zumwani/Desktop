@@ -12,7 +12,7 @@
             </Setter.Value>
         </Setter>
 
-        <Style.Triggers>
+        <!--<Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=IsIdle}" Value="{x:True}">
                 <Setter Property="LayoutTransform">
                     <Setter.Value>
@@ -20,7 +20,7 @@
                     </Setter.Value>
                 </Setter>
             </DataTrigger>
-        </Style.Triggers>
+        </Style.Triggers>-->
 
     </Style>
     

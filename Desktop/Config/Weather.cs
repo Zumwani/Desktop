@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Desktop.Models;
 using Desktop.Utility;
 using PostSharp.Patterns.Model;
 
@@ -10,7 +10,7 @@ public class Weather : ConfigModule
 
     public static Weather Instance { get; } = new();
 
-    public TimeSpan UpdateInterval { get; set; } = TimeSpan.FromMinutes(1);
+    public Duration UpdateInterval { get; set; } = Duration.FromMinutes(1);
 
     public string ApiKey { get; set; } = "";
     public string SearchLocation { get; set; } = "";

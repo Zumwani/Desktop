@@ -1,6 +1,9 @@
-﻿namespace Desktop.Config;
+﻿using PostSharp.Patterns.Model;
 
-public interface ISharedVisibilityConfig
+namespace Desktop.Config;
+
+[NotifyPropertyChanged]
+public class SharedVisibilityConfig : ConfigModule
 {
 
     public bool ShowNotifications { get; set; }

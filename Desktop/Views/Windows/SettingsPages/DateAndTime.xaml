@@ -29,8 +29,8 @@
             <wpfui:Card Margin="0,8,0,0">
                 <StackPanel>
 
-                    <TextBlock Text="Calendar app:"/>
-                    <TextBox Text="{Binding Config.CalendarUri}"/>
+                    <TextBlock Text="Calendar app:" Margin="0,8"/>
+                    <TextBox Text="{Binding Config.CalendarUri}" Margin="0,0,0,8"/>
 
                 </StackPanel>
             </wpfui:Card>

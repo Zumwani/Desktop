@@ -20,36 +20,67 @@
                 </ResourceDictionary.MergedDictionaries>
 
                 <Style TargetType="{x:Type wpfui:Card}" BasedOn="{StaticResource {x:Type wpfui:Card}}">
+                    
                     <Setter Property="Background" Value="#20FFFFFF"/>
-                    <Setter Property="Padding" Value="12"/>
+                    <Setter Property="Padding" Value="12,4,12,4"/>
                     <Setter Property="Margin" Value="0"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#20FFFFFF"/>
+                        </Trigger>
+                    </Style.Triggers>
+                    
                 </Style>
-                
+
+                <Style x:Key="Style.ListBox" TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                <wpfui:Button Height="64" Width="200" HorizontalContentAlignment="Left" Margin="0,8,0,0"
+                                              Command="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl}, Path=DataContext.OpenPageCommand}">
+
+                                    <wpfui:Button.Style>
+                                        <Style TargetType="{x:Type wpfui:Button}" BasedOn="{StaticResource {x:Type wpfui:Button}}">
+
+                                            <Setter Property="Background" Value="Transparent"/>
+
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsSelected}" Value="{x:True}">
+                                                    <Setter Property="Background" Value="#20000000"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+
+                                        </Style>
+                                    </wpfui:Button.Style>
+                                    
+                                    <DockPanel>
+                                        <wpfui:SymbolIcon DockPanel.Dock="Left" Symbol="{Binding Icon}" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding Title}"/>
+                                    </DockPanel>
+
+                                </wpfui:Button>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+
             </ResourceDictionary>
         </DataTemplate.Resources>
 
         <wpfui:DynamicScrollViewer>
             <DockPanel>
 
-                <ListBox DockPanel.Dock="Left" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalAlignment="Top" ItemsSource="{Binding Pages}" Margin="4,0,4,0" SelectedItem="{Binding SelectedPage, Mode=TwoWay}" Background="Transparent" BorderThickness="0">
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListBoxItem}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                        <ToggleButton Height="64" Width="200" HorizontalContentAlignment="Left" Margin="0,4" Padding="22,0,0,0" IsChecked="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsSelected, Mode=TwoWay}" BorderThickness="0" Cursor="Hand">
-                                            <DockPanel>
-                                                <wpfui:SymbolIcon DockPanel.Dock="Left" Symbol="{Binding Icon}" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                                <TextBlock VerticalAlignment="Center" Text="{Binding Title}"/>
-                                            </DockPanel>
-                                        </ToggleButton>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                </ListBox>
+                <DockPanel.Resources>
+                    <Style TargetType="{x:Type TextBlock}" BasedOn="{x:Null}"/>
+                </DockPanel.Resources>
 
+                <ListBox DockPanel.Dock="Left" VerticalAlignment="Top" ItemContainerStyle="{StaticResource Style.ListBox}"
+                         ItemsSource="{Binding Pages}" SelectedItem="{Binding SelectedPage, Mode=TwoWay}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                         Margin="4,4,4,0" Background="Transparent" BorderThickness="0"
+                         ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                
                 <ContentPresenter Content="{Binding SelectedPage}" Margin="0,8,8,8"/>
 
             </DockPanel>

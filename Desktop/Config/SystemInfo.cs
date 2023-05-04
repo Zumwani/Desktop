@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 using Desktop.Models;
 using Desktop.Utility;
 using Desktop.ViewModels.Helpers;
@@ -11,7 +10,7 @@ namespace Desktop.Config;
 public class SystemInfo : ConfigModule
 {
 
-    public TimeSpan UpdateInterval { get; set; } = TimeSpan.FromSeconds(2);
+    public Duration UpdateInterval { get; set; } = Duration.FromSeconds(2);
     [JsonInclude] private string? SelectedDeviceName { get; set; }
 
     private BluetoothDevice? device;

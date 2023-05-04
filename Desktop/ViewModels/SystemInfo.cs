@@ -2,10 +2,10 @@
 
 namespace Desktop.ViewModels;
 
-public class SystemStatus
+public class SystemInfo
 {
 
-    public ISharedVisibilityConfig? Config { get; set; }
+    public SharedVisibilityConfig? Config { get; set; }
 
     public BluetoothBattery BluetoothBattery { get; } = new();
     public CpuUsage CpuUsage { get; } = new();

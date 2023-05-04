@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Desktop.Models;
 using PostSharp.Patterns.Model;
 
 namespace Desktop.Config;
@@ -11,6 +11,6 @@ public class Notifications : ConfigModule
     public bool ShowClearAllButton { get; set; } = true;
 
     public bool OverrideWindowsNotifications { get; set; } = true;
-    public TimeSpan DelayBeforeHidingWindowsNotification { get; set; } = TimeSpan.FromSeconds(5);
+    public Duration DelayBeforeHidingWindowsNotification { get; set; } = Duration.FromSeconds(5);
 
 }

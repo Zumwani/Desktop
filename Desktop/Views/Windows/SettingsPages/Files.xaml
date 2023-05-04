@@ -4,27 +4,39 @@
                     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml">
 
     <DataTemplate DataType="{x:Type viewModels:Files}">
-
-        <wpfui:Card>
-            <StackPanel>
-
-                <CheckBox Content="Show recycle bin" IsChecked="{Binding Config.ShowRecycleBin}"/>
-                
-                <TextBlock Text="Sources:" Margin="0,0,0,8"/>
-                <ListBox ItemsSource="{Binding Config.Sources}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <DockPanel>
-                                <wpfui:Button Icon="Delete48" DockPanel.Dock="Right"/>
-                                <TextBlock Text="{Binding}"/>
-                            </DockPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-
-            </StackPanel>
-        </wpfui:Card>
+        <StackPanel>
+            
+            <wpfui:Card>
+                <StackPanel>
+                    <CheckBox Content="Show home" IsChecked="{Binding Config.ShowHome}"/>
+                    <CheckBox Content="Show This PC" IsChecked="{Binding Config.ShowThisPC}"/>
+                    <CheckBox Content="Show Downloads" IsChecked="{Binding Config.ShowDownloads}"/>
+                    <CheckBox Content="Show recycle bin" IsChecked="{Binding Config.ShowRecycleBin}"/>
+                </StackPanel>
+            </wpfui:Card>
         
+            <wpfui:Card Margin="0,-56,0,0">
+                <StackPanel>
+
+                    <TextBlock Text="Sources:" Margin="0,8,0,8"/>
+                    <ListBox ItemsSource="{Binding Config.Sources}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <DockPanel>
+                                    <wpfui:Button Icon="Delete48" DockPanel.Dock="Right" Padding="6" VerticalAlignment="Stretch"
+                                                  Width="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
+                                    <TextBlock Text="{Binding}" Margin="2,0,0,0" VerticalAlignment="Center"/>
+                                </DockPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <wpfui:Button Icon="Add28" Margin="0,8,0,0" Padding="6" ToolTip="Add source..." Command="{Binding AddSourceCommand}"/>
+
+                </StackPanel>
+            </wpfui:Card>
+        
+        </StackPanel>
     </DataTemplate>
     
 </ResourceDictionary>

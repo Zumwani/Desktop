@@ -11,6 +11,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Common.Utility;
+using Desktop.Config;
 using Desktop.Models;
 
 namespace Desktop.Utility;
@@ -20,11 +21,17 @@ public static class FileUtility
 
     public static ObservableCollection<FileItem> Files { get; } = new();
 
-    static FileUtility()
+    public static string DesktopFolder { get; } = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+    public static string DownloadsFolder { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+
+    static FileUtility() =>
+        Initialize();
+
+    static async void Initialize()
     {
-        Refresh();
-        CreateWatcher(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
-        CreateWatcher(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads"));
+        await Task.Delay(100);
+        Reload();
+        ConfigManager.Files.Sources.CollectionChanged += (s, e) => Reload();
     }
 
     static void Add(string path)
@@ -41,7 +48,14 @@ public static class FileUtility
 
     #region Watcher
 
-    static void Refresh() =>
+    static void Reload()
+    {
+        foreach (var path in ConfigManager.Files.Sources)
+            CreateWatcher(path);
+        RefreshFiles();
+    }
+
+    static void RefreshFiles() =>
         App.Current.Dispatcher.Invoke(() =>
         {
 
@@ -77,7 +91,7 @@ public static class FileUtility
         async void Watcher_Changed(object sender, FileSystemEventArgs e)
         {
             await Task.Delay(100);
-            Refresh();
+            RefreshFiles();
         }
 
         void Watcher_Error(object sender, ErrorEventArgs e) =>

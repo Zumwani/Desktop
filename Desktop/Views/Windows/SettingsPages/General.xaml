@@ -12,30 +12,37 @@
                     <CheckBox Content="Autostart" IsChecked="{Binding Config.Autostart}"/>
                     <CheckBox Content="Dim screen when not active" IsChecked="{Binding Config.DimScreenWhenNotActive}"/>
                     <CheckBox Content="Display border along bottom of primary screen" IsChecked="{Binding Config.ShowBorderAlongBottomOfPrimaryScreen}"/>
-                    <wpfui:Button Content="Create startmenu shortcut" Command="{Binding CreateStartmenuShortcutCommand}"/>
+                    <wpfui:Button Content="Create startmenu shortcut" Command="{Binding CreateStartmenuShortcutCommand}" Margin="0,8"/>
                 </StackPanel>
             </wpfui:Card>
 
             <wpfui:Card Margin="0,-40,0,0">
                 <StackPanel>
                     
-                    <TextBlock Text="Wallpaper:" Margin="0,0,0,8"/>
+                    <TextBlock Text="Wallpaper:" Margin="0,8,0,8"/>
                     <TextBox Text="{Binding Config.WallpaperUri}"/>
 
                     <TextBlock Text="Stretch:" Margin="0,8,0,0"/>
-                    <ComboBox Margin="0,8" ItemsSource="{Binding Source={StaticResource Enum.Stretch}}"
+                    <ComboBox Margin="0,8" HorizontalAlignment="Left" Cursor="Hand"
+                              ItemsSource="{Binding Source={StaticResource Enum.Stretch}}"
                               SelectedItem="{Binding Config.WallpaperStretch}"/>
 
-                    <CheckBox Content="Show files" IsChecked="{Binding Config.ShowFiles}"/>
+                </StackPanel>
+            </wpfui:Card>
+
+            <wpfui:Card Margin="0,-30,0,0">
+                <StackPanel>
+
+                    <CheckBox Content="Show files" IsChecked="{Binding Config.ShowFiles}" Margin="0,2,0,0"/>
                     <CheckBox Content="Show notifications" IsChecked="{Binding Config.ShowNotifications}"/>
                     <CheckBox Content="Show notes" IsChecked="{Binding Config.ShowNotes}"/>
                     <CheckBox Content="Show time" IsChecked="{Binding Config.ShowTime}"/>
                     <CheckBox Content="Show date" IsChecked="{Binding Config.ShowDate}"/>
                     <CheckBox Content="Show weather" IsChecked="{Binding Config.ShowWeather}"/>
                     <CheckBox Content="Show bluetooth battery indicator" IsChecked="{Binding Config.ShowBluetoothDeviceBattery}"/>
-                    <CheckBox Content="Show cpu usage" IsChecked="{Binding Config.ShowCpuUsage}"/>
-                    <CheckBox Content="Show cpu temperature" IsChecked="{Binding Config.ShowCpuTemperature}"/>
-                    <CheckBox Content="Show memory" IsChecked="{Binding Config.ShowMemory}" Margin="0,0,0,-8"/>
+                    <CheckBox Content="Show CPU usage" IsChecked="{Binding Config.ShowCpuUsage}"/>
+                    <CheckBox Content="Show CPU temperature" IsChecked="{Binding Config.ShowCpuTemperature}"/>
+                    <CheckBox Content="Show memory" IsChecked="{Binding Config.ShowMemory}"/>
 
                 </StackPanel>
             </wpfui:Card>

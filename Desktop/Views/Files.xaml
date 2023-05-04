@@ -10,13 +10,8 @@
 
             <wpfui:Card.ContextMenu>
                 <ContextMenu>
-                    <wpfui:MenuItem Header="Create folder..." SymbolIcon="FolderAdd48"/>
-                    <!--Click="CreateFolderItem_Click"-->
-                    <wpfui:MenuItem Header="Create file..." SymbolIcon="DocumentAdd48"/>
-                    <!--Click="CreateFileItem_Click"-->
-                    <Separator/>
-                    <wpfui:MenuItem Header="Open desktop..." SymbolIcon="Desktop32" Command="{commands:OpenDesktop}"/>
-                    <wpfui:MenuItem Header="Open downloads..." SymbolIcon="ArrowDownload48" Command="{commands:OpenDownloads}"/>
+                    <wpfui:MenuItem Header="Create folder..." SymbolIcon="FolderAdd48" Command="{Binding CreateFolderCommand}"/>
+                    <wpfui:MenuItem Header="Create file..." SymbolIcon="DocumentAdd48" Command="{Binding CreateFileCommand}"/>
                     <Separator/>
                     <wpfui:MenuItem Header="Configure..." SymbolIcon="Settings48" Command="{commands:ConfigureFiles}"/>
                 </ContextMenu>
@@ -28,10 +23,19 @@
                     <Border Common.IsVisible="{Binding RelativeSource={RelativeSource AncestorType=wpfui:Card}, Path=IsMouseOver}">
                         <TextBlock Text="No files available..." Common.IsCollapsed="{Binding HasItems}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8"/>
                     </Border>
-                    
-                    <wpfui:Button Icon="Recycle32" Content="Recycle bin" Command="{commands:OpenRecycleBin}" ToolTip="Open recycle bin..."
+
+                    <wpfui:Button Icon="Home48" Content="Home" Command="{Binding OpenHome}" ToolTip="Open home bin..."
+                                  Common.IsVisible="{Binding Config.ShowHome}"/>
+
+                    <wpfui:Button Icon="Desktop32" Content="This PC" Command="{Binding OpenThisPC}" ToolTip="Open this PC bin..."
+                                  Common.IsVisible="{Binding Config.ShowThisPC}"/>
+
+                    <wpfui:Button Icon="ArrowDownload48" Content="Downloads" Command="{Binding OpenDownloads}" ToolTip="Open downloads..."
+                                  Common.IsVisible="{Binding Config.ShowDownloads}"/>
+
+                    <wpfui:Button Icon="Recycle32" Content="Recycle bin" Command="{Binding OpenRecycleBin}" ToolTip="Open recycle bin..."
                                   Common.IsVisible="{Binding Config.ShowRecycleBin}"/>
-                    
+
                     <ItemsControl ItemsSource="{Binding Items}" MaxWidth="200"/>
                     
                 </StackPanel>

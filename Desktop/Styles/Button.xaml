@@ -122,4 +122,12 @@
     
     <Style TargetType="wpfui:Button" BasedOn="{StaticResource Styles.Button}"/>
 
+    <Style TargetType="{x:Type ToggleButton}">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Margin" Value="0,4"/>
+        <Setter Property="Padding" Value="22,0,0,0"/>
+        <Setter Property="CommandParameter" Value="{Binding}"/>
+    </Style>
+    
 </ResourceDictionary>

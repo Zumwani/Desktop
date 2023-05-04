@@ -1,26 +1,33 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:Desktop.ViewModels.SettingPages"
-                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml">
+                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+                    xmlns:controls="clr-namespace:Desktop.Controls">
 
     <DataTemplate DataType="{x:Type viewModels:SystemInfo}">
         <StackPanel>
 
-            <wpfui:Button Content="Restart server" Command="{Binding RestartServerCommand}" Margin="0,0,0,8">
-                <wpfui:Button.ToolTip>
-                    <TextBlock TextWrapping="Wrap">
-                        <Run Text="Restart system info server."/>
-                        <LineBreak/>
-                        <LineBreak/>
-                        <Run Text="Local server is required, since some hardware sensors require admin."/>
-                    </TextBlock>
-                </wpfui:Button.ToolTip>   
-            </wpfui:Button>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                
+                <wpfui:Button Content="Restart server" Command="{Binding RestartServerCommand}">
+                    <wpfui:Button.ToolTip>
+                        <TextBlock TextWrapping="Wrap" Style="{x:Null}">
+                            <Run Text="Restart system info server."/>
+                            <LineBreak/>
+                            <LineBreak/>
+                            <Run Text="Local server is required, since some hardware sensors require admin."/>
+                        </TextBlock>
+                    </wpfui:Button.ToolTip>   
+                </wpfui:Button>
+
+                <wpfui:Button Content="Reload" Command="{Binding ReloadCommand}"/>
+
+            </StackPanel>
             
             <wpfui:Card>
                 <StackPanel>
-                    <TextBlock Text="Update interval"/>
-                    <Label Content="TODO: Add timepicker"/>
+                    <TextBlock Text="Update interval" Margin="0,8"/>
+                    <controls:TimePicker Value="{Binding Config.UpdateInterval, Mode=TwoWay}"/>
                 </StackPanel>
             </wpfui:Card>
             

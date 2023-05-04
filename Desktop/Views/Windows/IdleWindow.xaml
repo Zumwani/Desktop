@@ -10,15 +10,25 @@
                 <Grid Common.IsVisible="{Binding IsIdle}">
 
                     <ContentPresenter Content="{Binding Wallpaper}" Margin="-12"/>
-                    <ContentPresenter Content="{Binding Notifications}" Margin="0,12,0,0" Common.IsVisible="{Binding Config.ShowNotifications}"/>
+                    <Border Margin="0,12,0,0" Common.IsVisible="{Binding Config.ShowNotifications}">
+                        <ContentPresenter Content="{Binding Notifications}"/>
+                    </Border>
 
-                    <ContentPresenter Content="{Binding Time}" HorizontalAlignment="Center" VerticalAlignment="Center" Common.IsVisible="{Binding Config.ShowTime}"/>
+                    <Border HorizontalAlignment="Center" VerticalAlignment="Center" Common.IsVisible="{Binding Config.ShowTime}">
+                        <ContentPresenter Content="{Binding Time}"/>
+                    </Border>
                     <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                        <ContentPresenter Content="{Binding Weather}" Margin="22,0,0,0" Common.IsVisible="{Binding Config.ShowWeather}"/>
-                        <ContentPresenter Content="{Binding Date}" Margin="0,-22,0,0" Common.IsVisible="{Binding Config.ShowDate}"/>
+                        <Border Margin="22,0,0,0" Common.IsVisible="{Binding Config.ShowWeather}">
+                            <ContentPresenter Content="{Binding Weather}"/>
+                        </Border>
+                        <Border Margin="0,-22,0,0" Common.IsVisible="{Binding Config.ShowDate}">
+                            <ContentPresenter Content="{Binding Date}"/>
+                        </Border>
                     </StackPanel>
 
-                    <ContentPresenter Content="{Binding SystemStatus}" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                    <Border VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                        <ContentPresenter Content="{Binding SystemStatus}"/>
+                    </Border>
 
                 </Grid>
             </Border>

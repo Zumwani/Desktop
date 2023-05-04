@@ -3,7 +3,8 @@
                     xmlns:viewModels="clr-namespace:Desktop.ViewModels.SettingPages"
                     xmlns:normalViewModels="clr-namespace:Desktop.ViewModels"
                     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
-                    xmlns:helpers="clr-namespace:Desktop.ViewModels.Helpers">
+                    xmlns:helpers="clr-namespace:Desktop.ViewModels.Helpers"
+                    xmlns:controls="clr-namespace:Desktop.Controls">
 
     <DataTemplate DataType="{x:Type viewModels:Weather}">
 
@@ -18,7 +19,7 @@
             <wpfui:Card>
                 <StackPanel>
 
-                    <TextBlock TextWrapping="Wrap">
+                    <TextBlock TextWrapping="Wrap" Margin="0,4,0,0">
                         <Hyperlink Command="{Binding UrlClickCommand}">
                             <Run Text="https://api.openweathermap.org/data/2.5/weather"/>
                             <LineBreak/>
@@ -47,9 +48,9 @@
             <wpfui:Card Margin="0,8,0,0">
                 <StackPanel>
 
-                    <TextBlock Text="Update interval:"/>
+                    <TextBlock Text="Update interval:" Margin="0,8,0,0"/>
                     <Label Content="Timeout: 60 calls per minute."/>
-                    <Label Content="TODO: Add timepicker"/>
+                    <controls:TimePicker Value="{Binding Config.UpdateInterval, Mode=TwoWay}"/>
 
                 </StackPanel>
             </wpfui:Card>

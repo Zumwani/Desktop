@@ -15,7 +15,7 @@ public class DesktopWindow
     public Date Date { get; } = new();
     public Time Time { get; } = new();
     public Wallpaper Wallpaper { get; } = new();
-    public SystemStatus SystemStatus { get; } = new();
+    public SystemInfo SystemStatus { get; } = new();
     public Weather Weather { get; } = new();
 
     public bool IsOpen { get; set; }

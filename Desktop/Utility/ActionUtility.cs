@@ -15,7 +15,7 @@ public static class ActionUtility
     public static async void Invoke(Action action, TimeSpan interval)
     {
 
-        if (action is null)
+        if (action is null || interval.TotalMilliseconds < 10)
             return;
 
         StopInvoke(action);

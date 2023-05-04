@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Desktop" WindowStartupLocation="CenterScreen"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}, Path=View}"
-        Width="1000" Height="600" Topmost="True"
+        Width="1000" Height="600"
         Common.IsVisible="{Binding IsOpen}">
 
     <ContentPresenter Content="{Binding}"/>

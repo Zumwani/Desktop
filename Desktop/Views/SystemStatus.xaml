@@ -4,7 +4,7 @@
                     xmlns:viewModels="clr-namespace:Desktop.ViewModels"
                     xmlns:commands="clr-namespace:Desktop.Commands">
 
-    <DataTemplate DataType="{x:Type viewModels:SystemStatus}">
+    <DataTemplate DataType="{x:Type viewModels:SystemInfo}">
         
         <wpfui:Card HorizontalAlignment="Right" VerticalAlignment="Bottom" HorizontalContentAlignment="Right">
 
@@ -13,12 +13,20 @@
                     <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{commands:ConfigureSystemInfo}"/>
                 </ContextMenu>
             </wpfui:Card.ContextMenu>
-            
+
             <UniformGrid Columns="1">
-                <ContentPresenter Content="{Binding BluetoothBattery}" Common.IsVisible="{Binding Config.ShowBluetoothBattery}"/>
-                <ContentPresenter Content="{Binding CpuUsage}" Common.IsVisible="{Binding Config.ShowCpuUsage}"/>
-                <ContentPresenter Content="{Binding CpuTemperature}" Common.IsVisible="{Binding Config.ShowCpuTemperature}"/>
-                <ContentPresenter Content="{Binding Memory}" Common.IsVisible="{Binding Config.ShowMemory}"/>
+                <Border Common.IsVisible="{Binding Config.ShowBluetoothDeviceBattery}">
+                    <ContentPresenter Content="{Binding BluetoothBattery}"/>
+                </Border>
+                <Border Common.IsVisible="{Binding Config.ShowCpuUsage}">
+                    <ContentPresenter Content="{Binding CpuUsage}"/>
+                </Border>
+                <Border Common.IsVisible="{Binding Config.ShowCpuTemperature}">
+                    <ContentPresenter Content="{Binding CpuTemperature}"/>
+                </Border>
+                <Border Common.IsVisible="{Binding Config.ShowMemory}">
+                    <ContentPresenter Content="{Binding Memory}"/>
+                </Border>
             </UniformGrid>
             
         </wpfui:Card>
