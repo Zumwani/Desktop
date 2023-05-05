@@ -6,7 +6,7 @@
              Margin="0,4,0,8">
 
     <UserControl.Resources>
-        <helpers:EnumProvider x:Key="Enum.Unit" EnumType="{x:Type models:Unit}"/>
+        <helpers:EnumProvider x:Key="Enum.Unit" EnumType="{x:Type models:TimeUnit}"/>
     </UserControl.Resources>
     
     <DockPanel HorizontalAlignment="Left">

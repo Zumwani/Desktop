@@ -14,7 +14,6 @@ namespace Desktop;
 public partial class DesktopWindow : UiWindow
 {
 
-    //TODO: Fix better solution than Window.IsIdle
     //TODO: Improve icon on shortcut
     //TODO: Fix create startmenu shortcut
     //TODO: Setup single instance (force close existing, if Debugger.IsAttached)

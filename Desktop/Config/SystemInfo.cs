@@ -11,7 +11,10 @@ public class SystemInfo : ConfigModule
 {
 
     public Duration UpdateInterval { get; set; } = Duration.FromSeconds(2);
-    [JsonInclude] private string? SelectedDeviceName { get; set; }
+    [JsonInclude, SafeForDependencyAnalysis] private string? SelectedDeviceName { get; set; }
+
+    [JsonIgnore]
+    public string DeviceName => SelectedDeviceName ?? "No device selected...";
 
     private BluetoothDevice? device;
     [JsonIgnore, SafeForDependencyAnalysis]

@@ -8,7 +8,7 @@
 
         <wpfui:Button Icon="Headphones48" HorizontalAlignment="Right" Style="{StaticResource Styles.Button.IconRight}"
                       Common.ContextMenuOnLeftClick="True" Common.CenterContextMenu="True"
-                      ToolTip="{Binding Config.SelectedDevice.Value.Name}">
+                      ToolTip="{Binding Config.DeviceName}">
 
             <wpfui:Button.ContextMenu>
                 <ContextMenu Placement="Left">

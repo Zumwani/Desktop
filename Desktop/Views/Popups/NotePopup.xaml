@@ -5,6 +5,7 @@
        xmlns:mahApps="http://metro.mahapps.com/winfx/xaml/controls"
        xmlns:models="clr-namespace:Desktop.Models"
        xmlns:helpers="clr-namespace:Desktop.ViewModels.Helpers"
+       xmlns:controls="clr-namespace:Desktop.Controls"
        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
        StaysOpen="False" AllowsTransparency="True" PopupAnimation="Fade" Placement="MousePoint">
     
@@ -47,8 +48,7 @@
 
                             <DockPanel Common.IsCollapsed="{Binding Note.PermanentNotification}">
                                 <TextBlock Text="Duration:" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <mahApps:NumericUpDown Value="{Binding Note.NotifyDurationValue, UpdateSourceTrigger=PropertyChanged}"/>
-                                <ComboBox ItemsSource="{Binding Source={StaticResource Enum.TimeUnit}}" SelectedItem="{Binding Note.NotifyDurationUnit}" Margin="12,0,0,0" HorizontalAlignment="Left"/>
+                                <controls:TimePicker Value="{Binding Note.NotifyDuration, Mode=TwoWay}"/>
                             </DockPanel>
                         
                         </StackPanel>

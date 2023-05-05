@@ -3,19 +3,31 @@
                     xmlns:viewModels="clr-namespace:Desktop.ViewModels">
 
     <DataTemplate DataType="{x:Type viewModels:IdleWindow}">
-        
-        <Grid>
 
+        <DataTemplate.Resources>
+            <Style TargetType="{x:Type ContentPresenter}">
+
+                <Setter Property="LayoutTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="4" ScaleY="4"/>
+                    </Setter.Value>
+                </Setter>
+
+            </Style>
+        </DataTemplate.Resources>
+
+        <Grid>
+            
             <Border Common.IsVisible="{Binding Config.IsEnabled}">
                 <Grid Common.IsVisible="{Binding IsIdle}">
 
-                    <ContentPresenter Content="{Binding Wallpaper}" Margin="-12"/>
+                    <ContentPresenter Content="{Binding Wallpaper}" Margin="-12" Style="{x:Null}"/>
                     <Border Margin="0,12,0,0" Common.IsVisible="{Binding Config.ShowNotifications}">
-                        <ContentPresenter Content="{Binding Notifications}"/>
+                        <ContentPresenter Content="{Binding Notifications}" Style="{x:Null}"/>
                     </Border>
 
                     <Border HorizontalAlignment="Center" VerticalAlignment="Center" Common.IsVisible="{Binding Config.ShowTime}">
-                        <ContentPresenter Content="{Binding Time}"/>
+                        <ContentPresenter Content="{Binding Time}" Style="{x:Null}"/>
                     </Border>
                     <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
                         <Border Margin="22,0,0,0" Common.IsVisible="{Binding Config.ShowWeather}">

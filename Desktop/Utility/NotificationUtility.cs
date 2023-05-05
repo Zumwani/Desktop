@@ -161,7 +161,7 @@ static partial class NotificationUtility
                 var header = binding.GetTextElements()[0].Text;
                 _ = Notify(new Notification(text) { Header = header }).ContinueWith(t => _ = list.Remove(notification.Id));
 
-                await Task.Delay(5000);
+                await Task.Delay(ConfigManager.Notifications.DelayBeforeHidingWindowsNotification);
                 listener.RemoveNotification(notification.Id);
 
             }

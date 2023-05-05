@@ -1,14 +1,8 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 using PostSharp.Patterns.Model;
 
 namespace Desktop.Models;
-
-public enum TimeUnit
-{
-    Seconds,
-    Minutes,
-    Hours
-}
 
 [NotifyPropertyChanged]
 public class Note
@@ -21,24 +15,14 @@ public class Note
 
     public bool PermanentNotification { get; set; }
     public DateTime NotifyAt { get; set; }
-    public int NotifyDurationValue { get; set; } = 5;
-    public TimeUnit NotifyDurationUnit { get; set; }
+    public Duration NotifyDuration { get; set; } = Duration.FromSeconds(5);
 
-    public TimeSpan NotifyDuration =>
-        NotifyDurationUnit switch
-        {
-            TimeUnit.Seconds => TimeSpan.FromSeconds(NotifyDurationValue),
-            TimeUnit.Minutes => TimeSpan.FromMinutes(NotifyDurationValue),
-            TimeUnit.Hours => TimeSpan.FromHours(NotifyDurationValue),
-            _ => TimeSpan.Zero,
-        };
-
-    public bool NotifyOnMonday { get; set; }
-    public bool NotifyOnTuesday { get; set; }
-    public bool NotifyOnWednesday { get; set; }
-    public bool NotifyOnThursday { get; set; }
-    public bool NotifyOnFriday { get; set; }
-    public bool NotifyOnSaturday { get; set; }
-    public bool NotifyOnSunday { get; set; }
+    [JsonPropertyName("mon")] public bool NotifyOnMonday { get; set; }
+    [JsonPropertyName("tue")] public bool NotifyOnTuesday { get; set; }
+    [JsonPropertyName("wed")] public bool NotifyOnWednesday { get; set; }
+    [JsonPropertyName("thu")] public bool NotifyOnThursday { get; set; }
+    [JsonPropertyName("fri")] public bool NotifyOnFriday { get; set; }
+    [JsonPropertyName("sat")] public bool NotifyOnSaturday { get; set; }
+    [JsonPropertyName("sun")] public bool NotifyOnSunday { get; set; }
 
 }
