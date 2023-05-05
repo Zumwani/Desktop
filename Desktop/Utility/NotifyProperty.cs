@@ -1,17 +1,17 @@
 ﻿using System;
 using PostSharp.Patterns.Model;
 
-namespace Desktop.ViewModels.Helpers;
+namespace Desktop.Utility;
 
 [NotifyPropertyChanged]
 public class NotifyProperty<T>
 {
 
-    public Action? onUpdateRequest { get; init; }
+    public Action? OnUpdateRequest { get; init; }
 
     public T? Value { get; set; }
 
     public void Update() =>
-        onUpdateRequest?.Invoke();
+        OnUpdateRequest?.Invoke();
 
 }

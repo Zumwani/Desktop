@@ -1,9 +1,10 @@
-﻿using PostSharp.Patterns.Model;
+﻿using System.Windows.Media;
+using PostSharp.Patterns.Model;
 
 namespace Desktop.Config;
 
 [NotifyPropertyChanged]
-public class SharedVisibilityConfig : ConfigModule
+public class WindowConfig : ConfigModule
 {
 
     public bool ShowNotifications { get; set; }
@@ -14,5 +15,6 @@ public class SharedVisibilityConfig : ConfigModule
     public bool ShowCpuUsage { get; set; }
     public bool ShowCpuTemperature { get; set; }
     public bool ShowMemory { get; set; }
+    public Stretch WallpaperStretch { get; set; }
 
 }

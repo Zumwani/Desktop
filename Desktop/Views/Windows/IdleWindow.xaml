@@ -5,6 +5,7 @@
     <DataTemplate DataType="{x:Type viewModels:IdleWindow}">
 
         <DataTemplate.Resources>
+
             <Style TargetType="{x:Type ContentPresenter}">
 
                 <Setter Property="LayoutTransform">
@@ -14,6 +15,7 @@
                 </Setter>
 
             </Style>
+            
         </DataTemplate.Resources>
 
         <Grid>
@@ -22,6 +24,7 @@
                 <Grid Common.IsVisible="{Binding IsIdle}">
 
                     <ContentPresenter Content="{Binding Wallpaper}" Margin="-12" Style="{x:Null}"/>
+
                     <Border Margin="0,12,0,0" Common.IsVisible="{Binding Config.ShowNotifications}">
                         <ContentPresenter Content="{Binding Notifications}" Style="{x:Null}"/>
                     </Border>
@@ -29,14 +32,8 @@
                     <Border HorizontalAlignment="Center" VerticalAlignment="Center" Common.IsVisible="{Binding Config.ShowTime}">
                         <ContentPresenter Content="{Binding Time}" Style="{x:Null}"/>
                     </Border>
-                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                        <Border Margin="22,0,0,0" Common.IsVisible="{Binding Config.ShowWeather}">
-                            <ContentPresenter Content="{Binding Weather}"/>
-                        </Border>
-                        <Border Margin="0,-22,0,0" Common.IsVisible="{Binding Config.ShowDate}">
-                            <ContentPresenter Content="{Binding Date}"/>
-                        </Border>
-                    </StackPanel>
+
+                    <ContentPresenter Content="{Binding DateWeather}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
 
                     <Border VerticalAlignment="Bottom" HorizontalAlignment="Right">
                         <ContentPresenter Content="{Binding SystemStatus}"/>

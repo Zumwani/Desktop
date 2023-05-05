@@ -5,5 +5,5 @@ namespace Desktop.Commands;
 
 public class ConfigureSystemInfo : Command
 {
-    public override void Execute() => SettingsWindow.Open<SystemInfo>();
+    public override void Execute() => SettingsWindow.Open<Tracker>();
 }

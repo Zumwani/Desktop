@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:helpers="clr-namespace:Desktop.ViewModels.Helpers"
+             xmlns:models="clr-namespace:Desktop.Models"
+             xmlns:viewModels="clr-namespace:Desktop.ViewModels" xmlns:utility="clr-namespace:Desktop.Utility"
              ShutdownMode="OnMainWindowClose">
     
     <Application.Resources>
@@ -23,6 +25,7 @@
                 <ResourceDictionary Source="Styles/TextBlock.xaml"/>
                 <ResourceDictionary Source="Styles/ListBox.xaml"/>
                 <ResourceDictionary Source="Styles/Card.xaml"/>
+                <ResourceDictionary Source="Styles/GroupBox.xaml"/>
 
                 <ResourceDictionary Source="Views/Indicators/BluetoothBattery.xaml"/>
                 <ResourceDictionary Source="Views/Indicators/CpuTemperature.xaml"/>
@@ -32,15 +35,17 @@
                 <ResourceDictionary Source="Views/Indicators/Time.xaml"/>
                 <ResourceDictionary Source="Views/Indicators/Weather.xaml"/>
                 
-                <ResourceDictionary Source="Views/Templates/FileItem.xaml"/>
-                <ResourceDictionary Source="Views/Templates/Note.xaml"/>
-                <ResourceDictionary Source="Views/Templates/Notification.xaml"/>
+                <ResourceDictionary Source="Views/ItemTemplates/FileItem.xaml"/>
+                <ResourceDictionary Source="Views/ItemTemplates/Note.xaml"/>
+                <ResourceDictionary Source="Views/ItemTemplates/Notification.xaml"/>
                 
-                <ResourceDictionary Source="Views/Files.xaml"/>
-                <ResourceDictionary Source="Views/Notes.xaml"/>
-                <ResourceDictionary Source="Views/Notifications.xaml"/>
-                <ResourceDictionary Source="Views/SystemStatus.xaml"/>
-                <ResourceDictionary Source="Views/Wallpaper.xaml"/>
+                <ResourceDictionary Source="Views/Widgets/Files.xaml"/>
+                <ResourceDictionary Source="Views/Widgets/Notes.xaml"/>
+                <ResourceDictionary Source="Views/Widgets/Notifications.xaml"/>
+                <ResourceDictionary Source="Views/Widgets/Tracker.xaml"/>
+                <ResourceDictionary Source="Views/Widgets/Wallpaper.xaml"/>
+                <ResourceDictionary Source="Views/Widgets/DateWeather.xaml"/>
+                <ResourceDictionary Source="Views/Widgets/DateTimeWeather.xaml"/>
                 
                 <ResourceDictionary Source="Views/Windows/DesktopWindow.xaml"/>
                 <ResourceDictionary Source="Views/Windows/IdleWindow.xaml"/>
@@ -48,11 +53,10 @@
 
             </ResourceDictionary.MergedDictionaries>
 
-            <helpers:EnumProvider x:Key="Enum.Stretch" EnumType="{x:Type Stretch}"/>
+            <utility:EnumProvider x:Key="Enum.Stretch" EnumType="{x:Type Stretch}"/>
+            <utility:EnumProvider x:Key="Enum.TimeUnit" EnumType="{x:Type models:TimeUnit}"/>
+            <utility:EnumProvider x:Key="Enum.WeatherUnit" EnumType="{x:Type models:WeatherUnit}"/>
 
-            <Color x:Key="Theme.Color.Background">#202020</Color>
-            <SolidColorBrush x:Key="Theme.Brush.Background" Color="{StaticResource Theme.Color.Background}"/>
-            
         </ResourceDictionary>
     </Application.Resources>
     

@@ -6,8 +6,8 @@
 
     <DataTemplate DataType="{x:Type viewModels:IdleMode}">
         <StackPanel>
-            
-            <wpfui:Card>
+
+            <GroupBox>
                 <StackPanel>
                     
                     <CheckBox Content="Is enabled" IsChecked="{Binding Config.IsEnabled}" Margin="0,0,0,8"/>
@@ -22,9 +22,9 @@
                               SelectedItem="{Binding Config.WallpaperStretch}"/>
 
                 </StackPanel>
-            </wpfui:Card>
+            </GroupBox>
 
-            <wpfui:Card Margin="0,8,0,0">
+            <GroupBox>
                 <StackPanel>
 
                     <CheckBox Content="Show time" IsChecked="{Binding Config.ShowTime}"/>
@@ -37,7 +37,7 @@
                     <CheckBox Content="Show memory" IsChecked="{Binding Config.ShowMemory}"/>
 
                 </StackPanel>
-            </wpfui:Card>
+            </GroupBox>
             
         </StackPanel>
     </DataTemplate>

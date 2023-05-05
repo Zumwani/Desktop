@@ -8,15 +8,6 @@
     <DataTemplate DataType="{x:Type viewModels:Files}">
         <wpfui:Card HorizontalAlignment="Left">
 
-            <wpfui:Card.ContextMenu>
-                <ContextMenu>
-                    <wpfui:MenuItem Header="Create folder..." SymbolIcon="FolderAdd48" Command="{Binding CreateFolderCommand}"/>
-                    <wpfui:MenuItem Header="Create file..." SymbolIcon="DocumentAdd48" Command="{Binding CreateFileCommand}"/>
-                    <Separator/>
-                    <wpfui:MenuItem Header="Configure..." SymbolIcon="Settings48" Command="{commands:ConfigureFiles}"/>
-                </ContextMenu>
-            </wpfui:Card.ContextMenu>
-
             <wpfui:DynamicScrollViewer>
                 <StackPanel MinHeight="42" MinWidth="142">
                     

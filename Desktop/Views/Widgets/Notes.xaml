@@ -7,15 +7,6 @@
     <DataTemplate DataType="{x:Type viewModels:Notes}">
         <wpfui:Card DockPanel.Dock="Right" HorizontalAlignment="Right">
             
-            <wpfui:Card.ContextMenu>
-                <ContextMenu>
-                    <wpfui:MenuItem Header="Create note..." SymbolIcon="NoteAdd48" Command="{Binding CreateCommand}"/>
-                    <Separator/>
-                    <wpfui:MenuItem Header="Show hidden notes..." SymbolIcon="Eye24" Common.IsCollapsed="{Binding Config.ShowHiddenNotes, Mode=OneWay}" Command="{commands:ShowHiddenNotes}" Transition.IsEnabled="False"/>
-                    <wpfui:MenuItem Header="Hide hidden notes..." SymbolIcon="EyeOff24" Common.IsVisible="{Binding Config.ShowHiddenNotes, Mode=OneWay}" Command="{commands:HideHiddenNotes}" Transition.IsEnabled="False"/>
-                </ContextMenu>
-            </wpfui:Card.ContextMenu>
-
             <wpfui:DynamicScrollViewer>
                 <Grid MinHeight="42" MinWidth="142">
 

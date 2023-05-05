@@ -11,7 +11,7 @@
                 <ContextMenu>
                     <wpfui:MenuItem SymbolIcon="WindowNew24" Header="Open calendar..." Command="{commands:OpenCalendar}"/>
                     <Separator/>
-                    <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{commands:ConfigureDateAndTime}"/>
+                    <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{Binding OpenDateTimeConfigCommand}"/>
                 </ContextMenu>
             </wpfui:Button.ContextMenu>
 

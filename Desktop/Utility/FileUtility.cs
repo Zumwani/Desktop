@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using Common.Utility;
 using Desktop.Config;
 using Desktop.Models;
+using Microsoft.VisualBasic.FileIO;
 
 namespace Desktop.Utility;
 
@@ -45,6 +46,34 @@ public static class FileUtility
 
     public static void Open(string path, string args = "") =>
         Process.Start(new ProcessStartInfo(path) { UseShellExecute = true, Arguments = args });
+
+    public static void OpenWith(string path)
+    {
+        var args = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "shell32.dll");
+        args += ",OpenAs_RunDLL " + path;
+        _ = Process.Start("rundll32.exe", args);
+    }
+
+    public static void OpenFolder(string path)
+    {
+
+        if (File.Exists(path) || Directory.Exists(path))
+            _ = Process.Start("explorer", "/select,\"" + path + "\"");
+
+    }
+
+    public static void Delete(string path)
+    {
+        _ = Task.Run(() =>
+        {
+
+            if (File.Exists(path))
+                FileSystem.DeleteFile(path, UIOption.AllDialogs, RecycleOption.SendToRecycleBin, UICancelOption.DoNothing);
+            else if (Directory.Exists(path))
+                FileSystem.DeleteDirectory(path, UIOption.AllDialogs, RecycleOption.SendToRecycleBin, UICancelOption.DoNothing);
+
+        });
+    }
 
     #region Watcher
 

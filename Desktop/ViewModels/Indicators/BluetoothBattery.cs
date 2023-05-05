@@ -18,7 +18,7 @@ public class BluetoothBattery : IntervalViewModel
 
     public IEnumerable<BluetoothDevice> AvailableDevices { get; private set; } = Array.Empty<BluetoothDevice>();
 
-    public Config.SystemInfo Config { get; } = ConfigManager.SystemInfo;
+    public Config.Trackers Config { get; } = ConfigManager.SystemInfo;
 
     public RelayCommand OpenAPIPageCommand { get; } = new(() => FileUtility.Open("https://www.bluetoothgoodies.com/info/battery-monitor-api/"));
     public RelayCommand OpenMainPageCommand { get; } = new(() => FileUtility.Open("https://www.bluetoothgoodies.com/"));
@@ -45,7 +45,7 @@ public class BluetoothBattery : IntervalViewModel
 
         Config.PropertyChanged += (s, e) =>
         {
-            Helper.BluetoothDevices.Update();
+            IndicatorUtility.BluetoothDevices.Update();
             Update();
         };
 
@@ -54,11 +54,11 @@ public class BluetoothBattery : IntervalViewModel
     public override void Update()
     {
 
-        Value = Helper.BluetoothDevices.Value?.Find(Config.SelectedDevice?.Name)?.BatteryLevel;
+        Value = IndicatorUtility.BluetoothDevices.Value?.Find(Config.SelectedDevice?.Name)?.BatteryLevel;
 
-        var devices = Helper.BluetoothDevices.Value;
+        var devices = IndicatorUtility.BluetoothDevices.Value;
         if (!(devices?.SequenceEqual(AvailableDevices) ?? false))
-            AvailableDevices = Helper.BluetoothDevices.Value ?? Array.Empty<BluetoothDevice>();
+            AvailableDevices = IndicatorUtility.BluetoothDevices.Value ?? Array.Empty<BluetoothDevice>();
 
     }
 

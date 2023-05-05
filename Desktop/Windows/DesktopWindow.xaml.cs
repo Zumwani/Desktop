@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Shell;
 using Desktop.Config;
-using Desktop.Utility;
 using PostSharp.Patterns.Model;
 using WindowsHook;
 using Wpf.Ui.Controls;
@@ -20,12 +19,10 @@ public partial class DesktopWindow : UiWindow
 
     //TODO: Move edit mode to settings, use button to enable and one to disable
     //TODO: Fix drag start from files
-    //TODO: Move and rename helpers
     //TODO: Add option to switch to farenheit for system indicator
     //TODO: Fix tab button scroll bar in settings
     //TODO: Update time and date format when changed in system
 
-    public bool IsIdle => false;
     public ViewModels.DesktopWindow View { get; } = new();
 
     public Config.DesktopWindow Config { get; } = ConfigManager.DesktopWindow;

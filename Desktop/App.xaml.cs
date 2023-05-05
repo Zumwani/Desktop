@@ -1,4 +1,6 @@
-﻿using System;
+﻿global using Desktop.Utility;
+global using RelayCommand = Desktop.Utility.RelayCommand;
+using System;
 using System.IO;
 using System.Windows;
 using Common.Utility;
@@ -24,10 +26,8 @@ public partial class App : Application
 
     }
 
-    protected override void OnExit(ExitEventArgs e)
-    {
+    protected override void OnExit(ExitEventArgs e) =>
         ServerUtility.Stop();
-    }
 
     static void CreateStartmenuShortcut()
     {

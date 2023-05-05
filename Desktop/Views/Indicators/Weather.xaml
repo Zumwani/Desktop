@@ -2,31 +2,17 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:Desktop.ViewModels"
                     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
-                    xmlns:helpers="clr-namespace:Desktop.ViewModels.Helpers" xmlns:commands="clr-namespace:Desktop.Commands">
+                    xmlns:commands="clr-namespace:Desktop.Commands">
 
     <DataTemplate DataType="{x:Type viewModels:Weather}">
 
         <wpfui:Button Padding="6,0,6,0" Common.ContextMenuOnLeftClick="True">
 
-            <Button.Resources>
-                <Style TargetType="Rectangle">
-
-                    <Setter Property="Width" Value="16"/>
-
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=IsIdle, Mode=OneWay}" Value="True">
-                            <Setter Property="Width" Value="22"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-
-                </Style>
-            </Button.Resources>
-
             <wpfui:Button.ContextMenu>
                 <ContextMenu Placement="Top">
-                    <wpfui:MenuItem SymbolIcon="WindowNew24" Header="View on openweathermap.org..." Command="{Binding ClickCommand}"/>
+                    <wpfui:MenuItem SymbolIcon="WindowNew24" Header="View on openweathermap.org..." Command="{Binding OpenWebpageCommand}"/>
                     <Separator/>
-                    <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{commands:ConfigureWeather}"/>
+                    <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{Binding OpenWeatherCommand}"/>
                 </ContextMenu>
             </wpfui:Button.ContextMenu>
 

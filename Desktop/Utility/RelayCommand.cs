@@ -1,7 +1,7 @@
 ﻿using System;
 using Common.Utility;
 
-namespace Desktop.ViewModels;
+namespace Desktop.Utility;
 
 public class RelayCommand : Command
 {

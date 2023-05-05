@@ -5,17 +5,17 @@
 
     <DataTemplate DataType="{x:Type viewModels:Files}">
         <StackPanel>
-            
-            <wpfui:Card>
+
+            <GroupBox>
                 <StackPanel>
                     <CheckBox Content="Show home" IsChecked="{Binding Config.ShowHome}"/>
                     <CheckBox Content="Show This PC" IsChecked="{Binding Config.ShowThisPC}"/>
                     <CheckBox Content="Show Downloads" IsChecked="{Binding Config.ShowDownloads}"/>
                     <CheckBox Content="Show recycle bin" IsChecked="{Binding Config.ShowRecycleBin}"/>
                 </StackPanel>
-            </wpfui:Card>
-        
-            <wpfui:Card Margin="0,-56,0,0">
+            </GroupBox>
+
+            <GroupBox>
                 <StackPanel>
 
                     <TextBlock Text="Sources:" Margin="0,8,0,8"/>
@@ -34,7 +34,7 @@
                     <wpfui:Button Icon="Add28" Margin="0,8,0,0" Padding="6" ToolTip="Add source..." Command="{Binding AddSourceCommand}"/>
 
                 </StackPanel>
-            </wpfui:Card>
+            </GroupBox>
         
         </StackPanel>
     </DataTemplate>

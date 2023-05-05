@@ -36,7 +36,7 @@ public class SettingsWindow
         new Notifications(),
         new DateAndTime(),
         new Weather(),
-        new SystemInfo(),
+        new Tracker(),
     };
 
     public SettingsPage SelectedPage { get; set; }

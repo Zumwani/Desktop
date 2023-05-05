@@ -1,9 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
-using Desktop.Commands;
 using Desktop.Config;
-using Desktop.Models;
-using Desktop.Utility;
 using Desktop.ViewModels.Helpers;
 using Desktop.Views.Popups;
 
@@ -12,12 +9,10 @@ namespace Desktop.ViewModels;
 public class Files : ViewModel
 {
 
-    static Files? instance;
-
     public bool HasItems => Config.ShowRecycleBin || Items.Any();
 
     public Config.Files Config { get; } = ConfigManager.Files;
-    public ObservableCollection<FileItem> Items => FileUtility.Files;
+    public ObservableCollection<FileItem> Items { get; } = new();
 
     public RelayCommand OpenHome { get; }
     public RelayCommand OpenThisPC { get; }
@@ -27,15 +22,12 @@ public class Files : ViewModel
     public RelayCommand CreateFileCommand { get; }
     public RelayCommand CreateFolderCommand { get; }
 
-    FilePopup Popup { get; } = new();
+    public RelayCommand<FileItem> RenameFileCommand { get; }
 
-    static Files() =>
-        RenameFile.Callback += file => instance?.Popup?.Rename(file.Path);
+    FilePopup Popup { get; } = new();
 
     public Files()
     {
-
-        instance = this;
 
         Items.CollectionChanged += (s, e) => OnPropertyChanged(nameof(HasItems));
         Config.PropertyChanged += (s, e) => OnPropertyChanged(nameof(HasItems));
@@ -47,6 +39,11 @@ public class Files : ViewModel
 
         CreateFileCommand = new(Popup.CreateFile);
         CreateFolderCommand = new(Popup.CreateFolder);
+        RenameFileCommand = new(file => Popup.Rename(file?.Model.Path));
+
+        FileUtility.Files.OnAdded(file => Items.Add(new(file) { RenameCommand = RenameFileCommand }));
+        FileUtility.Files.OnRemoved(file => Items.Remove(file));
+        FileUtility.Files.OnClear(Items.Clear);
 
     }
 

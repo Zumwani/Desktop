@@ -6,15 +6,7 @@
 
     <DataTemplate DataType="{x:Type viewModels:Notifications}">
         <wpfui:Card Padding="0,12,0,0" Margin="12,12">
-
-            <wpfui:Card.ContextMenu>
-                <ContextMenu>
-                    <wpfui:MenuItem SymbolIcon="Settings48" Header="Clear all..." Command="{Binding ClearNotificationsCommand}" IsEnabled="{Binding HasItems}"/>
-                    <Separator/>
-                    <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{commands:ConfigureNotifications}"/>
-                </ContextMenu>
-            </wpfui:Card.ContextMenu>
-
+            
             <ScrollViewer>
                 
                 <StackPanel MinHeight="32">

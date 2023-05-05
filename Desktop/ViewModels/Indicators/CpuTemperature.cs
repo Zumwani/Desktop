@@ -10,6 +10,6 @@ public class CpuTemperature : IntervalViewModel
     public double? Value { get; private set; }
 
     public override void Update() =>
-        Value = Helper.SystemInfo.Value?.CpuTemperature;
+        Value = IndicatorUtility.SystemInfo.Value?.CpuTemperature;
 
 }

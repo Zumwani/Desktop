@@ -5,21 +5,34 @@
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                 mc:Ignorable="d"
+                xmlns:viewModels="clr-namespace:Desktop.ViewModels"
                 xmlns:commands="clr-namespace:Desktop.Commands"
-                Title="Desktop" Common.IsVisibleInAltTab="False" ShowInTaskbar="False"
+                Title="Desktop" AllowsTransparency="True"
+                Common.IsVisibleInAltTab="False" ShowInTaskbar="False"
                 WindowStyle="None" MinWidth="100" MinHeight="100"
-                Common.ClampToMonitors="Screen"
+                Common.ClampToMonitors="Screen" Background="{x:Null}"
                 FontFamily="Segoe UI Semilight" d:Background="#202020"
-                Common.IsVisible="True" WindowStartupLocation="Manual"
+                Common.IsVisible="{Binding IsOpen}" WindowStartupLocation="Manual"
                 DataContext="{Binding RelativeSource={RelativeSource Mode=Self}, Path=View}"
+                d:DataContext="{d:DesignInstance Type=viewModels:DesktopWindow, IsDesignTimeCreatable=True}"
                 Common.PinToDesktop="True"
                 Loaded="UiWindow_Loaded">
 
     <Window.ContextMenu>
         <ContextMenu>
-            <wpfui:MenuItem Header="Configure..." SymbolIcon="Settings48" Command="{commands:ConfigureGeneral}"/>
+            <wpfui:MenuItem Header="Create folder..." SymbolIcon="FolderAdd48" Command="{Binding Files.CreateFolderCommand}"/>
+            <wpfui:MenuItem Header="Create file..." SymbolIcon="DocumentAdd48" Command="{Binding Files.CreateFileCommand}"/>
+            <Separator/>   
+            <wpfui:MenuItem Header="Create note..." SymbolIcon="NoteAdd48" Command="{Binding Notes.CreateCommand}"/>
             <Separator/>
-            <wpfui:MenuItem Header="Quit app" SymbolIcon="Power28" Command="{commands:Quit}"/>
+            <wpfui:MenuItem Header="Show hidden notes" SymbolIcon="Eye24" Common.IsCollapsed="{Binding Notes.Config.ShowHiddenNotes, Mode=OneWay}" Command="{commands:ShowHiddenNotes}" Transition.IsEnabled="False"/>
+            <wpfui:MenuItem Header="Hide hidden notes" SymbolIcon="EyeOff24" Common.IsVisible="{Binding Notes.Config.ShowHiddenNotes, Mode=OneWay}" Command="{commands:HideHiddenNotes}" Transition.IsEnabled="False"/>
+            <Separator/>
+            <wpfui:MenuItem SymbolIcon="TextBulletListDismiss20" Header="Clear all notifications" Command="{Binding Notifications.ClearNotificationsCommand}" IsEnabled="{Binding Notifications.HasItems}"/>
+            <Separator/>
+            <wpfui:MenuItem Header="Configure..." SymbolIcon="Settings48" Command="{Binding OpenConfigCommand}"/>
+            <Separator/>
+            <wpfui:MenuItem Header="Quit Desktop" SymbolIcon="Power28" Command="{Binding QuitCommand}"/>
         </ContextMenu>
     </Window.ContextMenu>
 

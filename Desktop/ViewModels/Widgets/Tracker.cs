@@ -1,11 +1,12 @@
 ﻿using Desktop.Config;
+using Desktop.ViewModels.Helpers;
 
 namespace Desktop.ViewModels;
 
-public class SystemInfo
+public class Tracker : ViewModel
 {
 
-    public SharedVisibilityConfig? Config { get; set; }
+    public WindowConfig? Config { get; set; }
 
     public BluetoothBattery BluetoothBattery { get; } = new();
     public CpuUsage CpuUsage { get; } = new();

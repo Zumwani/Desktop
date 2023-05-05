@@ -151,8 +151,11 @@ public partial class FilePopup : Popup
     #endregion
     #region Rename
 
-    public void Rename(string path)
+    public void Rename(string? path)
     {
+
+        if (string.IsNullOrEmpty(path))
+            return;
 
         SelectedName = Path.GetFileName(path);
 

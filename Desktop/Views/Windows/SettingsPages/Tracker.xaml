@@ -4,10 +4,10 @@
                     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
                     xmlns:controls="clr-namespace:Desktop.Controls">
 
-    <DataTemplate DataType="{x:Type viewModels:SystemInfo}">
+    <DataTemplate DataType="{x:Type viewModels:Tracker}">
         <StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+            <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
                 
                 <wpfui:Button Content="Restart server" Command="{Binding RestartServerCommand}">
                     <wpfui:Button.ToolTip>
@@ -23,13 +23,13 @@
                 <wpfui:Button Content="Reload" Command="{Binding ReloadCommand}"/>
 
             </StackPanel>
-            
-            <wpfui:Card>
+
+            <GroupBox>
                 <StackPanel>
                     <TextBlock Text="Update interval" Margin="0,8"/>
                     <controls:TimePicker Value="{Binding Config.UpdateInterval, Mode=TwoWay}"/>
                 </StackPanel>
-            </wpfui:Card>
+            </GroupBox>
             
         </StackPanel>
     </DataTemplate>

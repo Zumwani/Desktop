@@ -7,7 +7,7 @@ using PostSharp.Patterns.Model;
 namespace Desktop.Config;
 
 [NotifyPropertyChanged]
-public class SystemInfo : ConfigModule
+public class Trackers : ConfigModule
 {
 
     public Duration UpdateInterval { get; set; } = Duration.FromSeconds(2);
@@ -28,7 +28,7 @@ public class SystemInfo : ConfigModule
             else if (string.IsNullOrWhiteSpace(SelectedDeviceName))
                 return null;
             else
-                return device = Helper.BluetoothDevices.Value!.Find(SelectedDeviceName);
+                return device = IndicatorUtility.BluetoothDevices.Value!.Find(SelectedDeviceName);
 
         }
         set

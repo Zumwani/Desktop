@@ -1,6 +1,10 @@
 ﻿using System.Linq;
 using System.Windows;
 using Desktop.ViewModels.SettingPages;
+using Files = Desktop.ViewModels.SettingPages.Files;
+using Notifications = Desktop.ViewModels.SettingPages.Notifications;
+using Tracker = Desktop.ViewModels.SettingPages.Tracker;
+using Weather = Desktop.ViewModels.SettingPages.Weather;
 
 namespace Desktop;
 
@@ -13,6 +17,17 @@ public partial class SettingsWindow : Window
     public ViewModels.SettingPages.SettingsWindow View { get; } = new();
 
     static SettingsWindow? window;
+
+    public static RelayCommand OpenGeneralCommand { get; } = new(Open<General>);
+    public static RelayCommand OpenDateTimeCommand { get; } = new(Open<DateAndTime>);
+    public static RelayCommand OpenIdleModeCommand { get; } = new(Open<IdleMode>);
+    public static RelayCommand OpenFilesCommand { get; } = new(Open<Files>);
+    public static RelayCommand OpenNotificationCommand { get; } = new(Open<Notifications>);
+    public static RelayCommand OpenTrackerCommand { get; } = new(Open<Tracker>);
+    public static RelayCommand OpenWeatherCommand { get; } = new(Open<Weather>);
+
+    public static void Open() => Open<General>();
+
     public static void Open<T>() where T : SettingsPage
     {
 

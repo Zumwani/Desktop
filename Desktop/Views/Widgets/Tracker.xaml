@@ -4,16 +4,10 @@
                     xmlns:viewModels="clr-namespace:Desktop.ViewModels"
                     xmlns:commands="clr-namespace:Desktop.Commands">
 
-    <DataTemplate DataType="{x:Type viewModels:SystemInfo}">
-        
+    <DataTemplate DataType="{x:Type viewModels:Tracker}">
+
         <wpfui:Card HorizontalAlignment="Right" VerticalAlignment="Bottom" HorizontalContentAlignment="Right">
-
-            <wpfui:Card.ContextMenu>
-                <ContextMenu>
-                    <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{commands:ConfigureSystemInfo}"/>
-                </ContextMenu>
-            </wpfui:Card.ContextMenu>
-
+            
             <UniformGrid Columns="1">
                 <Border Common.IsVisible="{Binding Config.ShowBluetoothDeviceBattery}">
                     <ContentPresenter Content="{Binding BluetoothBattery}"/>

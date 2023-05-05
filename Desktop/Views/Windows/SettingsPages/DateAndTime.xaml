@@ -7,9 +7,9 @@
     <DataTemplate DataType="{x:Type viewModels:DateAndTime}">
         <StackPanel>
 
-            <wpfui:Button Icon="Settings48" Content="Open windows settings..." Command="{Binding OpenWindowsSettingsCommand}" Margin="0,0,0,8"/>
+            <wpfui:Button Icon="Settings48" Content="Open windows settings..." Command="{Binding OpenWindowsSettingsCommand}" Margin="0,8,0,0"/>
 
-            <wpfui:Card>
+            <GroupBox>
                 <StackPanel>
 
                     <CheckBox Content="Use windows format for date" IsChecked="{Binding Config.UseWindowsFormatForDate}"/>
@@ -20,20 +20,18 @@
 
                     <TextBlock Text="Time format" Margin="0,8"/>
                     <TextBox Text="{Binding Config.TimeFormat}" IsEnabled="{Binding Config.UseWindowsFormatForTime, Converter={converters:InvertBool}}"/>
-
-                    <wpfui:Button Content="Open windows date and time settings" Command="{Binding OpenWindowsSettingsCommand}" Margin="0,12,0,0"/>
-
+                    
                 </StackPanel>
-            </wpfui:Card>
+            </GroupBox>
 
-            <wpfui:Card Margin="0,8,0,0">
+            <GroupBox>
                 <StackPanel>
 
                     <TextBlock Text="Calendar app:" Margin="0,8"/>
                     <TextBox Text="{Binding Config.CalendarUri}" Margin="0,0,0,8"/>
 
                 </StackPanel>
-            </wpfui:Card>
+            </GroupBox>
             
         </StackPanel>
     </DataTemplate>

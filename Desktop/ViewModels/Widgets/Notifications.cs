@@ -2,12 +2,13 @@
 using System.Linq;
 using Desktop.Models;
 using Desktop.Utility;
+using Desktop.ViewModels.Helpers;
 using PostSharp.Patterns.Model;
 
 namespace Desktop.ViewModels;
 
 [NotifyPropertyChanged]
-public class Notifications
+public class Notifications : ViewModel
 {
 
     public bool HasItems { get; set; }

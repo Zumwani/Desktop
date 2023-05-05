@@ -10,6 +10,6 @@ public class CpuUsage : IntervalViewModel
     public double? Value { get; private set; }
 
     public override void Update() =>
-        Value = Helper.SystemInfo.Value?.CpuUsage;
+        Value = IndicatorUtility.SystemInfo.Value?.CpuUsage;
 
 }

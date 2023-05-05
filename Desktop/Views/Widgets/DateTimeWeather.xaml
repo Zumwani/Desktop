@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewModels="clr-namespace:Desktop.ViewModels"
+                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml">
+
+    <DataTemplate DataType="{x:Type viewModels:DateTimeWeather}">
+        <wpfui:Card>
+            <StackPanel>
+
+                <DockPanel Panel.ZIndex="1" Background="#01FFFFFF">
+                    <Border Common.IsVisible="{Binding Config.ShowWeather}" DockPanel.Dock="Right">
+                        <ContentPresenter Content="{Binding Weather}"/>
+                    </Border>
+                    <Border Common.IsVisible="{Binding Config.ShowDate}">
+                        <ContentPresenter Content="{Binding Date}"/>
+                    </Border>
+                </DockPanel>
+
+                <Border Common.IsVisible="{Binding Config.ShowTime}">
+                    <ContentPresenter Content="{Binding Time}"/>
+                </Border>
+
+            </StackPanel>
+        </wpfui:Card>
+    </DataTemplate>
+    
+</ResourceDictionary>

@@ -6,11 +6,6 @@ using Desktop.Config;
 
 namespace Desktop.Utility;
 
-public enum WeatherUnit
-{
-    Metric, Imperial
-}
-
 static class WeatherUtility
 {
 

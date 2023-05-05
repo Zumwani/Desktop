@@ -1,22 +1,16 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:Desktop.ViewModels.SettingPages"
-                    xmlns:normalViewModels="clr-namespace:Desktop.ViewModels"
                     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
-                    xmlns:helpers="clr-namespace:Desktop.ViewModels.Helpers"
                     xmlns:controls="clr-namespace:Desktop.Controls">
 
     <DataTemplate DataType="{x:Type viewModels:Weather}">
 
-        <DataTemplate.Resources>
-            <helpers:EnumProvider x:Key="Enum.WeatherUnit" EnumType="{normalViewModels:WeatherUnitEnumType}"/>
-        </DataTemplate.Resources>
-
         <StackPanel>
 
-            <wpfui:Button Content="Reload" Command="{Binding ReloadCommand}" Margin="0,0,0,8"/>
+            <wpfui:Button Content="Reload" Command="{Binding ReloadCommand}" Margin="0,8,0,0"/>
 
-            <wpfui:Card>
+            <GroupBox>
                 <StackPanel>
 
                     <TextBlock TextWrapping="Wrap" Margin="0,4,0,0">
@@ -43,9 +37,9 @@
                     <CheckBox Content="Use feels like temperature" IsChecked="{Binding Config.UseFeelsLikeTemperature}" Margin="0,8,0,2"/>
 
                 </StackPanel>
-            </wpfui:Card>
-            
-            <wpfui:Card Margin="0,8,0,0">
+            </GroupBox>
+
+            <GroupBox>
                 <StackPanel>
 
                     <TextBlock Text="Update interval:" Margin="0,8,0,0"/>
@@ -53,7 +47,7 @@
                     <controls:TimePicker Value="{Binding Config.UpdateInterval, Mode=TwoWay}"/>
 
                 </StackPanel>
-            </wpfui:Card>
+            </GroupBox>
             
         </StackPanel>
         

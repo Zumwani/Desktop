@@ -7,18 +7,18 @@
     <DataTemplate DataType="{x:Type viewModels:Notifications}">
         <StackPanel>
 
-            <wpfui:Button Icon="Settings48" Content="Open windows settings..." Command="{Binding OpenWindowsSettingsCommand}" Margin="0,0,0,8"/>
+            <wpfui:Button Icon="Settings48" Content="Open windows settings..." Command="{Binding OpenWindowsSettingsCommand}" Margin="0,8,0,0"/>
 
-            <wpfui:Card>
+            <GroupBox>
                 <StackPanel>
 
                     <CheckBox Content="Collapse notifications when multiple detected from same source" IsChecked="{Binding Config.CollapseNotificationsWhenMultipleRecievedFromSameSource}"/>
                     <CheckBox Content="Show clear all button" IsChecked="{Binding Config.ShowClearAllButton}"/>
 
                 </StackPanel>
-            </wpfui:Card>
+            </GroupBox>
 
-            <wpfui:Card Margin="0,-120,0,0">
+            <GroupBox>
                 <StackPanel>
 
                     <CheckBox Content="Override windows notifications" IsChecked="{Binding Config.OverrideWindowsNotifications}"/>
@@ -26,7 +26,7 @@
                     <controls:TimePicker Value="{Binding Config.DelayBeforeHidingWindowsNotification}"/>
 
                 </StackPanel>
-            </wpfui:Card>
+            </GroupBox>
             
         </StackPanel>
     </DataTemplate>

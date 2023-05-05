@@ -1,5 +1,4 @@
-﻿using Desktop.Utility;
-using Wpf.Ui.Common;
+﻿using Wpf.Ui.Common;
 
 namespace Desktop.ViewModels.SettingPages;
 

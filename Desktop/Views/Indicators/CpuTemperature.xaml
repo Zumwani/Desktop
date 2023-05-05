@@ -13,7 +13,7 @@
                 <ContextMenu>
                     <wpfui:MenuItem SymbolIcon="WindowNew24" Header="Open task manager..." Command="{commands:OpenTaskManager}"/>
                     <Separator/>
-                    <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{commands:ConfigureSystemInfo}"/>
+                    <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{Binding OpenTrackerConfigCommand}"/>
                 </ContextMenu>
             </wpfui:Button.ContextMenu>
 

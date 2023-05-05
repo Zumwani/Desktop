@@ -1,21 +1,15 @@
 ﻿<UserControl x:Class="Desktop.Controls.TimePicker"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:models="clr-namespace:Desktop.Models"
-             xmlns:helpers="clr-namespace:Desktop.ViewModels.Helpers"
              Margin="0,4,0,8">
 
-    <UserControl.Resources>
-        <helpers:EnumProvider x:Key="Enum.Unit" EnumType="{x:Type models:TimeUnit}"/>
-    </UserControl.Resources>
-    
     <DockPanel HorizontalAlignment="Left">
         
         <TextBox DockPanel.Dock="Left" Margin="0,0,6,0"
                  Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=SelectedValue, Mode=TwoWay}"
                  VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
 
-        <ComboBox ItemsSource="{Binding Source={StaticResource Enum.Unit}}" SelectedItem="{Binding  RelativeSource={RelativeSource AncestorType=UserControl}, Path=SelectedUnit, Mode=TwoWay}"/>
+        <ComboBox ItemsSource="{Binding Source={StaticResource Enum.TimeUnit}}" SelectedItem="{Binding  RelativeSource={RelativeSource AncestorType=UserControl}, Path=SelectedUnit, Mode=TwoWay}"/>
         
     </DockPanel>
     

@@ -13,7 +13,7 @@ public static class ConfigManager
     public static IdleMode IdleMode { get; } = new();
     public static Notes Notes { get; } = new();
     public static Notifications Notifications { get; } = new();
-    public static SystemInfo SystemInfo { get; } = new();
+    public static Trackers SystemInfo { get; } = new();
     public static Weather Weather { get; } = new();
     public static DesktopWindow DesktopWindow { get; } = new();
 

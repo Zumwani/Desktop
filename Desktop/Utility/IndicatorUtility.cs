@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Desktop.Config;
 using Desktop.Models;
-using Desktop.Utility;
 using Microsoft.Win32;
 
 namespace Desktop.ViewModels.Helpers;
 
-public static class Helper
+public static class IndicatorUtility
 {
 
-    static Helper()
+    static IndicatorUtility()
     {
         Reload();
         ConfigManager.SystemInfo.PropertyChanged += PropertyChanged;
@@ -44,10 +43,10 @@ public static class Helper
 
     }
 
-    public static NotifyProperty<Server.Models.SystemInfo?> SystemInfo { get; } = new() { onUpdateRequest = UpdateSystemInfo };
-    public static NotifyProperty<Models.Weather> Weather { get; } = new() { onUpdateRequest = UpdateWeather };
-    public static NotifyProperty<IEnumerable<BluetoothDevice>> BluetoothDevices { get; } = new() { onUpdateRequest = UpdateBluetoothDevices };
-    public static NotifyProperty<DateTime> DateTime { get; } = new() { onUpdateRequest = UpdateDateTime };
+    public static NotifyProperty<Server.Models.SystemInfo?> SystemInfo { get; } = new() { OnUpdateRequest = UpdateSystemInfo };
+    public static NotifyProperty<Models.Weather> Weather { get; } = new() { OnUpdateRequest = UpdateWeather };
+    public static NotifyProperty<IEnumerable<BluetoothDevice>> BluetoothDevices { get; } = new() { OnUpdateRequest = UpdateBluetoothDevices };
+    public static NotifyProperty<DateTime> DateTime { get; } = new() { OnUpdateRequest = UpdateDateTime };
 
     async static void UpdateSystemInfo() => SystemInfo.Value = await Server.API.GetSystemStatus();
     async static void UpdateWeather() => Weather.Value = await WeatherUtility.Get();

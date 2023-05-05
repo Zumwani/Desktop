@@ -13,17 +13,20 @@ public class IdleWindow : IntervalViewModel
     public Config.General GeneralConfig { get; } = ConfigManager.General;
 
     public Notifications Notifications { get; } = new();
-    public Date Date { get; } = new();
     public Time Time { get; } = new();
     public Wallpaper Wallpaper { get; } = new();
-    public SystemInfo SystemStatus { get; } = new();
-    public Weather Weather { get; } = new();
+    public Tracker SystemStatus { get; } = new();
+    public DateWeather DateWeather { get; } = new();
 
     public bool IsIdle { get; set; }
     public bool IsOpen { get; set; }
 
-    public IdleWindow() =>
+    public IdleWindow()
+    {
         SystemStatus.Config = Config;
+        DateWeather.Config = Config;
+        Wallpaper.Config = Config;
+    }
 
     public override void Update()
     {

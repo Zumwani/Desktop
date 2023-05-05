@@ -8,11 +8,7 @@
        xmlns:controls="clr-namespace:Desktop.Controls"
        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
        StaysOpen="False" AllowsTransparency="True" PopupAnimation="Fade" Placement="MousePoint">
-    
-    <Popup.Resources>
-        <helpers:EnumProvider x:Key="Enum.TimeUnit" EnumType="{x:Type models:TimeUnit}"/>
-    </Popup.Resources>
-    
+
     <Border Background="#202020" BorderThickness="1" BorderBrush="DimGray" CornerRadius="8">
         <StackPanel>
 

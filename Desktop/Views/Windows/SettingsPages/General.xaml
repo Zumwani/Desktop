@@ -7,16 +7,16 @@
 
         <StackPanel>
 
-            <wpfui:Card Margin="0">
+            <GroupBox>
                 <StackPanel>
                     <CheckBox Content="Autostart" IsChecked="{Binding Config.Autostart}"/>
                     <CheckBox Content="Dim screen when not active" IsChecked="{Binding Config.DimScreenWhenNotActive}"/>
-                    <CheckBox Content="Display border along bottom of primary screen" IsChecked="{Binding Config.ShowBorderAlongBottomOfPrimaryScreen}"/>
+                    <CheckBox Content="Display border along bottom of primary screen" IsChecked="{Binding Config.ShowBorderAlongBottomOfPrimaryScreen}" ToolTip="Fix for Win11 and auto-hide taskbar is enabled, where there is a white line at bottom of screen."/>
                     <wpfui:Button Content="Create startmenu shortcut" Command="{Binding CreateStartmenuShortcutCommand}" Margin="0,8"/>
                 </StackPanel>
-            </wpfui:Card>
+            </GroupBox>
 
-            <wpfui:Card Margin="0,-40,0,0">
+            <GroupBox>
                 <StackPanel>
                     
                     <TextBlock Text="Wallpaper:" Margin="0,8,0,8"/>
@@ -28,9 +28,9 @@
                               SelectedItem="{Binding Config.WallpaperStretch}"/>
 
                 </StackPanel>
-            </wpfui:Card>
+            </GroupBox>
 
-            <wpfui:Card Margin="0,-30,0,0">
+            <GroupBox>
                 <StackPanel>
 
                     <CheckBox Content="Show files" IsChecked="{Binding Config.ShowFiles}" Margin="0,2,0,0"/>
@@ -45,7 +45,7 @@
                     <CheckBox Content="Show memory" IsChecked="{Binding Config.ShowMemory}"/>
 
                 </StackPanel>
-            </wpfui:Card>
+            </GroupBox>
             
         </StackPanel>
         

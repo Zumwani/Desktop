@@ -8,7 +8,8 @@ public class Wallpaper
 {
 
     public Config.General GeneralConfig { get; } = ConfigManager.General;
-    public Config.IdleMode IdleConfig { get; } = ConfigManager.IdleMode;
+    public WindowConfig? Config { get; set; }
+
     public bool IsChangingWallpaper { get; set; }
 
 }
