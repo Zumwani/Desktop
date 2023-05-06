@@ -2,15 +2,15 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:Desktop.ViewModels"
                     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
-                    xmlns:commands="clr-namespace:Desktop.Commands">
+                    xmlns:converters="clr-namespace:Desktop.Converters">
 
     <DataTemplate DataType="{x:Type viewModels:Notes}">
         <wpfui:Card DockPanel.Dock="Right" HorizontalAlignment="Right">
             
             <wpfui:DynamicScrollViewer>
-                <Grid MinHeight="42" MinWidth="142">
+                <Grid>
 
-                    <Border Common.IsVisible="{Binding RelativeSource={RelativeSource AncestorType=wpfui:Card}, Path=IsMouseOver}">
+                    <Border Common.IsHidden="{Binding RelativeSource={RelativeSource AncestorType=wpfui:Card}, Path=IsMouseOver, Converter={converters:InvertBool}}">
                         <TextBlock Text="No notes available..." Common.IsCollapsed="{Binding HasItems}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8"/>
                     </Border>
 

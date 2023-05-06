@@ -1,8 +1,10 @@
 ﻿using Desktop.ViewModels.Helpers;
+using PostSharp.Patterns.Model;
 using Wpf.Ui.Common;
 
 namespace Desktop.ViewModels.SettingPages;
 
+[NotifyPropertyChanged]
 class Weather : SettingsPage<Config.Weather>
 {
 

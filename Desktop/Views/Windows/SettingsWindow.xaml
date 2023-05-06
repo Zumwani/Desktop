@@ -23,17 +23,18 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                <wpfui:Button Height="64" Width="200" HorizontalContentAlignment="Left" Margin="0,8,0,0"
+                                <wpfui:Button Height="64" Width="200" HorizontalContentAlignment="Left" Margin="0,8,0,0" Effect="{x:Null}"
                                               Command="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl}, Path=DataContext.OpenPageCommand}">
 
                                     <wpfui:Button.Style>
                                         <Style TargetType="{x:Type wpfui:Button}" BasedOn="{StaticResource {x:Type wpfui:Button}}">
 
                                             <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="Effect" Value="{x:Null}"/>
 
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsSelected}" Value="{x:True}">
-                                                    <Setter Property="Background" Value="#20000000"/>
+                                                    <Setter Property="Background" Value="#40000000"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
 
@@ -51,26 +52,25 @@
                     </Setter>
                 </Style>
 
+                <Style TargetType="{x:Type wpfui:Button}" BasedOn="{StaticResource {x:Type wpfui:Button}}">
+                    <Setter Property="Effect" Value="{x:Null}"/>
+                </Style>
 
             </ResourceDictionary>
         </DataTemplate.Resources>
 
-        <wpfui:DynamicScrollViewer>
             <DockPanel>
-
-                <DockPanel.Resources>
-                    <Style TargetType="{x:Type TextBlock}" BasedOn="{x:Null}"/>
-                </DockPanel.Resources>
-
+                
                 <ListBox DockPanel.Dock="Left" VerticalAlignment="Top" ItemContainerStyle="{StaticResource Style.ListBox}"
                          ItemsSource="{Binding Pages}" SelectedItem="{Binding SelectedPage, Mode=TwoWay}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                          Margin="4,4,4,0" Background="Transparent" BorderThickness="0"
                          ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
                 
-                <ContentPresenter Content="{Binding SelectedPage}" Margin="0,8,8,8"/>
+                <wpfui:DynamicScrollViewer>
+                    <ContentPresenter Content="{Binding SelectedPage}" Margin="0,8,8,8"/>
+                </wpfui:DynamicScrollViewer>
 
             </DockPanel>
-        </wpfui:DynamicScrollViewer>
         
     </DataTemplate>
     

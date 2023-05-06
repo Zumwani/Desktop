@@ -2,34 +2,37 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:Desktop.ViewModels"
                     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
-                    xmlns:commands="clr-namespace:Desktop.Commands"
                     xmlns:converters="clr-namespace:Desktop.Converters">
 
     <DataTemplate DataType="{x:Type viewModels:Files}">
         <wpfui:Card HorizontalAlignment="Left">
 
             <wpfui:DynamicScrollViewer>
-                <StackPanel MinHeight="42" MinWidth="142">
+                <Grid>
                     
-                    <Border Common.IsVisible="{Binding RelativeSource={RelativeSource AncestorType=wpfui:Card}, Path=IsMouseOver}">
+                    <Border Common.IsHidden="{Binding RelativeSource={RelativeSource AncestorType=wpfui:Card}, Path=IsMouseOver, Converter={converters:InvertBool}}">
                         <TextBlock Text="No files available..." Common.IsCollapsed="{Binding HasItems}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8"/>
                     </Border>
 
-                    <wpfui:Button Icon="Home48" Content="Home" Command="{Binding OpenHome}" ToolTip="Open home bin..."
-                                  Common.IsVisible="{Binding Config.ShowHome}"/>
-
-                    <wpfui:Button Icon="Desktop32" Content="This PC" Command="{Binding OpenThisPC}" ToolTip="Open this PC bin..."
-                                  Common.IsVisible="{Binding Config.ShowThisPC}"/>
-
-                    <wpfui:Button Icon="ArrowDownload48" Content="Downloads" Command="{Binding OpenDownloads}" ToolTip="Open downloads..."
-                                  Common.IsVisible="{Binding Config.ShowDownloads}"/>
-
-                    <wpfui:Button Icon="Recycle32" Content="Recycle bin" Command="{Binding OpenRecycleBin}" ToolTip="Open recycle bin..."
-                                  Common.IsVisible="{Binding Config.ShowRecycleBin}"/>
-
-                    <ItemsControl ItemsSource="{Binding Items}" MaxWidth="200"/>
+                    <StackPanel>
                     
-                </StackPanel>
+                        <wpfui:Button Icon="Home48" Content="Home" Command="{Binding OpenHome}" ToolTip="Open home bin..."
+                                      Common.IsVisible="{Binding Config.ShowHome}"/>
+
+                        <wpfui:Button Icon="Desktop32" Content="This PC" Command="{Binding OpenThisPC}" ToolTip="Open this PC bin..."
+                                      Common.IsVisible="{Binding Config.ShowThisPC}"/>
+
+                        <wpfui:Button Icon="ArrowDownload48" Content="Downloads" Command="{Binding OpenDownloads}" ToolTip="Open downloads..."
+                                      Common.IsVisible="{Binding Config.ShowDownloads}"/>
+
+                        <wpfui:Button Icon="Recycle32" Content="Recycle bin" Command="{Binding OpenRecycleBin}" ToolTip="Open recycle bin..."
+                                      Common.IsVisible="{Binding Config.ShowRecycleBin}"/>
+
+                        <ItemsControl ItemsSource="{Binding Items}" MaxWidth="200"/>
+                    
+                    </StackPanel>
+                    
+                </Grid>
             </wpfui:DynamicScrollViewer>
             
         </wpfui:Card>

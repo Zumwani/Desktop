@@ -10,7 +10,7 @@ using PostSharp.Patterns.Model;
 namespace Desktop.ViewModels;
 
 [NotifyPropertyChanged]
-public class BluetoothBattery : IntervalViewModel
+public class BluetoothBattery : TrackerIndicator
 {
 
     public double? Value { get; private set; }

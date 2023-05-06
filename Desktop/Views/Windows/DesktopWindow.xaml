@@ -36,7 +36,10 @@
             <Border Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,-52">
                 <ContentPresenter Content="{Binding DateTimeWeather}"/>
             </Border>
-            <ContentPresenter Content="{Binding Tracker}" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+
+            <Border Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                <ContentPresenter Content="{Binding Tracker}"/>
+            </Border>
 
             <!--Loading overlay-->
             <Border Background="#AA000000" Grid.RowSpan="2" Grid.ColumnSpan="3" Margin="-100" Common.IsCollapsed="{Binding IsLoaded, Mode=OneWay}" d:Common.IsCollapsed="True">

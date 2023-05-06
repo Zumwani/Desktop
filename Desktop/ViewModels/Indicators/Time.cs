@@ -1,12 +1,11 @@
 ﻿using System;
 using Desktop.Config;
-using Desktop.ViewModels.Helpers;
 using PostSharp.Patterns.Model;
 
 namespace Desktop.ViewModels;
 
 [NotifyPropertyChanged]
-public class Time : IntervalViewModel
+public class Time : DateTimeIndicator
 {
 
     public string Value { get; private set; } = "--";

@@ -1,19 +1,17 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:Desktop.ViewModels"
-                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml">
+                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+                    xmlns:converters="clr-namespace:Desktop.Converters">
 
     <DataTemplate DataType="{x:Type viewModels:Notifications}">
-        <wpfui:Card Padding="0,12,0,0" Margin="12,12">
+        <wpfui:Card Padding="0,12" Margin="12,12">
             
             <ScrollViewer>
-                
-                <StackPanel MinHeight="32">
-
-                    <wpfui:Button Content="Create test notification" Command="{Binding TestCommand}" HorizontalAlignment="Center" Common.IsVisible="{Binding ShowTestButton}"/>
-
+                <Grid>
+                    
                     <!--No items indicator-->
-                    <Border Common.IsVisible="{Binding RelativeSource={RelativeSource AncestorType=wpfui:Card}, Path=IsMouseOver}">
+                    <Border Common.IsHidden="{Binding RelativeSource={RelativeSource AncestorType=wpfui:Card}, Path=IsMouseOver, Converter={converters:InvertBool}}">
                         <TextBlock Text="No notifications available..." HorizontalAlignment="Center" Common.IsCollapsed="{Binding HasItems}">
                             <TextBlock.Effect>
                                 <DropShadowEffect ShadowDepth="0"/>
@@ -21,17 +19,24 @@
                         </TextBlock>
                     </Border>
                 
-                    <!--Clear all button-->
-                    <Border Common.IsCollapsed="{Binding Config.IsIdle}">
-                        <wpfui:Button Content="Clear all..." HorizontalAlignment="Center" Margin="0,0,0,8" Command="{Binding ClearNotificationsCommand}"
-                                      Common.IsVisible="{Binding HasItems}"/>
-                    </Border>
+                    <StackPanel>
 
-                    <!--List-->
-                    <ItemsControl ItemsSource="{Binding Items}" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+                        <Border Common.IsVisible="{Binding RelativeSource={RelativeSource AncestorType=wpfui:Card}, Path=IsMouseOver}">
+                            <wpfui:Button Content="Create test notification" Command="{Binding TestCommand}" HorizontalAlignment="Center" Common.IsVisible="{Binding ShowTestButton}"/>
+                        </Border>
 
-                </StackPanel>
+                        <!--Clear all button-->
+                        <Border Common.IsCollapsed="{Binding Config.IsIdle}">
+                            <wpfui:Button Content="Clear all..." HorizontalAlignment="Center" Margin="0,0,0,8" Command="{Binding ClearNotificationsCommand}"
+                                          Common.IsVisible="{Binding HasItems}"/>
+                        </Border>
+
+                        <!--List-->
+                        <ItemsControl ItemsSource="{Binding Items}" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+
+                    </StackPanel>
             
+                </Grid>
             </ScrollViewer>
             
         </wpfui:Card>

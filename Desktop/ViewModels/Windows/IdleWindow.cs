@@ -16,7 +16,8 @@ public class IdleWindow : IntervalViewModel
     public Time Time { get; } = new();
     public Wallpaper Wallpaper { get; } = new();
     public Tracker Tracker { get; } = new();
-    public DateWeather DateWeather { get; } = new();
+    public Date Date { get; } = new();
+    public Weather Weather { get; } = new();
 
     public bool IsIdle { get; set; }
     public bool IsOpen { get; set; }
@@ -26,7 +27,6 @@ public class IdleWindow : IntervalViewModel
         Notifications.Config = Config;
         Tracker.Config = Config;
         Wallpaper.Config = Config;
-        DateWeather.Config = Config;
     }
 
     public override void Update()

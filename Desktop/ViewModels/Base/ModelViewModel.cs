@@ -2,8 +2,5 @@
 
 public abstract class ModelViewModel<T> : ViewModel
 {
-
-    public ModelViewModel(T model) => Model = model;
-    public T Model { get; set; }
-
+    public T Model { get; init; } = default!;
 }

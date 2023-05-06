@@ -1,8 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:Desktop.ViewModels"
-                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
-                    xmlns:commands="clr-namespace:Desktop.Commands">
+                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml">
     
     <DataTemplate DataType="{x:Type viewModels:Memory}">
         <wpfui:Button Icon="Ram20" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" Style="{StaticResource Styles.Button.IconRight}"
@@ -10,7 +9,7 @@
             
             <wpfui:Button.ContextMenu>
                 <ContextMenu>
-                    <wpfui:MenuItem SymbolIcon="WindowNew24" Header="Open task manager..." Command="{commands:OpenTaskManager}"/>
+                    <wpfui:MenuItem SymbolIcon="WindowNew24" Header="Open task manager..." Command="{Binding OpenTaskManager}"/>
                     <Separator/>
                     <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{Binding OpenTrackerConfigCommand}"/>
                 </ContextMenu>

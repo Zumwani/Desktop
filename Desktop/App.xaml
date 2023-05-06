@@ -42,7 +42,6 @@
                 <ResourceDictionary Source="Views/Widgets/Notifications.xaml"/>
                 <ResourceDictionary Source="Views/Widgets/Tracker.xaml"/>
                 <ResourceDictionary Source="Views/Widgets/Wallpaper.xaml"/>
-                <ResourceDictionary Source="Views/Widgets/DateWeather.xaml"/>
                 <ResourceDictionary Source="Views/Widgets/DateTimeWeather.xaml"/>
                 
                 <ResourceDictionary Source="Views/Windows/DesktopWindow.xaml"/>

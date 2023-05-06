@@ -4,7 +4,7 @@ using PostSharp.Patterns.Model;
 namespace Desktop.ViewModels;
 
 [NotifyPropertyChanged]
-public class CpuUsage : IntervalViewModel
+public class CpuUsage : TrackerIndicator
 {
 
     public double? Value { get; private set; }

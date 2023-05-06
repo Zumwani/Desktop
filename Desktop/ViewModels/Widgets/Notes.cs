@@ -1,7 +1,6 @@
-﻿using System.Linq;
-using System.Windows.Data;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
 using Desktop.Config;
-using Desktop.Models;
 using Desktop.ViewModels.Helpers;
 using Desktop.Views.Popups;
 
@@ -10,37 +9,51 @@ namespace Desktop.ViewModels;
 public class Notes : ViewModel
 {
 
-    public CollectionViewSource Items { get; private set; }
-    public RelayCommand<Note> ClickCommand { get; }
+    public ObservableCollection<Note> Items { get; } = new();
+
     public RelayCommand CreateCommand { get; }
+    public RelayCommand<Models.Note> EditCommand { get; }
 
     readonly NotePopup popup = new();
 
-    public bool HasItems => Items.View.Cast<object>().Count() > 0;
+    public bool HasItems => Items.Any();
     public Config.Notes Config { get; } = ConfigManager.Notes;
 
     public Notes()
     {
 
-        ClickCommand = new(popup.Open);
         CreateCommand = new(CreateNote);
+        EditCommand = new(popup.Open);
 
-        Items = new CollectionViewSource { Source = Config.Items };
-        Items.Filter += (s, e) => e.Accepted = Config.ShowHiddenNotes || !((Note)e.Item).IsHidden;
+        RefreshItems();
         Config.PropertyChanged += (s, e) =>
         {
             RefreshItems();
             OnPropertyChanged(nameof(HasItems));
         };
 
+        Config.Items.OnAdded(_ => RefreshItems());
+        Config.Items.OnRemoved(_ => RefreshItems());
+        Config.Items.OnClear(Items.Clear);
+
     }
 
-    void RefreshItems() =>
-        Items.View.Refresh();
+    void RefreshItems()
+    {
+        Items.Clear();
+        foreach (var note in Config.Items)
+            Add(note);
+    }
+
+    void Add(Models.Note note)
+    {
+        if (Config.ShowHiddenNotes || !note.IsHidden)
+            Items.Add(new() { Model = note, EditCommand = EditCommand });
+    }
 
     void CreateNote()
     {
-        var note = new Note() { Content = "New note" };
+        var note = new Models.Note() { Content = "New note" };
         Config.Items.Add(note);
         popup.Open(note);
     }

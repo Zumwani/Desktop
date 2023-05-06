@@ -11,8 +11,7 @@
         <wpfui:Button HorizontalAlignment="Left" Command="{Binding OpenCommand}">
 
             <wpfui:Button.ContextMenu>
-                <ContextMenu DataContext="{Binding RelativeSource={RelativeSource Mode=Self}, Path=PlacementTarget.DataContext}"
-                             d:DataContext="{d:DesignInstance Type=viewModels:FileItem, IsDesignTimeCreatable=True}">
+                <ContextMenu>
                     <wpfui:MenuItem SymbolIcon="Open48" Header="Open..." Command="{Binding OpenCommand}"/>
                     <Separator/>
                     <wpfui:MenuItem SymbolIcon="OpenOff48" Header="Open with..." Command="{Binding OpenWithCommand}"/>

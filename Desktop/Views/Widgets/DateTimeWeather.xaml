@@ -7,7 +7,7 @@
         <wpfui:Card>
             <StackPanel>
 
-                <DockPanel Panel.ZIndex="1" Background="#01FFFFFF">
+                <DockPanel Panel.ZIndex="1">
                     <Border Common.IsVisible="{Binding Config.ShowWeather}" DockPanel.Dock="Right">
                         <ContentPresenter Content="{Binding Weather}"/>
                     </Border>

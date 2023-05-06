@@ -4,7 +4,7 @@ using PostSharp.Patterns.Model;
 namespace Desktop.ViewModels;
 
 [NotifyPropertyChanged]
-public class Memory : IntervalViewModel
+public class Memory : TrackerIndicator
 {
 
     public double? UsedMemory { get; private set; }

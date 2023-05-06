@@ -41,8 +41,8 @@ public class Files : ViewModel
         CreateFolderCommand = new(Popup.CreateFolder);
         RenameFileCommand = new(file => Popup.Rename(file?.Model.Path));
 
-        FileUtility.Files.OnAdded(file => Items.Add(new(file) { RenameCommand = RenameFileCommand }));
-        FileUtility.Files.OnRemoved(file => Items.Remove(file));
+        FileUtility.Files.OnAdded(file => Items.Add(new() { Model = file, RenameCommand = RenameFileCommand }));
+        FileUtility.Files.OnRemoved(file => Items.Remove(Items.First(i => i.Model.Path == file.Path)));
         FileUtility.Files.OnClear(Items.Clear);
 
     }

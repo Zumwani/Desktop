@@ -5,26 +5,18 @@
                     xmlns:viewModels="clr-namespace:Desktop.ViewModels">
 
     <DataTemplate DataType="{x:Type viewModels:Time}">
-        <wpfui:Button ToolTip="Open calendar..." Common.ContextMenuOnLeftClick="True" Common.CenterContextMenu="True" MinWidth="200">
-            
-            <wpfui:Button.Style>
-                <Style TargetType="wpfui:Button" BasedOn="{StaticResource {x:Type wpfui:Button}}">
-                    <Setter Property="Height" Value="100"/>
-                </Style>
-            </wpfui:Button.Style>
+        <wpfui:Button ToolTip="Open calendar..." Common.ContextMenuOnLeftClick="True" Common.CenterContextMenu="True">
             
             <wpfui:Button.ContextMenu>
                 <ContextMenu>
-                    <wpfui:MenuItem SymbolIcon="WindowNew24" Header="Open calendar..." Command="{commands:OpenCalendar}"/>
+                    <wpfui:MenuItem SymbolIcon="WindowNew24" Header="Open calendar..." Command="{Binding OpenCalendarCommand}"/>
                     <Separator/>
-                    <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{Binding OpenDateTimeCommand}"/>
+                    <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{Binding OpenDateTimeConfigCommand}"/>
                 </ContextMenu>
             </wpfui:Button.ContextMenu>
 
-            <Viewbox Margin="-8,-36,-8,-26">
-                <TextBlock Text="{Binding Value}"/>
-            </Viewbox>
-            
+            <TextBlock Text="{Binding Value}" FontSize="102" LineStackingStrategy="BlockLineHeight" LineHeight="106"/>
+
         </wpfui:Button>
     </DataTemplate>
 

@@ -4,39 +4,33 @@
 
     <DataTemplate DataType="{x:Type viewModels:IdleWindow}">
 
-        <DataTemplate.Resources>
-
-            <Style TargetType="{x:Type ContentPresenter}">
-
-                <Setter Property="LayoutTransform">
-                    <Setter.Value>
-                        <ScaleTransform ScaleX="4" ScaleY="4"/>
-                    </Setter.Value>
-                </Setter>
-
-            </Style>
-            
-        </DataTemplate.Resources>
-
         <Grid>
             
             <Border Common.IsVisible="{Binding Config.IsEnabled}">
                 <Grid Common.IsVisible="{Binding IsIdle}">
 
-                    <ContentPresenter Content="{Binding Wallpaper}" Margin="-12" Style="{x:Null}"/>
+                    <ContentPresenter Content="{Binding Wallpaper}" Margin="-12"/>
 
                     <Border Margin="0,12,0,0" Common.IsVisible="{Binding Config.ShowNotifications}">
-                        <ContentPresenter Content="{Binding Notifications}" Style="{x:Null}"/>
+                        <ContentPresenter Content="{Binding Notifications}" Common.Scale="2.5"/>
                     </Border>
 
-                    <Border HorizontalAlignment="Center" VerticalAlignment="Center" Common.IsVisible="{Binding Config.ShowTime}">
-                        <ContentPresenter Content="{Binding Time}" Style="{x:Null}"/>
-                    </Border>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                    <ContentPresenter Content="{Binding DateWeather}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                        <Border Common.IsVisible="{Binding Config.ShowTime}">
+                            <ContentPresenter Content="{Binding Time}" Common.Scale="1.5"/>
+                        </Border>
+
+                        <Border Common.IsVisible="{Binding Config.ShowDate}" HorizontalAlignment="Center" Margin="0,0,0,0">
+                            <ContentPresenter Content="{Binding Date}" Common.Scale="4"/>
+                        </Border>
+
+                    </StackPanel>
+
+                    <ContentPresenter Content="{Binding Weather}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Common.Scale="4"/>
 
                     <Border VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                        <ContentPresenter Content="{Binding Tracker}"/>
+                        <ContentPresenter Content="{Binding Tracker}" Common.Scale="4"/>
                     </Border>
 
                 </Grid>
