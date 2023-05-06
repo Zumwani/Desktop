@@ -13,6 +13,8 @@ public class Notes : ViewModel
 
     public RelayCommand CreateCommand { get; }
     public RelayCommand<Models.Note> EditCommand { get; }
+    public RelayCommand ShowAllCommand { get; } = new(() => ConfigManager.Notes.ShowHiddenNotes = true);
+    public RelayCommand HideAllCommand { get; } = new(() => ConfigManager.Notes.ShowHiddenNotes = false);
 
     readonly NotePopup popup = new();
 
@@ -33,7 +35,7 @@ public class Notes : ViewModel
         };
 
         Config.Items.OnAdded(_ => RefreshItems());
-        Config.Items.OnRemoved(_ => RefreshItems());
+        Config.Items.OnRemoved(n => Items.RemoveWhere(i => i.Model == n));
         Config.Items.OnClear(Items.Clear);
 
     }
@@ -48,7 +50,7 @@ public class Notes : ViewModel
     void Add(Models.Note note)
     {
         if (Config.ShowHiddenNotes || !note.IsHidden)
-            Items.Add(new() { Model = note, EditCommand = EditCommand });
+            Items.Add(new() { Model = note, EditCommand = EditCommand, ShowAllCommand = ShowAllCommand, HideAllCommand = HideAllCommand });
     }
 
     void CreateNote()

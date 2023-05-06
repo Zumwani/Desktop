@@ -6,7 +6,6 @@
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                 mc:Ignorable="d"
                 xmlns:viewModels="clr-namespace:Desktop.ViewModels"
-                xmlns:commands="clr-namespace:Desktop.Commands"
                 Title="Desktop" AllowsTransparency="True"
                 Common.IsVisibleInAltTab="False" ShowInTaskbar="False"
                 WindowStyle="None" MinWidth="100" MinHeight="100"
@@ -25,8 +24,8 @@
             <Separator/>   
             <wpfui:MenuItem Header="Create note..." SymbolIcon="NoteAdd48" Command="{Binding Notes.CreateCommand}"/>
             <Separator/>
-            <wpfui:MenuItem Header="Show hidden notes" SymbolIcon="Eye24" Common.IsCollapsed="{Binding Notes.Config.ShowHiddenNotes, Mode=OneWay}" Command="{commands:ShowHiddenNotes}" Transition.IsEnabled="False"/>
-            <wpfui:MenuItem Header="Hide hidden notes" SymbolIcon="EyeOff24" Common.IsVisible="{Binding Notes.Config.ShowHiddenNotes, Mode=OneWay}" Command="{commands:HideHiddenNotes}" Transition.IsEnabled="False"/>
+            <wpfui:MenuItem Header="Show hidden notes" SymbolIcon="Eye24" Common.IsCollapsed="{Binding Notes.Config.ShowHiddenNotes, Mode=OneWay}" Command="{Binding Notes.ShowAllCommand}" Transition.IsEnabled="False"/>
+            <wpfui:MenuItem Header="Hide hidden notes" SymbolIcon="EyeOff24" Common.IsVisible="{Binding Notes.Config.ShowHiddenNotes, Mode=OneWay}" Command="{Binding Notes.HideAllCommand}" Transition.IsEnabled="False"/>
             <Separator/>
             <wpfui:MenuItem SymbolIcon="TextBulletListDismiss20" Header="Clear all notifications" Command="{Binding Notifications.ClearNotificationsCommand}" IsEnabled="{Binding Notifications.HasItems}"/>
             <Separator/>

@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using Desktop.Config;
-using Desktop.Models;
 using Desktop.ViewModels.Helpers;
 using PostSharp.Patterns.Model;
 
@@ -22,9 +21,17 @@ public class Notifications : ViewModel
     public bool ShowTestButton { get; set; }
 
     [SafeForDependencyAnalysis]
-    public ObservableCollection<Notification> Items => NotificationUtility.Notifications;
+    public ObservableCollection<Notification> Items { get; } = new();
 
-    public Notifications() =>
+    public Notifications()
+    {
+
         Items.CollectionChanged += (s, e) => HasItems = Items.Any();
+        NotificationUtility.Notifications.OnAdded(n => Items.Add(new() { Model = n }));
+        NotificationUtility.Notifications.OnRemoved(n => Items.RemoveWhere(i => i.Model == n));
+
+        NotificationUtility.Notifications.OnClear(Items.Clear);
+
+    }
 
 }

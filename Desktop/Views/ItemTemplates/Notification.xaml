@@ -1,14 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
-                    xmlns:commands="clr-namespace:Desktop.Commands"
-                    xmlns:models="clr-namespace:Desktop.Models"
                     xmlns:helpers="clr-namespace:Desktop.ViewModels.Helpers"
-                    xmlns:converters="clr-namespace:Desktop.Converters">
+                    xmlns:converters="clr-namespace:Desktop.Converters"
+                    xmlns:viewModels="clr-namespace:Desktop.ViewModels">
 
-    <DataTemplate DataType="{x:Type models:Notification}">
+    <DataTemplate DataType="{x:Type viewModels:Notification}">
 
-        <wpfui:Button Common.IsVisible="{Binding IsVisible, Mode=OneWay}"
+        <wpfui:Button Common.IsVisible="{Binding Model.IsVisible, Mode=OneWay}"
                       Appearance="Primary" Padding="0" Margin="0,0,0,12" HorizontalContentAlignment="Stretch" HorizontalAlignment="Center">
 
             <Grid>
@@ -20,18 +19,18 @@
                 
                 <wpfui:Button Content="x" HorizontalAlignment="Right" VerticalAlignment="Top" Panel.ZIndex="10"
                                 Common.IsVisible="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=wpfui:Button}, Path=IsMouseOver}"
-                                Cursor="Hand" Command="{commands:HideNotification}"/>
+                                Cursor="Hand" Command="{Binding HideCommand}"/>
 
                 <StackPanel Orientation="Horizontal" Margin="12,12,12,4">
-                    <TextBlock Text="{Binding DuplicateHeaderCount, Mode=OneWay}" Common.IsVisible="{Binding DuplicateHeaderCount, Converter={converters:IsOver}, ConverterParameter=1}"/>
-                    <TextBlock Text="{Binding Content, Mode=OneWay}" TextTrimming="CharacterEllipsis"/>
+                    <TextBlock Text="{Binding Model.DuplicateHeaderCount, Mode=OneWay}" Common.IsVisible="{Binding DuplicateHeaderCount, Converter={converters:IsOver}, ConverterParameter=1}"/>
+                    <TextBlock Text="{Binding Model.Content, Mode=OneWay}" TextTrimming="CharacterEllipsis"/>
                 </StackPanel>
 
                 <ProgressBar Grid.Row="1" Height="6" Background="#AAFFFFFF" Foreground="CornflowerBlue" Margin="2"
-                                     Minimum="{Binding CreationTime.Ticks, Mode=OneWay}"
-                                     Maximum="{Binding EndTime.Ticks, Mode=OneWay}"
+                                     Minimum="{Binding Model.CreationTime.Ticks, Mode=OneWay}"
+                                     Maximum="{Binding Model.EndTime.Ticks, Mode=OneWay}"
                                      Value="{Binding Source={x:Static helpers:IndicatorUtility.DateTime}, Path=Value.Ticks, Mode=OneWay}"
-                                     Common.IsHidden="{Binding IsPermanent}" Transition.IsEnabled="False"/>
+                                     Common.IsHidden="{Binding Model.IsPermanent}" Transition.IsEnabled="False"/>
 
             </Grid>
 
