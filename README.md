@@ -15,3 +15,7 @@ Contains the following features:
 * Dimmer (dims screen when not active).
 * Idle mode, displays widgets, rearranged, in larger font, meant for when AFK.
 * Fix for white line at bottom of primary screen, when on Win11, and taskbar autohide is enabled.
+
+## Credits
+App icon: <img src="https://cdn-icons-png.flaticon.com/512/1597/1597580.png" alt= “” width="22" height="22">\
+<a href="https://www.flaticon.com/free-icons/desktop" title="desktop icons">Desktop icons created by Freepik - Flaticon</a>
