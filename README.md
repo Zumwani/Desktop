@@ -19,3 +19,9 @@ Contains the following features:
 ## Credits
 App icon: <img src="https://cdn-icons-png.flaticon.com/512/1597/1597580.png" alt= “” width="22" height="22">\
 <a href="https://www.flaticon.com/free-icons/desktop" title="desktop icons">Desktop icons created by Freepik - Flaticon</a>
+
+[WPFUI](https://github.com/lepoco/wpfui)\
+[MahApps](https://github.com/MahApps/MahApps.Metro)\
+[PostSharp](https://www.postsharp.net/)\
+[WindowsHook](https://github.com/topstarai/WindowsHook)\
+[LibreHardwareMonitor / Open hardware Monitor](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor)
