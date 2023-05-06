@@ -12,8 +12,8 @@ public class Memory : IntervalViewModel
 
     public override void Update()
     {
-        UsedMemory = IndicatorUtility.SystemInfo.Value?.UsedMemory;
-        AvailableMemory = IndicatorUtility.SystemInfo.Value?.AvailableMemory;
+        UsedMemory = IndicatorUtility.Tracker.Value?.UsedMemory;
+        AvailableMemory = IndicatorUtility.Tracker.Value?.AvailableMemory;
     }
 
 }

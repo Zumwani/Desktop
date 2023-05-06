@@ -10,6 +10,6 @@ class Tracker : SettingsPage<Config.Trackers>
     public override SymbolRegular Icon => SymbolRegular.Info28;
 
     public RelayCommand RestartServerCommand { get; } = new(ServerUtility.Restart);
-    public RelayCommand ReloadCommand { get; } = new(IndicatorUtility.SystemInfo.Update);
+    public RelayCommand ReloadCommand { get; } = new(IndicatorUtility.Tracker.RequestUpdate);
 
 }

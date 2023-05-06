@@ -33,24 +33,30 @@ public static class IndicatorUtility
 
         ActionUtility.StopInvoke(UpdateDateTime);
         ActionUtility.StopInvoke(UpdateBluetoothDevices);
-        ActionUtility.StopInvoke(UpdateSystemInfo);
+        ActionUtility.StopInvoke(UpdateTracker);
         ActionUtility.StopInvoke(UpdateWeather);
 
         ActionUtility.Invoke(UpdateDateTime, TimeSpan.FromSeconds(0.01)); //Used by notification progress bars (slower means staggered progress change)
         ActionUtility.Invoke(UpdateBluetoothDevices, ConfigManager.SystemInfo.UpdateInterval);
-        ActionUtility.Invoke(UpdateSystemInfo, ConfigManager.SystemInfo.UpdateInterval);
+        ActionUtility.Invoke(UpdateTracker, ConfigManager.SystemInfo.UpdateInterval);
         ActionUtility.Invoke(UpdateWeather, ConfigManager.Weather.UpdateInterval);
 
     }
 
-    public static NotifyProperty<Server.Models.SystemInfo?> SystemInfo { get; } = new() { OnUpdateRequest = UpdateSystemInfo };
+    public static NotifyProperty<Server.Models.SystemInfo?> Tracker { get; } = new() { OnUpdateRequest = UpdateTracker };
     public static NotifyProperty<Models.Weather> Weather { get; } = new() { OnUpdateRequest = UpdateWeather };
     public static NotifyProperty<IEnumerable<BluetoothDevice>> BluetoothDevices { get; } = new() { OnUpdateRequest = UpdateBluetoothDevices };
     public static NotifyProperty<DateTime> DateTime { get; } = new() { OnUpdateRequest = UpdateDateTime };
 
-    async static void UpdateSystemInfo() => SystemInfo.Value = await Server.API.GetSystemStatus();
-    async static void UpdateWeather() => Weather.Value = await WeatherUtility.Get();
-    async static void UpdateBluetoothDevices() => BluetoothDevices.Value = await BluetoothUtility.Get();
+    static async void UpdateWeather() => Weather.Value = await WeatherUtility.Get();
+    static async void UpdateBluetoothDevices() => BluetoothDevices.Value = await BluetoothUtility.Get();
     static void UpdateDateTime() => DateTime.Value = System.DateTime.Now;
+
+    static async void UpdateTracker()
+    {
+        Tracker.Value = await Server.API.GetSystemStatus();
+        if (Tracker.Value is null)
+            ServerUtility.Restart();
+    }
 
 }

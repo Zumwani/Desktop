@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using System.Threading.Tasks;
 using Desktop.Config;
 using Desktop.ViewModels.Helpers;
 using PostSharp.Patterns.Model;
@@ -6,7 +7,7 @@ using PostSharp.Patterns.Model;
 namespace Desktop.ViewModels;
 
 [NotifyPropertyChanged]
-public class DesktopWindow : ViewModel
+public partial class DesktopWindow : ViewModel
 {
 
     public General Config { get; } = ConfigManager.General;
@@ -15,7 +16,7 @@ public class DesktopWindow : ViewModel
     public Notifications Notifications { get; } = new();
     public Notes Notes { get; } = new();
     public Wallpaper Wallpaper { get; } = new();
-    public Tracker SystemStatus { get; } = new();
+    public Tracker Tracker { get; } = new();
     public DateTimeWeather DateTimeWeather { get; } = new();
 
     public bool IsOpen { get; set; } = true;
@@ -26,9 +27,10 @@ public class DesktopWindow : ViewModel
     public DesktopWindow()
     {
 
-        SystemStatus.Config = Config;
+        Tracker.Config = Config;
         DateTimeWeather.Config = Config;
         Wallpaper.Config = Config;
+        Notifications.ShowTestButton = Debugger.IsAttached;
 
         QuitCommand = new(async () =>
         {

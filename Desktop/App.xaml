@@ -2,9 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
-             xmlns:helpers="clr-namespace:Desktop.ViewModels.Helpers"
              xmlns:models="clr-namespace:Desktop.Models"
-             xmlns:viewModels="clr-namespace:Desktop.ViewModels" xmlns:utility="clr-namespace:Desktop.Utility"
              ShutdownMode="OnMainWindowClose">
     
     <Application.Resources>
@@ -53,9 +51,11 @@
 
             </ResourceDictionary.MergedDictionaries>
 
-            <utility:EnumProvider x:Key="Enum.Stretch" EnumType="{x:Type Stretch}"/>
-            <utility:EnumProvider x:Key="Enum.TimeUnit" EnumType="{x:Type models:TimeUnit}"/>
-            <utility:EnumProvider x:Key="Enum.WeatherUnit" EnumType="{x:Type models:WeatherUnit}"/>
+            <EnumProvider x:Key="Enum.Stretch" EnumType="{x:Type Stretch}"/>
+            <EnumProvider x:Key="Enum.TimeUnit" EnumType="{x:Type models:TimeUnit}"/>
+            <EnumProvider x:Key="Enum.WeatherUnit" EnumType="{x:Type models:WeatherUnit}"/>
+
+            <BitmapSource x:Key="Icon">/Desktop;component/computer.ico</BitmapSource>
 
         </ResourceDictionary>
     </Application.Resources>

@@ -1,6 +1,5 @@
 ﻿using Common.Utility;
 using Desktop.Config;
-using Desktop.Utility;
 
 namespace Desktop.Commands;
 

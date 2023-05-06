@@ -4,6 +4,7 @@
         Title="Desktop" WindowStartupLocation="CenterScreen"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}, Path=View}"
         Width="1000" Height="600"
+        Icon="{StaticResource Icon}"
         Common.IsVisible="{Binding IsOpen}">
 
     <ContentPresenter Content="{Binding}"/>

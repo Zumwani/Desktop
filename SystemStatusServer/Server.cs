@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Text.Json;
+﻿using System.Text.Json;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,25 +15,6 @@ public static class App
 
     static void Main(string[] args)
     {
-
-        if (int.TryParse(args.ElementAtOrDefault(0), out var parentProcessID) && Process.GetProcessById(parentProcessID) is Process process)
-        {
-
-            ServerUtility.ParentProcess = parentProcessID;
-
-            _ = Task.Run(async () =>
-            {
-                await process.WaitForExitAsync();
-                Console.WriteLine("Parent process has quit, stopping server...");
-                Quit();
-            });
-
-        }
-        else
-        {
-            Console.WriteLine("No parent process found, stopping server...");
-            return;
-        }
 
         try
         {
@@ -82,7 +62,6 @@ public static class App
 class Startup
 {
 
-#pragma warning disable CA1822 // Mark members as static
     public void ConfigureServices(IServiceCollection services) =>
         services.
         AddControllers();
@@ -98,15 +77,6 @@ class Startup
             _ = endpoints.MapGet("/desktop/system-status.json", () => JsonSerializer.Serialize(SystemUtility.GetInfo()));
             _ = endpoints.MapGet("/desktop/server.json", () => JsonSerializer.Serialize(ServerUtility.GetInfo()));
 
-            _ = endpoints.MapGet("/desktop/notifications/queue.json", () => JsonSerializer.Serialize(NotificationUtility.ListQueue()));
-            _ = endpoints.MapPost("/desktop/notifications/pop.json", () => JsonSerializer.Serialize(NotificationUtility.PopQueue()));
-            _ = endpoints.MapPut("/desktop/notifications/queue", (e) =>
-            {
-                NotificationUtility.Queue(e.Request.Query["appTitle"][0], e.Request.Query["content"][0]);
-                return Task.CompletedTask;
-            });
-
         });
-#pragma warning restore CA1822 // Mark members as static
 
 }

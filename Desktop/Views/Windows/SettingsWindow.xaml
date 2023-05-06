@@ -14,7 +14,7 @@
                     <ResourceDictionary Source="SettingsPages/Files.xaml"/>
                     <ResourceDictionary Source="SettingsPages/General.xaml"/>
                     <ResourceDictionary Source="SettingsPages/Notifications.xaml"/>
-                    <ResourceDictionary Source="SettingsPages/SystemInfo.xaml"/>
+                    <ResourceDictionary Source="SettingsPages/Tracker.xaml"/>
                     <ResourceDictionary Source="SettingsPages/Weather.xaml"/>
                     <ResourceDictionary Source="SettingsPages/IdleMode.xaml"/>
                 </ResourceDictionary.MergedDictionaries>

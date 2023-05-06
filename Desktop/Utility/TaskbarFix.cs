@@ -25,7 +25,7 @@ static class TaskbarFix
             return;
         isInitialized = true;
 
-        Common.Utility.AttachedProperties.Common.SetIsVisibleInAltTab(window, false);
+        Common.Utility.xaml.NoNamespace.Common.SetIsVisibleInAltTab(window, false);
         window.Closing += (s, e) => e.Cancel = !App.Current.Dispatcher.HasShutdownStarted;
 
         window.Height = 1;

@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Text.Json.Serialization;
+using System.Windows.Media;
 using PostSharp.Patterns.Model;
 
 namespace Desktop.Config;
@@ -16,5 +17,7 @@ public class WindowConfig : ConfigModule
     public bool ShowCpuTemperature { get; set; }
     public bool ShowMemory { get; set; }
     public Stretch WallpaperStretch { get; set; }
+
+    [JsonIgnore] public virtual bool IsIdle { get; }
 
 }

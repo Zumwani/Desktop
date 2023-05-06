@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows.Controls;
 using Desktop.Config;
 using Desktop.Models;
-using Desktop.Utility;
 using Desktop.ViewModels.Helpers;
 using PostSharp.Patterns.Model;
 
@@ -45,7 +44,7 @@ public class BluetoothBattery : IntervalViewModel
 
         Config.PropertyChanged += (s, e) =>
         {
-            IndicatorUtility.BluetoothDevices.Update();
+            IndicatorUtility.BluetoothDevices.RequestUpdate();
             Update();
         };
 

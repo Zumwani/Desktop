@@ -1,6 +1,5 @@
 ﻿using Common.Utility;
 using Desktop.Models;
-using Desktop.Utility;
 
 namespace Desktop.Commands;
 

@@ -1,9 +1,9 @@
-﻿global using Desktop.Utility;
-global using RelayCommand = Desktop.Utility.RelayCommand;
+﻿global using Common.Utility;
+global using Desktop.Utility;
+global using RelayCommand = Common.Utility.RelayCommand;
 using System;
 using System.IO;
 using System.Windows;
-using Common.Utility;
 
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
 namespace Desktop;
@@ -18,16 +18,12 @@ public partial class App : Application
             return;
 
         CreateStartmenuShortcut();
-        AppUtility.AutoStart.Enable();
         ServerUtility.Initialize();
 
         MainWindow = new DesktopWindow();
         _ = new IdleWindow();
 
     }
-
-    protected override void OnExit(ExitEventArgs e) =>
-        ServerUtility.Stop();
 
     static void CreateStartmenuShortcut()
     {

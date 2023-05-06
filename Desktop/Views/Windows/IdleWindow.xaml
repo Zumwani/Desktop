@@ -36,7 +36,7 @@
                     <ContentPresenter Content="{Binding DateWeather}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
 
                     <Border VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                        <ContentPresenter Content="{Binding SystemStatus}"/>
+                        <ContentPresenter Content="{Binding Tracker}"/>
                     </Border>
 
                 </Grid>

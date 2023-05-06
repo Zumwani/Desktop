@@ -13,8 +13,6 @@ namespace Desktop;
 public partial class DesktopWindow : UiWindow
 {
 
-    //TODO: Improve icon on shortcut
-    //TODO: Fix create startmenu shortcut
     //TODO: Setup single instance (force close existing, if Debugger.IsAttached)
 
     //TODO: Move edit mode to settings, use button to enable and one to disable

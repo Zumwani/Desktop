@@ -1,5 +1,4 @@
 ﻿using Common.Utility;
-using Desktop.Utility;
 
 namespace Desktop.Commands;
 

@@ -9,26 +9,7 @@
             
             <wpfui:Button.Style>
                 <Style TargetType="wpfui:Button" BasedOn="{StaticResource {x:Type wpfui:Button}}">
-
-                    <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
                     <Setter Property="Height" Value="100"/>
-
-                    <Setter Property="LayoutTransform">
-                        <Setter.Value>
-                            <ScaleTransform ScaleX="1" ScaleY="1"/>
-                        </Setter.Value>
-                    </Setter>
-
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=IsIdle}" Value="{x:True}">
-                            <Setter Property="LayoutTransform">
-                                <Setter.Value>
-                                    <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
-                                </Setter.Value>
-                            </Setter>
-                        </DataTrigger>
-                    </Style.Triggers>
-
                 </Style>
             </wpfui:Button.Style>
             

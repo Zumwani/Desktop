@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:Desktop.ViewModels.SettingPages"
-                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml">
+                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+                    xmlns:app="http://common/app">
 
     <DataTemplate DataType="{x:Type viewModels:General}">
 
@@ -9,10 +10,10 @@
 
             <GroupBox>
                 <StackPanel>
-                    <CheckBox Content="Autostart" IsChecked="{Binding Config.Autostart}"/>
+                    <CheckBox Content="Autostart" IsChecked="{app:AutoStart}"/>
                     <CheckBox Content="Dim screen when not active" IsChecked="{Binding Config.DimScreenWhenNotActive}"/>
                     <CheckBox Content="Display border along bottom of primary screen" IsChecked="{Binding Config.ShowBorderAlongBottomOfPrimaryScreen}" ToolTip="Fix for Win11 and auto-hide taskbar is enabled, where there is a white line at bottom of screen."/>
-                    <wpfui:Button Content="Create startmenu shortcut" Command="{Binding CreateStartmenuShortcutCommand}" Margin="0,8"/>
+                    <wpfui:Button Content="Create startmenu shortcut" Command="{app:CreateShortcutInStartmenuCommand}" Margin="0,8"/>
                 </StackPanel>
             </GroupBox>
 

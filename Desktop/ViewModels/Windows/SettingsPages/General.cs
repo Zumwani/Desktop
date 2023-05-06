@@ -10,6 +10,4 @@ class General : SettingsPage<Config.General>
     public override string Title => "General";
     public override SymbolRegular Icon => SymbolRegular.Wrench24;
 
-    public RelayCommand CreateStartmenuShortcutCommand { get; } = new(() => { });
-
 }
