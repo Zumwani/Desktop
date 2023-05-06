@@ -15,7 +15,7 @@
                     <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{Binding OpenTrackerConfigCommand}"/>
                 </ContextMenu>
             </wpfui:Button.ContextMenu>
-            
+
             <TextBlock Text="{Binding Value, Mode=OneWay, StringFormat='{}{0:N0}%', TargetNullValue='--', FallbackValue='--'}"/>
             
         </wpfui:Button>

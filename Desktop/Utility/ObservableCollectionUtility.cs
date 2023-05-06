@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 
 namespace Desktop.Utility;
 
@@ -36,9 +37,8 @@ static class ObservableCollectionUtility
 
     public static void RemoveWhere<T>(this ObservableCollection<T> list, Func<T, bool> callback)
     {
-        foreach (var item in list)
-            if (callback.Invoke(item))
-                _ = list.Remove(item);
+        foreach (var item in list.Where(callback).ToArray())
+            _ = list.Remove(item);
     }
 
 }

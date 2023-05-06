@@ -23,22 +23,22 @@
             <ContentPresenter Content="{Binding Wallpaper}" Grid.ColumnSpan="3" Grid.RowSpan="2"/>
 
             <Border Common.IsVisible="{Binding Config.ShowFiles}" Grid.Column="0">
-                <ContentPresenter Content="{Binding Files}"/>
+                <ContentPresenter Content="{Binding Files}" Effect="{DynamicResource Effect.Shadow}"/>
             </Border>
 
             <Border Common.IsVisible="{Binding Config.ShowNotifications}" Grid.Column="1">
-                <ContentPresenter Content="{Binding Notifications}"/>
+                <ContentPresenter Content="{Binding Notifications}" Effect="{DynamicResource Effect.Shadow}"/>
             </Border>
             <Border Common.IsVisible="{Binding Config.ShowNotes}" Grid.Column="2">
-                <ContentPresenter Content="{Binding Notes}"/>
+                <ContentPresenter Content="{Binding Notes}" Effect="{DynamicResource Effect.Shadow}"/>
             </Border>
 
             <Border Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,-52">
-                <ContentPresenter Content="{Binding DateTimeWeather}"/>
+                <ContentPresenter Content="{Binding DateTimeWeather}" Effect="{DynamicResource Effect.Shadow}"/>
             </Border>
 
             <Border Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                <ContentPresenter Content="{Binding Tracker}"/>
+                <ContentPresenter Content="{Binding Tracker}" Effect="{DynamicResource Effect.Shadow}"/>
             </Border>
 
             <!--Loading overlay-->

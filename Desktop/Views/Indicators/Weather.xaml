@@ -27,7 +27,7 @@
 
                 <Border Width="8" DockPanel.Dock="{Binding IconDock}"/>
 
-                <TextBlock x:Name="TextBlock" VerticalAlignment="Center"
+                <TextBlock x:Name="TextBlock" VerticalAlignment="Center" Effect="{DynamicResource Effect.Shadow}"
                            Text="{Binding Temperature, Mode=OneWay, StringFormat='{}{0:N1} °C', TargetNullValue='No location set'}"/>
 
             </DockPanel>

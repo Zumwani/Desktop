@@ -56,6 +56,8 @@
 
             <BitmapSource x:Key="Icon">/Desktop;component/computer.ico</BitmapSource>
 
+            <DropShadowEffect x:Key="Effect.Shadow" ShadowDepth="0" Color="Gray" Opacity="0.5" Direction="0"/>
+
         </ResourceDictionary>
     </Application.Resources>
     

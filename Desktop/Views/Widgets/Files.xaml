@@ -16,10 +16,10 @@
 
                     <StackPanel>
                     
-                        <wpfui:Button Icon="Home48" Content="Home" Command="{Binding OpenHome}" ToolTip="Open home bin..."
+                        <wpfui:Button Icon="Home48" Content="Home" Command="{Binding OpenHome}" ToolTip="Open home..."
                                       Common.IsVisible="{Binding Config.ShowHome}"/>
 
-                        <wpfui:Button Icon="Desktop32" Content="This PC" Command="{Binding OpenThisPC}" ToolTip="Open this PC bin..."
+                        <wpfui:Button Icon="Desktop32" Content="This PC" Command="{Binding OpenThisPC}" ToolTip="Open this PC..."
                                       Common.IsVisible="{Binding Config.ShowThisPC}"/>
 
                         <wpfui:Button Icon="ArrowDownload48" Content="Downloads" Command="{Binding OpenDownloads}" ToolTip="Open downloads..."

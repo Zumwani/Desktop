@@ -29,7 +29,7 @@
                 
                 <Image DockPanel.Dock="Left" Source="{Binding Model.Icon, FallbackValue={x:Null}, TargetNullValue={x:Null}}" Height="16" Width="16" 
                        Common.IsVisible="{Binding Model.Icon, Converter={converters:HasValue}}"/>
-                
+
                 <TextBlock Text="{Binding Model.Title}" Margin="6,0,0,0" TextTrimming="CharacterEllipsis"/>
                 
             </DockPanel>

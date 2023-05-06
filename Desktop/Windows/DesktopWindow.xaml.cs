@@ -99,4 +99,10 @@ public partial class DesktopWindow : UiWindow
 
     #endregion
 
+    async void UiWindow_CallbackOnShutdown(object sender, MouseButtonEventArgs e)
+    {
+        View.IsOpen = false;
+        await Task.Delay(250);
+    }
+
 }

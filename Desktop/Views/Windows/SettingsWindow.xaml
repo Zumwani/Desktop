@@ -55,7 +55,7 @@
                 <Style TargetType="{x:Type wpfui:Button}" BasedOn="{StaticResource {x:Type wpfui:Button}}">
                     <Setter Property="Effect" Value="{x:Null}"/>
                 </Style>
-
+                
             </ResourceDictionary>
         </DataTemplate.Resources>
 

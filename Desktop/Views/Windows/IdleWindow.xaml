@@ -12,25 +12,26 @@
                     <ContentPresenter Content="{Binding Wallpaper}" Margin="-12"/>
 
                     <Border Margin="0,12,0,0" Common.IsVisible="{Binding Config.ShowNotifications}">
-                        <ContentPresenter Content="{Binding Notifications}" Common.Scale="2.5"/>
+                        <ContentPresenter Content="{Binding Notifications}" Common.Scale="2.5" Effect="{DynamicResource Effect.Shadow}"/>
                     </Border>
 
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
                         <Border Common.IsVisible="{Binding Config.ShowTime}">
-                            <ContentPresenter Content="{Binding Time}" Common.Scale="1.5"/>
+                            <ContentPresenter Content="{Binding Time}" Common.Scale="1.5" Effect="{DynamicResource Effect.Shadow}"/>
                         </Border>
 
-                        <Border Common.IsVisible="{Binding Config.ShowDate}" HorizontalAlignment="Center" Margin="0,0,0,0">
-                            <ContentPresenter Content="{Binding Date}" Common.Scale="4"/>
+                        <Border Common.IsVisible="{Binding Config.ShowDate}" HorizontalAlignment="Center">
+                            <ContentPresenter Content="{Binding Date}" Common.Scale="4" Effect="{DynamicResource Effect.Shadow}"/>
                         </Border>
 
                     </StackPanel>
 
-                    <ContentPresenter Content="{Binding Weather}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Common.Scale="4"/>
+                    <ContentPresenter Content="{Binding Weather}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Common.Scale="4"
+                                      Effect="{DynamicResource Effect.Shadow}"/>
 
                     <Border VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                        <ContentPresenter Content="{Binding Tracker}" Common.Scale="4"/>
+                        <ContentPresenter Content="{Binding Tracker}" Common.Scale="4" Effect="{DynamicResource Effect.Shadow}"/>
                     </Border>
 
                 </Grid>

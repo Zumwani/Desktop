@@ -27,10 +27,10 @@
                 </StackPanel>
 
                 <ProgressBar Grid.Row="1" Height="6" Background="#AAFFFFFF" Foreground="CornflowerBlue" Margin="2"
-                                     Minimum="{Binding Model.CreationTime.Ticks, Mode=OneWay}"
-                                     Maximum="{Binding Model.EndTime.Ticks, Mode=OneWay}"
-                                     Value="{Binding Source={x:Static helpers:IndicatorUtility.DateTime}, Path=Value.Ticks, Mode=OneWay}"
-                                     Common.IsHidden="{Binding Model.IsPermanent}" Transition.IsEnabled="False"/>
+                             Minimum="{Binding Model.CreationTime.Ticks, Mode=OneWay}"
+                             Maximum="{Binding Model.EndTime.Ticks, Mode=OneWay}"
+                             Value="{Binding Source={x:Static helpers:IndicatorUtility.DateTime}, Path=Value.Ticks, Mode=OneWay}"
+                             Common.IsHidden="{Binding Model.IsPermanent}" Transition.IsEnabled="False"/>
 
             </Grid>
 
