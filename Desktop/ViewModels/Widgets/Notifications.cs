@@ -12,7 +12,8 @@ public class Notifications : ViewModel
 
     public WindowConfig? Config { get; set; }
 
-    public bool HasItems { get; set; }
+    [SafeForDependencyAnalysis]
+    public bool HasItems => Items.Any();
     public Date Date { get; } = new Date();
 
     public RelayCommand ClearNotificationsCommand { get; } = new(NotificationUtility.ClearAll);
@@ -26,7 +27,7 @@ public class Notifications : ViewModel
     public Notifications()
     {
 
-        Items.CollectionChanged += (s, e) => HasItems = Items.Any();
+        Items.CollectionChanged += (s, e) => NotifyPropertyChangedServices.SignalPropertyChanged(this, nameof(HasItems));
         NotificationUtility.Notifications.OnAdded(n => Items.Add(new() { Model = n }));
         NotificationUtility.Notifications.OnRemoved(n => Items.RemoveWhere(i => i.Model == n));
 

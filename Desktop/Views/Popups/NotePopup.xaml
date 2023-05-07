@@ -88,12 +88,12 @@
                     <wpfui:Card>
                         <StackPanel>
 
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" Margin="0,8">
                                 <TextBlock Text="Is permanent:" Margin="0,0,8,0"/>
                                 <wpfui:ToggleSwitch IsChecked="{Binding Note.PermanentNotification}"/>
                             </StackPanel>
 
-                            <DockPanel Common.IsCollapsed="{Binding Note.PermanentNotification}" Margin="0,12,0,0">
+                            <DockPanel Common.IsCollapsed="{Binding Note.PermanentNotification}" Margin="0,0,0,0">
                                 <TextBlock Text="Duration:" Margin="0,0,12,0" VerticalAlignment="Center"/>
                                 <controls:TimePicker Value="{Binding Note.NotifyDuration, Mode=TwoWay}"/>
                             </DockPanel>

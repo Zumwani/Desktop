@@ -11,23 +11,27 @@
                 <Grid>
                     
                     <!--No items indicator-->
-                    <Border Common.IsHidden="{Binding RelativeSource={RelativeSource AncestorType=wpfui:Card}, Path=IsMouseOver, Converter={converters:InvertBool}}">
-                        <TextBlock Text="No notifications available..." HorizontalAlignment="Center" Common.IsCollapsed="{Binding HasItems}">
-                            <TextBlock.Effect>
-                                <DropShadowEffect ShadowDepth="0"/>
-                            </TextBlock.Effect>
-                        </TextBlock>
+                    <Border Common.IsCollapsed="{Binding ShowTestButton}">
+                        <Border Common.IsHidden="{Binding RelativeSource={RelativeSource AncestorType=wpfui:Card}, Path=IsMouseOver, Converter={converters:InvertBool}}">
+                            <TextBlock Text="No notifications available..." HorizontalAlignment="Center" Common.IsCollapsed="{Binding HasItems}">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="0"/>
+                                </TextBlock.Effect>
+                            </TextBlock>
+                        </Border>
                     </Border>
                 
                     <StackPanel>
 
+                        <!--Create test notification-->
                         <Border Common.IsVisible="{Binding RelativeSource={RelativeSource AncestorType=wpfui:Card}, Path=IsMouseOver}">
                             <wpfui:Button Content="Create test notification" Command="{Binding TestCommand}" HorizontalAlignment="Center" Common.IsVisible="{Binding ShowTestButton}"/>
                         </Border>
 
                         <!--Clear all button-->
                         <Border Common.IsCollapsed="{Binding Config.IsIdle}">
-                            <wpfui:Button Content="Clear all..." HorizontalAlignment="Center" Margin="0,0,0,8" Command="{Binding ClearNotificationsCommand}"
+                            <wpfui:Button Content="Clear all..." HorizontalAlignment="Center" Margin="0,0,0,8"
+                                          Command="{Binding ClearNotificationsCommand}"
                                           Common.IsVisible="{Binding HasItems}"/>
                         </Border>
 

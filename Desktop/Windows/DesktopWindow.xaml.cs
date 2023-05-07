@@ -19,6 +19,16 @@ public partial class DesktopWindow : UiWindow
     //TODO: Fix tab button scroll bar in settings
     //TODO: Update time and date format when changed in system
 
+    //TODO: Add IndicatorWidget, which can take a list of Stack (root is a vertical stack), stacks can be nested
+    //TODO: Each stack can take a list of Indicator
+    //TODO: Add SpacerIndicator, which expands to consume available space, pushing indicators after it to the end
+    //TODO: Add drag and drop for indicators
+    //TODO: Add drag and drop for widgets
+
+    //Widgets: FilesWidget, NotificationsWidget, NotesWidget, IndicatorWidget
+    //Indicators: Time, Date, Weather, BluetoothBatteryIndicator, CpuUsageIndicator, CpuTemperatureIndicator, MemoryIndicator
+    //TODO: Add more system info indicators
+
     public ViewModels.DesktopWindow View { get; } = new();
 
     public Config.DesktopWindow Config { get; } = ConfigManager.DesktopWindow;

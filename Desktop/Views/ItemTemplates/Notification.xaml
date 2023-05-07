@@ -22,7 +22,7 @@
                                 Cursor="Hand" Command="{Binding HideCommand}"/>
 
                 <StackPanel Orientation="Horizontal" Margin="12,12,12,4">
-                    <TextBlock Text="{Binding Model.DuplicateHeaderCount, Mode=OneWay}" Common.IsVisible="{Binding DuplicateHeaderCount, Converter={converters:IsOver}, ConverterParameter=1}"/>
+                    <TextBlock Text="{Binding Model.DuplicateHeaderCount, Mode=OneWay}" Common.IsVisible="{Binding Model.DuplicateHeaderCount, Converter={converters:IsOver}, ConverterParameter=1}"/>
                     <TextBlock Text="{Binding Model.Content, Mode=OneWay}" TextTrimming="CharacterEllipsis"/>
                 </StackPanel>
 
