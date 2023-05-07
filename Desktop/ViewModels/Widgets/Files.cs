@@ -9,7 +9,7 @@ namespace Desktop.ViewModels;
 public class Files : ViewModel
 {
 
-    public bool HasItems => Config.ShowRecycleBin || Items.Any();
+    public bool HasItems => Config.ShowRecycleBin || Config.ShowHome || Config.ShowDownloads || Config.ShowThisPC || Items.Any();
 
     public Config.Files Config { get; } = ConfigManager.Files;
     public ObservableCollection<FileItem> Items { get; } = new();

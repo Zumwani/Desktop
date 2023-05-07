@@ -3,7 +3,6 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
        xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
        xmlns:mahApps="http://metro.mahapps.com/winfx/xaml/controls"
-       xmlns:models="clr-namespace:Desktop.Models"
        xmlns:helpers="clr-namespace:Desktop.ViewModels.Helpers"
        xmlns:controls="clr-namespace:Desktop.Controls"
        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
@@ -19,15 +18,67 @@
             <wpfui:CardExpander Header="Notify" IsExpanded="{Binding Path=Note.HasNotification, Mode=TwoWay}">
                 <StackPanel>
 
-                    <WrapPanel>
-                        <ToggleButton Content="Monday"    IsChecked="{Binding Path=Note.NotifyOnMonday,    Mode=TwoWay}"/>
-                        <ToggleButton Content="Tuesday"   IsChecked="{Binding Path=Note.NotifyOnTuesday,   Mode=TwoWay}"/>
-                        <ToggleButton Content="Wednesday" IsChecked="{Binding Path=Note.NotifyOnWednesday, Mode=TwoWay}"/>
-                        <ToggleButton Content="Thursday"  IsChecked="{Binding Path=Note.NotifyOnThursday,  Mode=TwoWay}"/>
-                        <ToggleButton Content="Friday"    IsChecked="{Binding Path=Note.NotifyOnFriday,    Mode=TwoWay}"/>
-                        <ToggleButton Content="Saturday"  IsChecked="{Binding Path=Note.NotifyOnSaturday,  Mode=TwoWay}"/>
-                        <ToggleButton Content="Sunday"    IsChecked="{Binding Path=Note.NotifyOnSunday,    Mode=TwoWay}"/>
-                    </WrapPanel>
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type wpfui:ToggleSwitch}" BasedOn="{StaticResource {x:Type wpfui:ToggleSwitch}}">
+                            <Setter Property="DockPanel.Dock" Value="Right"/>
+                            <Setter Property="Margin" Value="6,2"/>
+                            <Setter Property="DockPanel.Dock" Value="Right"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <Grid HorizontalAlignment="Center">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            
+                            <DockPanel>
+                                <wpfui:ToggleSwitch IsChecked="{Binding Path=Note.NotifyOnMonday,    Mode=TwoWay}"/>
+                                <TextBlock Text="Monday:" Margin="0,0,6,0"/>
+                            </DockPanel>
+
+                            <DockPanel>
+                                <wpfui:ToggleSwitch IsChecked="{Binding Path=Note.NotifyOnTuesday,   Mode=TwoWay}"/>
+                                <TextBlock Text="Tuesday:" Margin="0,0,6,0"/>
+                            </DockPanel>
+
+                            <DockPanel>
+                                <wpfui:ToggleSwitch IsChecked="{Binding Path=Note.NotifyOnWednesday, Mode=TwoWay}"/>
+                                <TextBlock Text="Wednesday:" Margin="0,0,6,0"/>
+                            </DockPanel>
+
+                            <DockPanel>
+                                <wpfui:ToggleSwitch IsChecked="{Binding Path=Note.NotifyOnThursday,  Mode=TwoWay}"/>
+                                <TextBlock Text="Thursday:" Margin="0,0,6,0"/>
+                            </DockPanel>
+
+                            <DockPanel>
+                                <wpfui:ToggleSwitch IsChecked="{Binding Path=Note.NotifyOnFriday,    Mode=TwoWay}"/>
+                                <TextBlock Text="Friday:" Margin="0,0,6,0"/>
+                            </DockPanel>
+                            
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Margin="6,0,0,0">
+
+                            <DockPanel>
+                                <wpfui:ToggleSwitch IsChecked="{Binding Path=Note.NotifyOnSaturday,  Mode=TwoWay}"/>
+                                <TextBlock Text="Saturday:" Margin="0,0,6,0"/>
+                            </DockPanel>
+
+                            <DockPanel>
+                                <wpfui:ToggleSwitch IsChecked="{Binding Path=Note.NotifyOnSunday,    Mode=TwoWay}"/>
+                                <TextBlock Text="Sunday:" Margin="0,0,6,0"/>
+                            </DockPanel>
+                        
+                        </StackPanel>
+                        
+                    </Grid>
 
                     <DockPanel Margin="0,12">
                         <TextBlock Text="At:" Margin="0,0,12,0" VerticalAlignment="Center"/>
@@ -37,12 +88,12 @@
                     <wpfui:Card>
                         <StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                            <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Is permanent:" Margin="0,0,8,0"/>
                                 <wpfui:ToggleSwitch IsChecked="{Binding Note.PermanentNotification}"/>
                             </StackPanel>
 
-                            <DockPanel Common.IsCollapsed="{Binding Note.PermanentNotification}">
+                            <DockPanel Common.IsCollapsed="{Binding Note.PermanentNotification}" Margin="0,12,0,0">
                                 <TextBlock Text="Duration:" Margin="0,0,12,0" VerticalAlignment="Center"/>
                                 <controls:TimePicker Value="{Binding Note.NotifyDuration, Mode=TwoWay}"/>
                             </DockPanel>
