@@ -5,10 +5,10 @@
     
     <DataTemplate DataType="{x:Type viewModels:Memory}">
         <wpfui:Button Icon="Ram20" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" Style="{StaticResource Styles.Button.IconRight}"
-                      ToolTip="Memory usage / Available" Common.ContextMenuOnLeftClick="True" Common.CenterContextMenu="True">
+                      ToolTip="Memory usage / Available" Common.ContextMenuOnLeftClick="True">
             
             <wpfui:Button.ContextMenu>
-                <ContextMenu>
+                <ContextMenu Placement="Left">
                     <wpfui:MenuItem SymbolIcon="WindowNew24" Header="Open task manager..." Command="{Binding OpenTaskManager}"/>
                     <Separator/>
                     <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{Binding OpenTrackerConfigCommand}"/>

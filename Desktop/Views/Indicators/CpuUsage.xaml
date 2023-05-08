@@ -6,10 +6,10 @@
     <DataTemplate DataType="{x:Type viewModels:CpuUsage}">
         <wpfui:Button Icon="DataArea24" HorizontalAlignment="Right" ToolTip="CPU usage"
                        Style="{StaticResource Styles.Button.IconRight}"
-                      Common.ContextMenuOnLeftClick="True" Common.CenterContextMenu="True">
+                      Common.ContextMenuOnLeftClick="True">
 
             <wpfui:Button.ContextMenu>
-                <ContextMenu>
+                <ContextMenu Placement="Left">
                     <wpfui:MenuItem SymbolIcon="WindowNew24" Header="Open task manager..." Command="{Binding OpenTaskManager}"/>
                     <Separator/>
                     <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{Binding OpenTrackerConfigCommand}"/>

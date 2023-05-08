@@ -30,7 +30,7 @@
 
                         <!--Clear all button-->
                         <Border Common.IsCollapsed="{Binding Config.IsIdle}">
-                            <wpfui:Button Content="Clear all..." HorizontalAlignment="Center" Margin="0,0,0,8"
+                            <wpfui:Button Content="Clear all" HorizontalAlignment="Center" Margin="0,0,0,8"
                                           Command="{Binding ClearNotificationsCommand}"
                                           Common.IsVisible="{Binding HasItems}"/>
                         </Border>

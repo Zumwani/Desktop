@@ -1,29 +1,22 @@
-﻿using System.Windows.Controls.Primitives;
+﻿using System.Windows;
+using System.Windows.Controls.Primitives;
 using Desktop.Models;
-using PostSharp.Patterns.Model;
 
 namespace Desktop.Views.Popups;
 
-[NotifyPropertyChanged]
 public partial class NotePopup : Popup
 {
 
     public NotePopup() =>
         InitializeComponent();
 
-    public Note? Note { get; private set; }
-
-    public new bool IsOpen => base.IsOpen;
-
-    public void Open(Note? note)
+    public Note Note
     {
-
-        if (note is null)
-            return;
-
-        Note = note;
-        base.IsOpen = true;
-
+        get => (Note)GetValue(NoteProperty);
+        set => SetValue(NoteProperty, value);
     }
+
+    public static readonly DependencyProperty NoteProperty =
+        DependencyProperty.Register("Note", typeof(Note), typeof(NotePopup), new PropertyMetadata(default(Note)));
 
 }

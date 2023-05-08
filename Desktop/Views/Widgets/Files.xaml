@@ -15,18 +15,18 @@
                     </Border>
 
                     <StackPanel>
-                    
-                        <wpfui:Button Icon="Home48" Content="Home" Command="{Binding OpenHome}" ToolTip="Open home..."
-                                      Common.IsVisible="{Binding Config.ShowHome}"/>
 
-                        <wpfui:Button Icon="Desktop32" Content="This PC" Command="{Binding OpenThisPC}" ToolTip="Open this PC..."
-                                      Common.IsVisible="{Binding Config.ShowThisPC}"/>
-
-                        <wpfui:Button Icon="ArrowDownload48" Content="Downloads" Command="{Binding OpenDownloads}" ToolTip="Open downloads..."
-                                      Common.IsVisible="{Binding Config.ShowDownloads}"/>
-
-                        <wpfui:Button Icon="Recycle32" Content="Recycle bin" Command="{Binding OpenRecycleBin}" ToolTip="Open recycle bin..."
-                                      Common.IsVisible="{Binding Config.ShowRecycleBin}"/>
+                        <wpfui:Button Icon="Home48" Content="Home" ToolTip="Open home..."
+                                      Command="{Binding OpenHome}" Common.IsVisible="{Binding Config.ShowHome}"/>
+                        
+                        <wpfui:Button Icon="Desktop32" Content="This PC" ToolTip="Open this PC..."
+                                      Command="{Binding OpenThisPC}" Common.IsVisible="{Binding Config.ShowThisPC}"/>
+                        
+                        <wpfui:Button Icon="ArrowDownload48" Content="Downloads" ToolTip="Open downloads..."
+                                      Command="{Binding OpenDownloads}" Common.IsVisible="{Binding Config.ShowDownloads}"/>
+                        
+                        <wpfui:Button Icon="Recycle32" Content="Recycle bin" ToolTip="Open recycle bin..."
+                                      Command="{Binding OpenRecycleBin}" Common.IsVisible="{Binding Config.ShowRecycleBin}"/>
 
                         <ItemsControl ItemsSource="{Binding Items}" MaxWidth="200"/>
                     

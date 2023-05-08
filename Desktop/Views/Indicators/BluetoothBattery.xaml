@@ -7,7 +7,7 @@
     <DataTemplate DataType="{x:Type viewModels:BluetoothBattery}">
 
         <wpfui:Button Icon="Headphones48" HorizontalAlignment="Right" Style="{StaticResource Styles.Button.IconRight}"
-                      Common.ContextMenuOnLeftClick="True" Common.CenterContextMenu="True"
+                      Common.ContextMenuOnLeftClick="True"
                       ToolTip="{Binding Config.DeviceName}">
 
             <wpfui:Button.ContextMenu>

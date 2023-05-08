@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
-using Common.Utility;
 using Desktop.Config;
 using PostSharp.Patterns.Model;
 
@@ -37,6 +36,9 @@ public partial class IdleWindow : Window
     {
         ActionUtility.Invoke(() => { if (!GetIfMouseOver()) View.IsOpen = true; }, TimeSpan.FromSeconds(0.1));
         ResetBounds();
+        Topmost = true;
+        Topmost = false;
+        Topmost = true;
     }
 
     protected override void OnClosing(CancelEventArgs e) =>

@@ -145,6 +145,9 @@ static partial class NotificationUtility
         ActionUtility.Invoke(async () =>
         {
 
+            if (!ConfigManager.Notifications.OverrideWindowsNotifications)
+                return;
+
             var notifications =
                 (await listener.GetNotificationsAsync(Windows.UI.Notifications.NotificationKinds.Toast)).
                 Where(n => !list.Contains(n.Id)).

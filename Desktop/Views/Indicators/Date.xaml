@@ -4,10 +4,10 @@
                     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml">
 
     <DataTemplate DataType="{x:Type viewModels:Date}">
-        <wpfui:Button ToolTip="Open calendar..." Common.ContextMenuOnLeftClick="True" Common.CenterContextMenu="True">
+        <wpfui:Button ToolTip="Open calendar..." Common.ContextMenuOnLeftClick="True">
 
             <wpfui:Button.ContextMenu>
-                <ContextMenu>
+                <ContextMenu Placement="Top">
                     <wpfui:MenuItem SymbolIcon="WindowNew24" Header="Open calendar..." Command="{Binding OpenCalendarCommand}"/>
                     <Separator/>
                     <wpfui:MenuItem SymbolIcon="Settings48" Header="Configure..." Command="{Binding OpenDateTimeConfigCommand}"/>

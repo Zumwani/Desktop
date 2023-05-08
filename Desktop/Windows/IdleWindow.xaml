@@ -9,7 +9,6 @@
         WindowStyle="None" MinWidth="100" MinHeight="100" ResizeMode="NoResize"
         FontFamily="Segoe UI Semilight" BorderThickness="0"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}, Path=View}"
-        Topmost="{Binding IsOpen, Mode=OneWay}"
         Common.IsVisible="{Binding IsOpen}"
         WindowStartupLocation="Manual"
         Loaded="UiWindow_Loaded" PreviewMouseDown="Window_PreviewMouseDown" PreviewDragEnter="Window_PreviewDragEnter" AllowDrop="True">

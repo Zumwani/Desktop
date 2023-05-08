@@ -35,6 +35,12 @@ static class ObservableCollectionUtility
                 callback.Invoke();
         };
 
+    public static void OnChanged<T>(this ObservableCollection<T> list, Action callback) =>
+        list.CollectionChanged += (s, e) =>
+        {
+            callback.Invoke();
+        };
+
     public static void RemoveWhere<T>(this ObservableCollection<T> list, Func<T, bool> callback)
     {
         foreach (var item in list.Where(callback).ToArray())

@@ -14,6 +14,9 @@ public class Notes : ConfigModule
     public ObservableCollection<Note> Items { get; set; } = new();
     public bool ShowHiddenNotes { get; set; } = false;
 
+    public void CreateNote() =>
+        Items.Add(new());
+
     public Notes()
     {
 

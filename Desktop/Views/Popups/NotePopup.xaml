@@ -5,17 +5,17 @@
        xmlns:mahApps="http://metro.mahapps.com/winfx/xaml/controls"
        xmlns:helpers="clr-namespace:Desktop.ViewModels.Helpers"
        xmlns:controls="clr-namespace:Desktop.Controls"
-       DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
-       StaysOpen="False" AllowsTransparency="True" PopupAnimation="Fade" Placement="MousePoint">
+       StaysOpen="False" AllowsTransparency="True" PopupAnimation="Fade" Placement="MousePoint"
+       x:Name="popup">
 
     <Border Background="#202020" BorderThickness="1" BorderBrush="DimGray" CornerRadius="8">
         <StackPanel>
 
-            <TextBox Text="{Binding Note.Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            <TextBox Text="{Binding ElementName=popup, Path=Note.Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      AcceptsReturn="True" AcceptsTab="True"  SpellCheck.IsEnabled="True"
                      TextWrapping="Wrap" helpers:TextBlockUtility.SelectAllOnTripleClick="True"/>
 
-            <wpfui:CardExpander Header="Notify" IsExpanded="{Binding Path=Note.HasNotification, Mode=TwoWay}">
+            <wpfui:CardExpander Header="Notify" IsExpanded="{Binding ElementName=popup, Path=Note.HasNotification, Mode=TwoWay}">
                 <StackPanel>
 
                     <StackPanel.Resources>
@@ -38,27 +38,27 @@
                         <StackPanel Grid.Column="0">
                             
                             <DockPanel>
-                                <wpfui:ToggleSwitch IsChecked="{Binding Path=Note.NotifyOnMonday,    Mode=TwoWay}"/>
+                                <wpfui:ToggleSwitch IsChecked="{Binding ElementName=popup, Path=Note.NotifyOnMonday, Mode=TwoWay}"/>
                                 <TextBlock Text="Monday:" Margin="0,0,6,0"/>
                             </DockPanel>
 
                             <DockPanel>
-                                <wpfui:ToggleSwitch IsChecked="{Binding Path=Note.NotifyOnTuesday,   Mode=TwoWay}"/>
+                                <wpfui:ToggleSwitch IsChecked="{Binding ElementName=popup, Path=Note.NotifyOnTuesday, Mode=TwoWay}"/>
                                 <TextBlock Text="Tuesday:" Margin="0,0,6,0"/>
                             </DockPanel>
 
                             <DockPanel>
-                                <wpfui:ToggleSwitch IsChecked="{Binding Path=Note.NotifyOnWednesday, Mode=TwoWay}"/>
+                                <wpfui:ToggleSwitch IsChecked="{Binding ElementName=popup, Path=Note.NotifyOnWednesday, Mode=TwoWay}"/>
                                 <TextBlock Text="Wednesday:" Margin="0,0,6,0"/>
                             </DockPanel>
 
                             <DockPanel>
-                                <wpfui:ToggleSwitch IsChecked="{Binding Path=Note.NotifyOnThursday,  Mode=TwoWay}"/>
+                                <wpfui:ToggleSwitch IsChecked="{Binding ElementName=popup, Path=Note.NotifyOnThursday, Mode=TwoWay}"/>
                                 <TextBlock Text="Thursday:" Margin="0,0,6,0"/>
                             </DockPanel>
 
                             <DockPanel>
-                                <wpfui:ToggleSwitch IsChecked="{Binding Path=Note.NotifyOnFriday,    Mode=TwoWay}"/>
+                                <wpfui:ToggleSwitch IsChecked="{Binding ElementName=popup, Path=Note.NotifyOnFriday, Mode=TwoWay}"/>
                                 <TextBlock Text="Friday:" Margin="0,0,6,0"/>
                             </DockPanel>
                             
@@ -67,12 +67,12 @@
                         <StackPanel Grid.Column="1" Margin="6,0,0,0">
 
                             <DockPanel>
-                                <wpfui:ToggleSwitch IsChecked="{Binding Path=Note.NotifyOnSaturday,  Mode=TwoWay}"/>
+                                <wpfui:ToggleSwitch IsChecked="{Binding ElementName=popup, Path=Note.NotifyOnSaturday, Mode=TwoWay}"/>
                                 <TextBlock Text="Saturday:" Margin="0,0,6,0"/>
                             </DockPanel>
 
                             <DockPanel>
-                                <wpfui:ToggleSwitch IsChecked="{Binding Path=Note.NotifyOnSunday,    Mode=TwoWay}"/>
+                                <wpfui:ToggleSwitch IsChecked="{Binding ElementName=popup, Path=Note.NotifyOnSunday, Mode=TwoWay}"/>
                                 <TextBlock Text="Sunday:" Margin="0,0,6,0"/>
                             </DockPanel>
                         
@@ -82,24 +82,24 @@
 
                     <DockPanel Margin="0,12">
                         <TextBlock Text="At:" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                        <mahApps:TimePicker SelectedDateTime="{Binding Path=Note.NotifyAt, UpdateSourceTrigger=PropertyChanged}"/>
+                        <mahApps:TimePicker SelectedDateTime="{Binding ElementName=popup, Path=Note.NotifyAt, UpdateSourceTrigger=PropertyChanged}"/>
                     </DockPanel>
 
-                    <wpfui:Card>
+                    <GroupBox>
                         <StackPanel>
 
                             <StackPanel Orientation="Horizontal" Margin="0,8">
                                 <TextBlock Text="Is permanent:" Margin="0,0,8,0"/>
-                                <wpfui:ToggleSwitch IsChecked="{Binding Note.PermanentNotification}"/>
+                                <wpfui:ToggleSwitch IsChecked="{Binding ElementName=popup, Path=Note.PermanentNotification}"/>
                             </StackPanel>
 
-                            <DockPanel Common.IsCollapsed="{Binding Note.PermanentNotification}" Margin="0,0,0,0">
+                            <DockPanel Common.IsCollapsed="{Binding ElementName=popup, Path=Note.PermanentNotification}" Margin="0,0,0,0">
                                 <TextBlock Text="Duration:" Margin="0,0,12,0" VerticalAlignment="Center"/>
-                                <controls:TimePicker Value="{Binding Note.NotifyDuration, Mode=TwoWay}"/>
+                                <controls:TimePicker Value="{Binding ElementName=popup, Path=Note.NotifyDuration, Mode=TwoWay}"/>
                             </DockPanel>
                         
                         </StackPanel>
-                    </wpfui:Card>
+                    </GroupBox>
 
                 </StackPanel>
             </wpfui:CardExpander>
