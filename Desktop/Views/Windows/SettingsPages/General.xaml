@@ -13,7 +13,6 @@
                     <CheckBox Content="Autostart" IsChecked="{app:AutoStart}"/>
                     <CheckBox Content="Dim screen when not active" IsChecked="{Binding Config.DimScreenWhenNotActive}"/>
                     <CheckBox Content="Display border along bottom of primary screen" IsChecked="{Binding Config.ShowBorderAlongBottomOfPrimaryScreen}" ToolTip="Fix for Win11 and auto-hide taskbar is enabled, where there is a white line at bottom of screen."/>
-                    <wpfui:Button Content="Create startmenu shortcut" Command="{app:CreateShortcutInStartmenuCommand}" Margin="0,8"/>
                 </StackPanel>
             </GroupBox>
 

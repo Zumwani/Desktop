@@ -22,8 +22,8 @@
                 <StackPanel>
 
                     <CheckBox Content="Override windows notifications" IsChecked="{Binding Config.OverrideWindowsNotifications}"/>
-                    <TextBlock Text="Delay before hiding windows notification:"/>
-                    <controls:TimePicker Value="{Binding Config.DelayBeforeHidingWindowsNotification}"/>
+                    <TextBlock Text="Delay before hiding windows notification:" Margin="0,6"/>
+                    <controls:TimePicker Value="{Binding Config.DelayBeforeHidingWindowsNotification, Mode=TwoWay}"/>
 
                 </StackPanel>
             </GroupBox>

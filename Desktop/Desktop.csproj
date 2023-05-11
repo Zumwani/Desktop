@@ -6,6 +6,8 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>computer.ico</ApplicationIcon>
+	<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+	<PackageIcon>computer.ico</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,7 +20,7 @@
 
   <ItemGroup>
     <PackageReference Include="Common-wpf.Settings" Version="1.1.6" />
-    <PackageReference Include="Common-wpf.Utility" Version="1.0.38" />
+    <PackageReference Include="Common-wpf.Utility" Version="2023.5.11.161712" />
     <PackageReference Include="LibreHardwareMonitorLib" Version="0.9.2" />
     <PackageReference Include="MahApps.Metro" Version="2.4.9" />
     <PackageReference Include="Microsoft-Windows10-APICodePack-Shell" Version="1.1.8" />
@@ -30,8 +32,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common-wpf\Common.Utility\Common.Utility.csproj" />
     <ProjectReference Include="..\SystemStatusServer\Desktop.Server.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="computer.ico">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 	
 </Project>

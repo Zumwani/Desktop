@@ -21,10 +21,18 @@
                                 Common.IsVisible="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=wpfui:Button}, Path=IsMouseOver}"
                                 Cursor="Hand" Command="{Binding HideCommand}"/>
 
-                <StackPanel Orientation="Horizontal" Margin="12,12,12,4">
-                    <TextBlock Text="{Binding Model.DuplicateHeaderCount, Mode=OneWay}" Common.IsVisible="{Binding Model.DuplicateHeaderCount, Converter={converters:IsOver}, ConverterParameter=1}"/>
-                    <TextBlock Text="{Binding Model.Content, Mode=OneWay}" TextTrimming="CharacterEllipsis"/>
-                </StackPanel>
+                <Grid Margin="12,12,12,4">
+
+                    <TextBlock TextTrimming="CharacterEllipsis" Common.IsCollapsed="{Binding Model.DuplicateHeaderCount, Converter={converters:IsOver}, ConverterParameter=1}" Transition.IsEnabled="False">
+                        <Run Text="{Binding Model.Content, Mode=OneWay}"/>
+                    </TextBlock>
+
+                    <TextBlock TextTrimming="CharacterEllipsis" Common.IsVisible="{Binding Model.DuplicateHeaderCount, Converter={converters:IsOver}, ConverterParameter=1}" Transition.IsEnabled="False">
+                        <Run Text="{Binding Model.DuplicateHeaderCount, Mode=OneWay}"/>
+                        <Run Text="{Binding Model.Content, Mode=OneWay}"/>
+                    </TextBlock>
+                    
+                </Grid>
 
                 <ProgressBar Grid.Row="1" Height="6" Background="#AAFFFFFF" Foreground="CornflowerBlue" Margin="2"
                              Minimum="{Binding Model.CreationTime.Ticks, Mode=OneWay}"

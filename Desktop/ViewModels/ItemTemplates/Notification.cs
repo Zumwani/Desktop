@@ -7,7 +7,7 @@ public class Notification : ModelViewModel<Models.Notification>
 
     public RelayCommand HideCommand { get; }
 
-    public Notification() => 
+    public Notification() =>
         HideCommand = new(() => NotificationUtility.Hide(Model));
 
 }

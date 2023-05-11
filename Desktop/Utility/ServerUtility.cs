@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 
 namespace Desktop;
@@ -9,35 +10,43 @@ namespace Desktop;
 static class ServerUtility
 {
 
-    static bool isInitialized;
-    public static void Initialize()
-    {
+    const string ServerFileName = "Desktop.Server.exe";
+    static string ServerPath { get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ServerFileName);
 
-        if (isInitialized)
-            return;
-        isInitialized = true;
+    public static void Restart() => RestartInternal(false);
+    public static void TryRestart() => RestartInternal(true);
 
-        Restart();
-
-    }
-
-    public static void Restart()
+    static int autoRetryCount;
+    static void RestartInternal(bool isAuto)
     {
 
         if (DesignerProperties.GetIsInDesignMode(new()))
             return;
 
+        if (isAuto)
+        {
+            autoRetryCount += 1;
+            if (autoRetryCount > 2)
+                return;
+        }
+        else
+            autoRetryCount = 0;
+
         while (GetServerProcess(out var process))
             process.Kill();
 
-        _ = NotificationUtility.Notify("Server not running, attempting to start restart...", TimeSpan.FromSeconds(2.5));
-        ChildProcessTrackerUtility.AddProcess(Process.Start(new ProcessStartInfo(Server.App.Path)
-        {
-            Verb = "runas",
-            UseShellExecute = true,
-            CreateNoWindow = true,
-            WindowStyle = ProcessWindowStyle.Hidden,
-        }));
+        if (isAuto && autoRetryCount == 1)
+            _ = NotificationUtility.Notify("Server not running, attempting to restart...", TimeSpan.FromSeconds(2.5));
+
+        if (File.Exists(ServerPath))
+            ChildProcessTrackerUtility.AddProcess(Process.Start(
+                new ProcessStartInfo(ServerPath)
+                {
+                    Verb = "runas",
+                    UseShellExecute = true,
+                    CreateNoWindow = true,
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                }));
 
     }
 

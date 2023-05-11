@@ -56,7 +56,7 @@ public static class IndicatorUtility
     {
         Tracker.Value = await Server.API.GetSystemStatus();
         if (Tracker.Value is null)
-            ServerUtility.Restart();
+            ServerUtility.TryRestart();
     }
 
 }

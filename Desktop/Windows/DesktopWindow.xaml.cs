@@ -18,6 +18,7 @@ public partial class DesktopWindow : UiWindow
     //TODO: Add option to switch to farenheit for system indicator
     //TODO: Fix tab button scroll bar in settings
     //TODO: Update time and date format when changed in system
+    //TODO: weather resestting to 'no location set' after system wake up
 
     //TODO: Add IndicatorWidget, which can take a list of Stack (root is a vertical stack), stacks can be nested
     //TODO: Each stack can take a list of Indicator
@@ -108,11 +109,5 @@ public partial class DesktopWindow : UiWindow
     }
 
     #endregion
-
-    async void UiWindow_CallbackOnShutdown(object sender, MouseButtonEventArgs e)
-    {
-        View.IsOpen = false;
-        await Task.Delay(250);
-    }
 
 }

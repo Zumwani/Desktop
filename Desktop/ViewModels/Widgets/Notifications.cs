@@ -11,6 +11,7 @@ public class Notifications : ViewModel
 {
 
     public WindowConfig? Config { get; set; }
+    public Config.Notifications NotificationsConfig { get; } = ConfigManager.Notifications;
 
     [SafeForDependencyAnalysis]
     public bool HasItems => Items.Any();

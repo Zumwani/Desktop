@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using Common.Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,12 +10,13 @@ namespace Server;
 public static class App
 {
 
-    public static string Path => typeof(App).Assembly.Location.Replace(".dll", ".exe");
-
     static IWebHost host = null!;
 
-    static void Main(string[] args)
+    static void Main()
     {
+
+        if (AppUtility.IsSecondaryInstance())
+            return;
 
         try
         {

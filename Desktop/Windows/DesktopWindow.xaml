@@ -14,7 +14,7 @@
                 Common.IsVisible="{Binding IsOpen}" WindowStartupLocation="Manual"
                 DataContext="{Binding RelativeSource={RelativeSource Mode=Self}, Path=View}"
                 d:DataContext="{d:DesignInstance Type=viewModels:DesktopWindow, IsDesignTimeCreatable=True}"
-                Common.PinToDesktop="True" App.CallbackOnShutdown="UiWindow_CallbackOnShutdown"
+                Common.PinToDesktop="True"
                 Loaded="UiWindow_Loaded">
 
     <Window.ContextMenu>

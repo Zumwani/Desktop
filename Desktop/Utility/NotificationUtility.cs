@@ -57,7 +57,7 @@ static partial class NotificationUtility
     public static async Task Notify(Notification notification)
     {
 
-        if (!string.IsNullOrEmpty(notification.Header) && Find(notification.Header, out var existingNotification))
+        if (ConfigManager.Notifications.CollapseNotificationsWhenMultipleRecievedFromSameSource && !string.IsNullOrEmpty(notification.Header) && Find(notification.Header, out var existingNotification))
         {
             existingNotification.DuplicateHeaderCount += 1;
             return;
@@ -162,7 +162,11 @@ static partial class NotificationUtility
                 var text = string.Join("\n", binding.GetTextElements().Select(t => t.Text));
 
                 var header = binding.GetTextElements()[0].Text;
-                _ = Notify(new Notification(text) { Header = header }).ContinueWith(t => _ = list.Remove(notification.Id));
+                _ = Notify(new Notification(text) { Header = header }).ContinueWith(t =>
+                {
+                    listener.RemoveNotification(notification.Id);
+                    _ = list.Remove(notification.Id);
+                });
 
                 await Task.Delay(ConfigManager.Notifications.DelayBeforeHidingWindowsNotification);
                 listener.RemoveNotification(notification.Id);
@@ -170,7 +174,7 @@ static partial class NotificationUtility
             }
 
 
-        }, TimeSpan.FromSeconds(0.5));
+        }, TimeSpan.FromSeconds(0.1));
 
     }
 
