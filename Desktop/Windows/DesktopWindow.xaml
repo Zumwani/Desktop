@@ -1,22 +1,21 @@
-﻿<wpfui:UiWindow x:Class="Desktop.DesktopWindow"
-                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
-                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                mc:Ignorable="d"
-                xmlns:viewModels="clr-namespace:Desktop.ViewModels"
-                Title="Desktop" AllowsTransparency="True"
-                Common.IsVisibleInAltTab="False" ShowInTaskbar="False"
-                WindowStyle="None" MinWidth="100" MinHeight="100"
-                Common.ClampToMonitors="Screen" Background="{x:Null}"
-                FontFamily="Segoe UI Semilight" d:Background="#202020"
-                Common.IsVisible="{Binding IsOpen}" WindowStartupLocation="Manual"
-                DataContext="{Binding RelativeSource={RelativeSource Mode=Self}, Path=View}"
-                d:DataContext="{d:DesignInstance Type=viewModels:DesktopWindow, IsDesignTimeCreatable=True}"
-                Common.PinToDesktop="True"
-                Loaded="UiWindow_Loaded">
-
+﻿<Window x:Class="Desktop.DesktopWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:Desktop.ViewModels"
+        mc:Ignorable="d"
+        Title="Desktop" AllowsTransparency="True"
+        Common.IsVisibleInAltTab="False" ShowInTaskbar="False"
+        WindowStyle="None" MinWidth="100" MinHeight="100"
+        Common.ClampToMonitors="Screen" Background="{x:Null}"
+        FontFamily="Segoe UI Semilight" d:Background="#202020"
+        WindowStartupLocation="Manual"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}, Path=View}"
+        d:DataContext="{d:DesignInstance Type=viewModels:DesktopWindow, IsDesignTimeCreatable=True}"
+        SizeChanged="Window_SizeChanged" Loaded="UiWindow_Loaded">
+    
     <Window.ContextMenu>
         <ContextMenu>
             <wpfui:MenuItem Header="Create folder..." SymbolIcon="FolderAdd48" Command="{Binding Files.CreateFolderCommand}"/>
@@ -46,18 +45,35 @@
             <Setter Property="Opacity" Value="1"/>
             <Setter Property="WindowState" Value="Normal"/>
             <Setter Property="Topmost" Value="False"/>
+            <Setter Property="Common.PinToDesktop" Value="True"/>
 
             <Style.Triggers>
 
+                <DataTrigger Binding="{Binding Config.IsEditMode}" Value="{x:True}">
+                    
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Common.PinToDesktop" Value="False"/>
+                    <Setter Property="Topmost" Value="True"/>
+
+                </DataTrigger>
+
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsMouseOver}" Value="True"/>
-                        <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsShiftDown}" Value="True"/>
+                        <Condition Binding="{Binding Config.IsEditMode}" Value="{x:True}"/>
+                        <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsMouseDown}" Value="{x:True}"/>
                     </MultiDataTrigger.Conditions>
 
-                    <Setter Property="Cursor" Value="Hand"/>
-                    <Setter Property="Opacity" Value="0.75"/>
-                    <Setter Property="Topmost" Value="True"/>
+                    <Setter Property="Opacity" Value="0.85"/>
+
+                </MultiDataTrigger>
+
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Config.IsEditMode}" Value="{x:True}"/>
+                        <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(Common.IsResizing)}" Value="{x:True}"/>
+                    </MultiDataTrigger.Conditions>
+
+                    <Setter Property="Opacity" Value="0.85"/>
 
                 </MultiDataTrigger>
 
@@ -68,4 +84,4 @@
 
     <ContentPresenter Content="{Binding}"/>
 
-</wpfui:UiWindow>
+</Window>

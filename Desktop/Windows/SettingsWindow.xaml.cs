@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using Desktop.ViewModels.SettingPages;
 using Files = Desktop.ViewModels.SettingPages.Files;
@@ -11,8 +12,20 @@ namespace Desktop;
 public partial class SettingsWindow : Window
 {
 
-    public SettingsWindow() =>
+    public SettingsWindow()
+    {
         InitializeComponent();
+        Config.ConfigManager.General.PropertyChanged += General_PropertyChanged;
+    }
+
+    void General_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(Config.ConfigManager.General.IsEditMode))
+        {
+            //Topmost = Config.ConfigManager.General.IsEditMode;
+            Owner = App.Current.MainWindow;
+        }
+    }
 
     public ViewModels.SettingPages.SettingsWindow View { get; } = new();
 

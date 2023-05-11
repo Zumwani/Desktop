@@ -4,10 +4,22 @@
                     xmlns:converters="clr-namespace:Desktop.Converters">
 
     <DataTemplate DataType="{x:Type viewModels:Wallpaper}">
-        <Grid>
-            <Border Background="#202020" Common.IsCollapsed="{Binding GeneralConfig.WallpaperUri,Converter={converters:HasValue}}"/>
-            <Image Source="{Binding GeneralConfig.WallpaperUri, Mode=OneWay}" Stretch="{Binding Config.WallpaperStretch}"
-                   RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased"/>
+        <Grid x:Name="container">
+
+            <Grid.OpacityMask>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <Border CornerRadius="8" Background="White"
+                                Width="{Binding ElementName=container, Path=ActualWidth}"
+                                Height="{Binding ElementName=container, Path=ActualHeight}"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Grid.OpacityMask>
+            
+            <Border Background="#202020" Common.IsCollapsed="{Binding GeneralConfig.WallpaperUri, Converter={converters:HasValue}}" CornerRadius="8"/>
+            <Image Source="{Binding GeneralConfig.WallpaperUri}" Stretch="{Binding Config.WallpaperStretch}"
+                        RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased"/>
+            
         </Grid>
     </DataTemplate>
     

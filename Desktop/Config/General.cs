@@ -1,4 +1,5 @@
-﻿using PostSharp.Patterns.Model;
+﻿using System.Text.Json.Serialization;
+using PostSharp.Patterns.Model;
 
 namespace Desktop.Config;
 
@@ -6,6 +7,7 @@ namespace Desktop.Config;
 public class General : WindowConfig
 {
 
+    [JsonIgnore] public bool IsEditMode { get; set; }
     public bool DimScreenWhenNotActive { get; set; }
     public bool ShowBorderAlongBottomOfPrimaryScreen { get; set; }
 

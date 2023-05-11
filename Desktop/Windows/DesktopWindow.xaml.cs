@@ -1,16 +1,15 @@
-﻿using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Shell;
 using Desktop.Config;
 using PostSharp.Patterns.Model;
-using WindowsHook;
-using Wpf.Ui.Controls;
 
 namespace Desktop;
 
 [NotifyPropertyChanged]
-public partial class DesktopWindow : UiWindow
+public partial class DesktopWindow : Window
 {
 
     //TODO: Move edit mode to settings, use button to enable and one to disable
@@ -33,6 +32,7 @@ public partial class DesktopWindow : UiWindow
     public ViewModels.DesktopWindow View { get; } = new();
 
     public Config.DesktopWindow Config { get; } = ConfigManager.DesktopWindow;
+    public bool IsMouseDown { get; set; }
 
     public DesktopWindow()
     {
@@ -43,20 +43,37 @@ public partial class DesktopWindow : UiWindow
 
     #region Window
 
-    void InitializeWindow()
-    {
+    void InitializeWindow() =>
         ResetBounds();
-        var hook = Hook.GlobalEvents();
-        hook.KeyDown += KeyDown;
-        hook.KeyUp += KeyUp;
-    }
 
-    async void UiWindow_Loaded(object sender, RoutedEventArgs e)
+    void UiWindow_Loaded(object sender, RoutedEventArgs e)
     {
-        await Task.Delay(1000);
+        View.Config.PropertyChanged += Config_PropertyChanged;
         View.IsLoaded = true;
         TaskbarFix.Initialize();
         ResetBounds();
+    }
+
+    void Config_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+
+        if (e.PropertyName != nameof(View.Config.IsEditMode))
+            return;
+
+        if (View.Config.IsEditMode)
+        {
+            Common.Utility.xaml.NoNamespace.Common.SetPinToDesktop(this, false);
+            Topmost = false;
+            Topmost = true;
+            WindowChrome.SetWindowChrome(this, new() { ResizeBorderThickness = new(10), CaptionHeight = 0, GlassFrameThickness = new(0), CornerRadius = new(8) });
+        }
+        else
+        {
+            Topmost = false;
+            Common.Utility.xaml.NoNamespace.Common.SetPinToDesktop(this, true);
+            WindowChrome.SetWindowChrome(this, new() { ResizeBorderThickness = new(0), CaptionHeight = 0, GlassFrameThickness = new(0), CornerRadius = new(8) });
+        }
+
     }
 
     void ResetBounds()
@@ -70,33 +87,17 @@ public partial class DesktopWindow : UiWindow
     #endregion
     #region Move mode
 
-    public bool IsShiftDown { get; private set; }
-
-    new void KeyDown(object sender, WindowsHook.KeyEventArgs e)
+    protected override async void OnMouseLeftButtonDown(MouseButtonEventArgs e)
     {
-        if (e.KeyCode == Keys.LShiftKey)
+        if (View.Config.IsEditMode)
         {
-            IsShiftDown = true;
-            WindowChrome.SetWindowChrome(this, new() { ResizeBorderThickness = new(10), CaptionHeight = 0, GlassFrameThickness = new(0), CornerRadius = new(8) });
-        }
-    }
-
-    new void KeyUp(object sender, WindowsHook.KeyEventArgs e)
-    {
-        if (e.KeyCode == Keys.LShiftKey)
-        {
-            IsShiftDown = false;
-            WindowChrome.SetWindowChrome(this, new() { ResizeBorderThickness = new(0), CaptionHeight = 0, GlassFrameThickness = new(0), CornerRadius = new(8) });
-            SaveSize();
-        }
-    }
-
-    protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
-    {
-        if (IsShiftDown)
-        {
+            IsMouseDown = true;
+            Topmost = false;
+            Topmost = true;
+            await Task.Delay(10);
             DragMove();
             SaveSize();
+            IsMouseDown = false;
         }
     }
 
@@ -110,4 +111,8 @@ public partial class DesktopWindow : UiWindow
 
     #endregion
 
+    private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+
+    }
 }

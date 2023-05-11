@@ -8,6 +8,9 @@
 
         <StackPanel>
 
+            <wpfui:Button Icon="ArrowExpand24" Content="Enable move mode" Margin="0,8,0,0" Common.IsCollapsed="{Binding Config.IsEditMode}" Command="{Binding EnterEditModeCommand}" Transition.IsEnabled="False"/>
+            <wpfui:Button Icon="ArrowExpand24" Content="Disable move mode" Margin="0,8,0,0" Common.IsVisible="{Binding Config.IsEditMode}" Command="{Binding ExitEditModeCommand}" Transition.IsEnabled="False"/>
+
             <GroupBox>
                 <StackPanel>
                     <CheckBox Content="Autostart" IsChecked="{app:AutoStart}"/>
@@ -18,7 +21,7 @@
 
             <GroupBox>
                 <StackPanel>
-                    
+
                     <TextBlock Text="Wallpaper:" Margin="0,8,0,8"/>
                     <TextBox Text="{Binding Config.WallpaperUri}"/>
 
@@ -29,7 +32,7 @@
 
                 </StackPanel>
             </GroupBox>
-
+            
             <GroupBox>
                 <StackPanel>
 
