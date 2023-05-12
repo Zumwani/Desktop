@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using Desktop.ViewModels.SettingPages;
@@ -21,10 +22,7 @@ public partial class SettingsWindow : Window
     void General_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(Config.ConfigManager.General.IsEditMode))
-        {
-            //Topmost = Config.ConfigManager.General.IsEditMode;
             Owner = App.Current.MainWindow;
-        }
     }
 
     public ViewModels.SettingPages.SettingsWindow View { get; } = new();
@@ -55,5 +53,8 @@ public partial class SettingsWindow : Window
         window.View.SelectedPage = window.View.Pages.FirstOrDefault(p => p.GetType() == typeof(T)) ?? window.View.Pages[0];
 
     }
+
+    void Window_Closed(object sender, EventArgs e) =>
+        Config.ConfigManager.General.IsEditMode = false;
 
 }

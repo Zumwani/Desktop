@@ -12,12 +12,11 @@ namespace Desktop;
 public partial class DesktopWindow : Window
 {
 
-    //TODO: Move edit mode to settings, use button to enable and one to disable
     //TODO: Fix drag start from files
     //TODO: Add option to switch to farenheit for system indicator
     //TODO: Fix tab button scroll bar in settings
     //TODO: Update time and date format when changed in system
-    //TODO: weather resestting to 'no location set' after system wake up
+    //TODO: weather resetting to 'no location set' after system wake up (seems to only be in release)
 
     //TODO: Add IndicatorWidget, which can take a list of Stack (root is a vertical stack), stacks can be nested
     //TODO: Each stack can take a list of Indicator
@@ -46,12 +45,13 @@ public partial class DesktopWindow : Window
     void InitializeWindow() =>
         ResetBounds();
 
-    void UiWindow_Loaded(object sender, RoutedEventArgs e)
+    async void UiWindow_Loaded(object sender, RoutedEventArgs e)
     {
         View.Config.PropertyChanged += Config_PropertyChanged;
-        View.IsLoaded = true;
         TaskbarFix.Initialize();
         ResetBounds();
+        await Task.Delay(100);
+        View.IsLoaded = true;
     }
 
     void Config_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -87,20 +87,6 @@ public partial class DesktopWindow : Window
     #endregion
     #region Move mode
 
-    protected override async void OnMouseLeftButtonDown(MouseButtonEventArgs e)
-    {
-        if (View.Config.IsEditMode)
-        {
-            IsMouseDown = true;
-            Topmost = false;
-            Topmost = true;
-            await Task.Delay(10);
-            DragMove();
-            SaveSize();
-            IsMouseDown = false;
-        }
-    }
-
     void SaveSize()
     {
         Config.Left = Left;
@@ -109,10 +95,24 @@ public partial class DesktopWindow : Window
         Config.Height = Height;
     }
 
+    void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        Topmost = false;
+        Topmost = true;
+        SaveSize();
+    }
+
+    async void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        IsMouseDown = true;
+        await Task.Delay(1);
+        Topmost = false;
+        Topmost = true;
+        DragMove();
+        SaveSize();
+        IsMouseDown = false;
+    }
+
     #endregion
 
-    private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
-    {
-
-    }
 }

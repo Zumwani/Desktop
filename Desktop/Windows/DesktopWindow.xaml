@@ -5,6 +5,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:Desktop.ViewModels"
+        xmlns:converters="clr-namespace:Desktop.Converters"
         mc:Ignorable="d"
         Title="Desktop" AllowsTransparency="True"
         Common.IsVisibleInAltTab="False" ShowInTaskbar="False"
@@ -41,47 +42,30 @@
     <Window.Style>
         <Style TargetType="Window" BasedOn="{StaticResource {x:Type Window}}">
 
-            <Setter Property="Cursor" Value="Arrow"/>
             <Setter Property="Opacity" Value="1"/>
-            <Setter Property="WindowState" Value="Normal"/>
             <Setter Property="Topmost" Value="False"/>
             <Setter Property="Common.PinToDesktop" Value="True"/>
 
             <Style.Triggers>
 
                 <DataTrigger Binding="{Binding Config.IsEditMode}" Value="{x:True}">
-                    
-                    <Setter Property="Cursor" Value="Hand"/>
                     <Setter Property="Common.PinToDesktop" Value="False"/>
                     <Setter Property="Topmost" Value="True"/>
-
                 </DataTrigger>
-
-                <MultiDataTrigger>
-                    <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding Config.IsEditMode}" Value="{x:True}"/>
-                        <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsMouseDown}" Value="{x:True}"/>
-                    </MultiDataTrigger.Conditions>
-
-                    <Setter Property="Opacity" Value="0.85"/>
-
-                </MultiDataTrigger>
-
-                <MultiDataTrigger>
-                    <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding Config.IsEditMode}" Value="{x:True}"/>
-                        <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(Common.IsResizing)}" Value="{x:True}"/>
-                    </MultiDataTrigger.Conditions>
-
-                    <Setter Property="Opacity" Value="0.85"/>
-
-                </MultiDataTrigger>
 
             </Style.Triggers>
 
         </Style>
     </Window.Style>
 
-    <ContentPresenter Content="{Binding}"/>
+    <Grid Common.IsVisible="True">
+        <ContentPresenter Content="{Binding}" IsHitTestVisible="{Binding Config.IsEditMode, Converter={converters:InvertBool}}"/>
+        <Border CornerRadius="8" BorderThickness="4" BorderBrush="#AAFFFFFF" Common.IsVisible="{Binding Config.IsEditMode}" Cursor="Hand" Background="Transparent" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+            <Grid>
+                <Border CornerRadius="8" Background="#50FFFFFF" Common.IsVisible="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=IsMouseDown}" IsHitTestVisible="False"/>
+                <Border CornerRadius="8" Background="#50FFFFFF" Common.IsVisible="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=(Common.IsResizing)}" IsHitTestVisible="False"/>
+            </Grid>
+        </Border>
+    </Grid>
 
 </Window>

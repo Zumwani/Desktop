@@ -5,7 +5,8 @@
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}, Path=View}"
         Icon="{StaticResource Icon}"
         Width="1000" Height="562" ResizeMode="NoResize"
-        Common.IsVisible="{Binding IsOpen}">
+        Common.IsVisible="{Binding IsOpen}"
+        Closed="Window_Closed">
 
     <ContentPresenter Content="{Binding}"/>
 

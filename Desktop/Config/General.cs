@@ -8,6 +8,8 @@ public class General : WindowConfig
 {
 
     [JsonIgnore] public bool IsEditMode { get; set; }
+    public bool IsFirstOpen { get; set; } = true;
+
     public bool DimScreenWhenNotActive { get; set; }
     public bool ShowBorderAlongBottomOfPrimaryScreen { get; set; }
 

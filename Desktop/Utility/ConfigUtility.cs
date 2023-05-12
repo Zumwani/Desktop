@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -47,32 +48,39 @@ public static class ConfigUtility
         if (target is null)
             throw new ArgumentNullException(nameof(target));
 
+        return
+            GetInternal(target, typeof(T), null, out var value, propertyName)
+            ? (T)value
+            : default;
+
+    }
+
+    static bool GetInternal(object target, Type type, object? defaultValue, [NotNullWhen(true)] out object? value, string propertyName = "")
+    {
+
+        value = null;
+        if (target is null)
+            throw new ArgumentNullException(nameof(target));
+
         var valueName = $"{target.GetType().FullName}.{propertyName}";
 
         using var key = Registry.CurrentUser.OpenSubKey(KeyPath);
         if (key is null)
-            return default;
+            return false;
 
         var json = (string)key.GetValue(valueName)!;
         if (string.IsNullOrEmpty(json))
-            return default;
+            return false;
 
-        var value = JsonSerializer.Deserialize<T>(json);
-        return value;
-
-    }
-
-    static object? GetInternal(object target, Type type, object? defaultValue, string propertyName = "")
-    {
-
-        if (defaultValue is not null && !type.IsAssignableFrom(defaultValue.GetType()))
-            throw new ArgumentException("Type mismatch", nameof(defaultValue));
-
-        var method = typeof(ConfigUtility).GetMethods().First(m => m.Name == nameof(Get) && m.GetParameters().Length == 3);
-        method = method.MakeGenericMethod(type, target.GetType());
-        var value = method.Invoke(null, new[] { target, defaultValue, propertyName });
-
-        return value;
+        try
+        {
+            value = JsonSerializer.Deserialize(json, type) ?? defaultValue;
+            return value is not null;
+        }
+        catch (JsonException)
+        {
+            return false;
+        }
 
     }
 
@@ -115,10 +123,8 @@ public static class ConfigUtility
 
         var properties = obj.GetType().GetProperties(BindingFlags.GetProperty | BindingFlags.SetProperty | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Where(IsValidProperty);
         foreach (var property in properties)
-        {
-            var value = GetInternal(obj, property.PropertyType, property.GetValue(obj), property.Name);
-            property.SetValue(obj, value);
-        }
+            if (GetInternal(obj, property.PropertyType, property.GetValue(obj), out var value, property.Name))
+                property.SetValue(obj, value);
 
         obj.PropertyChanged += (s, e) =>
         {
