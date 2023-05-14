@@ -35,9 +35,6 @@ static class ServerUtility
         while (GetServerProcess(out var process))
             process.Kill();
 
-        if (isAuto && autoRetryCount == 1)
-            _ = NotificationUtility.Notify("Server not running, attempting to restart...", TimeSpan.FromSeconds(2.5));
-
         if (File.Exists(ServerPath))
             ChildProcessTrackerUtility.AddProcess(Process.Start(
                 new ProcessStartInfo(ServerPath)

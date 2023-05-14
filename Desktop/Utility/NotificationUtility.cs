@@ -46,20 +46,29 @@ static partial class NotificationUtility
     public static bool Find(string header, [NotNullWhen(true)] out Notification? notification) =>
         (notification = Notifications.FirstOrDefault(n => n.Header == header)) is not null;
 
+    static bool IsDuplicate(Notification notification, [NotNullWhen(true)] out Notification? existingNotification)
+    {
+
+        existingNotification = null;
+
+        return
+            ConfigManager.Notifications.CollapseNotificationsWhenMultipleRecievedFromSameSource &&
+            !string.IsNullOrEmpty(notification.Header) &&
+            Find(notification.Header, out existingNotification);
+
+    }
+
     #region Notify
 
-    public static Task Notify(string message) =>
-        Notify(message, TimeSpan.FromSeconds(5));
-
-    public static Task Notify(string message, TimeSpan duration) =>
+    public static Task Notify(string message, TimeSpan? duration = null) =>
         Notify(new Notification(message, duration));
 
     public static async Task Notify(Notification notification)
     {
 
-        if (ConfigManager.Notifications.CollapseNotificationsWhenMultipleRecievedFromSameSource && !string.IsNullOrEmpty(notification.Header) && Find(notification.Header, out var existingNotification))
+        if (IsDuplicate(notification, out var existingNotification))
         {
-            existingNotification.DuplicateHeaderCount += 1;
+            existingNotification.Collapse();
             return;
         }
 
@@ -79,8 +88,11 @@ static partial class NotificationUtility
                 await Task.Delay(100);
         }
 
-        async Task DurationRanOut() =>
-            await Task.Delay(notification.Duration);
+        async Task DurationRanOut()
+        {
+            while (notification.EndTime.HasValue && DateTime.Now < notification.EndTime.Value)
+                await Task.Delay(100);
+        }
 
     }
 

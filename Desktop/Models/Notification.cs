@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using PostSharp.Patterns.Model;
 
 namespace Desktop.Models;
@@ -7,19 +8,17 @@ namespace Desktop.Models;
 public class Notification
 {
 
-    public Notification(string content)
+    public Notification(string content, TimeSpan? duration = null)
     {
-        Content = content;
-        IsPermanent = true;
-        EndTime = DateTime.Today.AddDays(1);
-    }
 
-    public Notification(string content, TimeSpan duration)
-    {
         Content = content;
         Duration = duration;
-        CreationTime = DateTime.Now;
-        EndTime = CreationTime + duration;
+
+        Header ??= content.Contains('\n') ? content.Split('\n', StringSplitOptions.RemoveEmptyEntries).First() : content;
+
+        IsPermanent = duration is null;
+        ResetTimer();
+
     }
 
     public int DuplicateHeaderCount { get; set; } = 1;
@@ -28,8 +27,25 @@ public class Notification
     public string Content { get; set; }
 
     public bool IsPermanent { get; set; }
-    public DateTime CreationTime { get; set; }
-    public DateTime EndTime { get; set; }
-    public TimeSpan Duration { get; set; }
+    public DateTime? CreationTime { get; set; }
+    public DateTime? EndTime { get; set; }
+    public TimeSpan? Duration { get; set; }
+
+    public void Collapse()
+    {
+        DuplicateHeaderCount += 1;
+        ResetTimer();
+    }
+
+    public void ResetTimer()
+    {
+        if (IsPermanent)
+            EndTime = DateTime.Today.AddDays(1);
+        else
+        {
+            CreationTime = DateTime.Now;
+            EndTime = CreationTime + Duration!.Value;
+        }
+    }
 
 }

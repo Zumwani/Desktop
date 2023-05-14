@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SystemStatusServer\Desktop.Server.csproj" />
+    <ProjectReference Include="..\Desktop.Server\Desktop.Server.csproj" />
   </ItemGroup>
 
   <ItemGroup>

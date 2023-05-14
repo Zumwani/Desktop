@@ -24,8 +24,12 @@
                     <StackPanel>
 
                         <!--Create test notification-->
-                        <Border Common.IsVisible="{Binding RelativeSource={RelativeSource AncestorType=wpfui:Card}, Path=IsMouseOver}">
-                            <wpfui:Button Content="Create test notification" Command="{Binding TestCommand}" HorizontalAlignment="Center" Common.IsVisible="{Binding ShowTestButton}"/>
+                        <Border Common.IsVisible="{Binding ShowTestButton}" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" Common.IsVisible="{Binding RelativeSource={RelativeSource AncestorType=wpfui:Card}, Path=IsMouseOver}">
+                                <TextBlock Text="Create:" VerticalAlignment="Center"/>
+                                <wpfui:Button Content="timed" Command="{Binding CreateTimedCommand}"/>
+                                <wpfui:Button Content="permanent" Command="{Binding CreatePermanentCommand}"/>
+                            </StackPanel>
                         </Border>
 
                         <!--Clear all button-->

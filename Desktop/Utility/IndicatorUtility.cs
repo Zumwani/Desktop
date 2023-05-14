@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Desktop.Config;
 using Desktop.Models;
 using Microsoft.Win32;
@@ -28,8 +29,10 @@ public static class IndicatorUtility
             Reload();
     }
 
-    static void Reload()
+    static async void Reload()
     {
+
+        await Task.Delay(100);
 
         ActionUtility.StopInvoke(UpdateDateTime);
         ActionUtility.StopInvoke(UpdateBluetoothDevices);

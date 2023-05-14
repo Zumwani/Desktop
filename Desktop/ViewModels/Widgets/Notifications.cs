@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Desktop.Config;
 using Desktop.ViewModels.Helpers;
@@ -18,7 +19,8 @@ public class Notifications : ViewModel
     public Date Date { get; } = new Date();
 
     public RelayCommand ClearNotificationsCommand { get; } = new(NotificationUtility.ClearAll);
-    public RelayCommand TestCommand { get; } = new(() => NotificationUtility.Notify("test"));
+    public RelayCommand CreateTimedCommand { get; } = new(() => NotificationUtility.Notify("this is a timed notification", TimeSpan.FromSeconds(2.5)));
+    public RelayCommand CreatePermanentCommand { get; } = new(() => NotificationUtility.Notify("this is a permanent notification"));
 
     public bool ShowTestButton { get; set; }
 
