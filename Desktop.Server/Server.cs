@@ -16,7 +16,10 @@ public static class App
     {
 
         if (AppUtility.IsSecondaryInstance())
+        {
+            Console.WriteLine("Existing instance detected, exiting...");
             return;
+        }
 
         try
         {
@@ -73,12 +76,9 @@ class Startup
         UseRouting().
         UseEndpoints(endpoints =>
         {
-
             _ = endpoints.MapControllers();
-
-            _ = endpoints.MapGet("/desktop/system-status.json", () => JsonSerializer.Serialize(SystemUtility.GetInfo()));
             _ = endpoints.MapGet("/desktop/server.json", () => JsonSerializer.Serialize(ServerUtility.GetInfo()));
-
+            _ = endpoints.MapGet("/desktop/system-status.json", () => JsonSerializer.Serialize(SystemUtility.GetInfo()));
         });
 
 }

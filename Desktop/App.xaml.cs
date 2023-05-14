@@ -16,6 +16,8 @@ public partial class App : Application
         if (AppUtility.IsPrimaryInstance())
         {
 
+            ServerUtility.Restart();
+
             MainWindow = new DesktopWindow();
             _ = new IdleWindow();
 

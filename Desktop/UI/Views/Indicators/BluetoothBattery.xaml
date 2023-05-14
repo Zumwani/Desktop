@@ -36,7 +36,7 @@
                 </ContextMenu>
             </wpfui:Button.ContextMenu>
 
-            <TextBlock Text="{Binding Value, Mode=OneWay, StringFormat='{}{0:N0}%', TargetNullValue='--', FallbackValue='--'}"/>
+            <TextBlock Text="{Binding Value, Mode=OneWay, StringFormat='{}{0:N0} %', TargetNullValue='--', FallbackValue='--'}"/>
 
         </wpfui:Button>
         

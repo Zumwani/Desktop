@@ -19,7 +19,7 @@ public static class API
             return model;
 
         }
-        catch (HttpRequestException)
+        catch (HttpRequestException e)
         {
             return default;
         }

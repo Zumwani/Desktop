@@ -1,8 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:viewModels="clr-namespace:Desktop.ViewModels"
-                    xmlns:commands="clr-namespace:Desktop.Commands">
+                    xmlns:viewModels="clr-namespace:Desktop.ViewModels">
 
     <DataTemplate DataType="{x:Type viewModels:Tracker}">
 
@@ -13,13 +12,13 @@
                     <ContentPresenter Content="{Binding BluetoothBattery}"/>
                 </Border>
                 <Border Common.IsVisible="{Binding Config.ShowCpuUsage}">
-                    <ContentPresenter Content="{Binding CpuUsage}"/>
+                    <ContentPresenter Content="{Binding CPULoad}"/>
                 </Border>
                 <Border Common.IsVisible="{Binding Config.ShowCpuTemperature}">
-                    <ContentPresenter Content="{Binding CpuTemperature}"/>
+                    <ContentPresenter Content="{Binding CPUTemp}"/>
                 </Border>
                 <Border Common.IsVisible="{Binding Config.ShowMemory}">
-                    <ContentPresenter Content="{Binding Memory}"/>
+                    <ContentPresenter Content="{Binding SystemMemory}"/>
                 </Border>
             </UniformGrid>
             

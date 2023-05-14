@@ -17,36 +17,35 @@
                 <wpfui:ControlsDictionary/>
                 <wpfui:ThemesDictionary Theme="Dark"/>
 
-                <ResourceDictionary Source="Styles/Button.xaml"/>
-                <ResourceDictionary Source="Styles/MenuItem.xaml"/>
-                <ResourceDictionary Source="Styles/Popup.xaml"/>
-                <ResourceDictionary Source="Styles/TextBlock.xaml"/>
-                <ResourceDictionary Source="Styles/ListBox.xaml"/>
-                <ResourceDictionary Source="Styles/Card.xaml"/>
-                <ResourceDictionary Source="Styles/GroupBox.xaml"/>
+                <ResourceDictionary Source="UI/Styles/Button.xaml"/>
+                <ResourceDictionary Source="UI/Styles/MenuItem.xaml"/>
+                <ResourceDictionary Source="UI/Styles/Popup.xaml"/>
+                <ResourceDictionary Source="UI/Styles/TextBlock.xaml"/>
+                <ResourceDictionary Source="UI/Styles/ListBox.xaml"/>
+                <ResourceDictionary Source="UI/Styles/Card.xaml"/>
+                <ResourceDictionary Source="UI/Styles/GroupBox.xaml"/>
 
-                <ResourceDictionary Source="Views/Indicators/BluetoothBattery.xaml"/>
-                <ResourceDictionary Source="Views/Indicators/CpuTemperature.xaml"/>
-                <ResourceDictionary Source="Views/Indicators/CpuUsage.xaml"/>
-                <ResourceDictionary Source="Views/Indicators/Date.xaml"/>
-                <ResourceDictionary Source="Views/Indicators/Memory.xaml"/>
-                <ResourceDictionary Source="Views/Indicators/Time.xaml"/>
-                <ResourceDictionary Source="Views/Indicators/Weather.xaml"/>
-                
-                <ResourceDictionary Source="Views/ItemTemplates/FileItem.xaml"/>
-                <ResourceDictionary Source="Views/ItemTemplates/Note.xaml"/>
-                <ResourceDictionary Source="Views/ItemTemplates/Notification.xaml"/>
-                
-                <ResourceDictionary Source="Views/Widgets/Files.xaml"/>
-                <ResourceDictionary Source="Views/Widgets/Notes.xaml"/>
-                <ResourceDictionary Source="Views/Widgets/Notifications.xaml"/>
-                <ResourceDictionary Source="Views/Widgets/Tracker.xaml"/>
-                <ResourceDictionary Source="Views/Widgets/Wallpaper.xaml"/>
-                <ResourceDictionary Source="Views/Widgets/DateTimeWeather.xaml"/>
-                
-                <ResourceDictionary Source="Views/Windows/DesktopWindow.xaml"/>
-                <ResourceDictionary Source="Views/Windows/IdleWindow.xaml"/>
-                <ResourceDictionary Source="Views/Windows/SettingsWindow.xaml"/>
+                <ResourceDictionary Source="UI/Views/Indicators/BluetoothBattery.xaml"/>
+                <ResourceDictionary Source="UI/Views/Indicators/SystemTrackerIndicator.xaml"/>
+                <ResourceDictionary Source="UI/Views/Indicators/SystemTrackerIndicatorMulti.xaml"/>
+                <ResourceDictionary Source="UI/Views/Indicators/Date.xaml"/>
+                <ResourceDictionary Source="UI/Views/Indicators/Time.xaml"/>
+                <ResourceDictionary Source="UI/Views/Indicators/Weather.xaml"/>
+
+                <ResourceDictionary Source="UI/Views/ItemTemplates/FileItem.xaml"/>
+                <ResourceDictionary Source="UI/Views/ItemTemplates/Note.xaml"/>
+                <ResourceDictionary Source="UI/Views/ItemTemplates/Notification.xaml"/>
+
+                <ResourceDictionary Source="UI/Views/Widgets/Files.xaml"/>
+                <ResourceDictionary Source="UI/Views/Widgets/Notes.xaml"/>
+                <ResourceDictionary Source="UI/Views/Widgets/Notifications.xaml"/>
+                <ResourceDictionary Source="UI/Views/Widgets/Tracker.xaml"/>
+                <ResourceDictionary Source="UI/Views/Widgets/Wallpaper.xaml"/>
+                <ResourceDictionary Source="UI/Views/Widgets/DateTimeWeather.xaml"/>
+
+                <ResourceDictionary Source="UI/Views/Windows/DesktopWindow.xaml"/>
+                <ResourceDictionary Source="UI/Views/Windows/IdleWindow.xaml"/>
+                <ResourceDictionary Source="UI/Views/Windows/SettingsWindow.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
 
