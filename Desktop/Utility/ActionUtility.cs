@@ -21,9 +21,12 @@ public static class ActionUtility
         StopInvoke(action);
         actions.Add(action, new(interval));
 
-        action.Invoke();
+        Invoke();
         while (await actions[action].WaitForNextTickAsync())
-            action.Invoke();
+            Invoke();
+
+        void Invoke() =>
+            App.Current.Dispatcher.Invoke(action);
 
     }
 

@@ -1,4 +1,5 @@
-﻿using Desktop.Config;
+﻿using System.Globalization;
+using Desktop.Config;
 using Desktop.ViewModels.Helpers;
 using PostSharp.Patterns.Model;
 
@@ -12,8 +13,10 @@ public class Date : DateTimeIndicator
 
     public override void Update()
     {
-        var format = ConfigManager.DateAndTime.UseWindowsFormatForDate ? "d" : ConfigManager.DateAndTime.DateFormat;
-        Value = IndicatorUtility.DateTime.Value?.ToString(format);
+        if (ConfigManager.DateAndTime.UseWindowsFormatForDate)
+            Value = IndicatorUtility.DateTime.Value?.ToString(DateTimeUtility.SystemDateFormat, CultureInfo.InvariantCulture);
+        else
+            Value = IndicatorUtility.DateTime.Value?.ToString(ConfigManager.DateAndTime.DateFormat, CultureInfo.InvariantCulture);
     }
 
 }

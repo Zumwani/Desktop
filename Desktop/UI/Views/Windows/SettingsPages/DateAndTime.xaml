@@ -20,6 +20,10 @@
 
                     <TextBlock Text="Time format" Margin="0,8"/>
                     <TextBox Text="{Binding Config.TimeFormat}" IsEnabled="{Binding Config.UseWindowsFormatForTime, Converter={converters:InvertBool}}"/>
+
+                    <TextBlock Margin="0,8,0,0">
+                        <Hyperlink Command="{Binding OpenFormatDocCommand}">View formats on learn.microsoft.com...</Hyperlink>
+                    </TextBlock>
                     
                 </StackPanel>
             </GroupBox>

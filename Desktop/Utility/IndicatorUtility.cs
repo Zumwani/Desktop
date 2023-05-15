@@ -13,9 +13,12 @@ public static class IndicatorUtility
 
     static IndicatorUtility()
     {
-        Reload();
+
+        DateTimeUtility.OnFormatsChanged += Reload;
         ConfigManager.SystemInfo.PropertyChanged += PropertyChanged;
         ConfigManager.Weather.PropertyChanged += PropertyChanged;
+        SystemEvents.TimeChanged += (s, e) => Reload();
+
         SystemEvents.PowerModeChanged += (s, e) =>
         {
 
@@ -25,6 +28,9 @@ public static class IndicatorUtility
                 Reload();
 
         };
+
+        Reload();
+
     }
 
     static void PropertyChanged(object? sender, PropertyChangedEventArgs e)

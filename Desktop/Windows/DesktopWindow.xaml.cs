@@ -14,8 +14,6 @@ public partial class DesktopWindow : Window
 
     //TODO: Fix drag start from files
     //TODO: Add option to switch to farenheit for system indicator
-    //TODO: Fix tab button scroll bar in settings
-    //TODO: Update time and date format when changed in system
     //TODO: weather resetting to 'no location set' after system wake up (seems to only be in release)
 
     //TODO: Add IndicatorWidget, which can take a list of Stack (root is a vertical stack), stacks can be nested
@@ -25,8 +23,7 @@ public partial class DesktopWindow : Window
     //TODO: Add drag and drop for widgets
 
     //Widgets: FilesWidget, NotificationsWidget, NotesWidget, IndicatorWidget
-    //Indicators: Time, Date, Weather, BluetoothBatteryIndicator, CpuUsageIndicator, CpuTemperatureIndicator, MemoryIndicator
-    //TODO: Add more system info indicators
+    //Indicators: Time, Date, Weather, Trackers...
 
     public ViewModels.DesktopWindow View { get; } = new();
 
