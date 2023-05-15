@@ -17,7 +17,7 @@
 
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                        <Border Common.IsVisible="{Binding Config.ShowTime}">
+                        <Border Common.IsVisible="{Binding Config.ShowTime}" HorizontalAlignment="Center">
                             <ContentPresenter Content="{Binding Time}" Common.Scale="1.5" Effect="{DynamicResource Effect.Shadow}"/>
                         </Border>
 
