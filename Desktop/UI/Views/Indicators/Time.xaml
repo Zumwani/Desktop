@@ -14,7 +14,7 @@
                 </ContextMenu>
             </wpfui:Button.ContextMenu>
 
-            <TextBlock Text="{Binding Value}" FontSize="102" LineStackingStrategy="BlockLineHeight" LineHeight="106"/>
+            <TextBlock Text="{Binding Value, TargetNullValue='--', FallbackValue='--'}" FontSize="102" LineStackingStrategy="BlockLineHeight" LineHeight="106"/>
 
         </wpfui:Button>
     </DataTemplate>

@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:Desktop.ViewModels"
-                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml">
+                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+                    xmlns:converters="clr-namespace:Desktop.Converters">
 
     <DataTemplate DataType="{x:Type viewModels:Weather}">
 
@@ -17,7 +18,7 @@
 
             <DockPanel IsHitTestVisible="False" Margin="-6,0,0,0">
 
-                <Canvas Width="50" Height="0" DockPanel.Dock="{Binding IconDock}">
+                <Canvas Width="50" Height="0" DockPanel.Dock="{Binding IconDock}" Common.IsVisible="{Binding Icon, Converter={converters:HasValue}}" Transition.IsEnabled="False">
                     <Border Width="50" Height="50" Margin="0,-25,0,0">
                         <Border.Background>
                             <ImageBrush ImageSource="{Binding Icon}"/>
@@ -25,7 +26,7 @@
                     </Border>
                 </Canvas>
 
-                <Border Width="8" DockPanel.Dock="{Binding IconDock}"/>
+                <Border Width="8" DockPanel.Dock="{Binding IconDock}" Common.IsVisible="{Binding Icon, Converter={converters:HasValue}}" Transition.IsEnabled="False"/>
 
                 <TextBlock x:Name="TextBlock" VerticalAlignment="Center" Effect="{DynamicResource Effect.Shadow}"
                            Text="{Binding Temperature, Mode=OneWay, StringFormat='{}{0:N1} °C', TargetNullValue='No location set'}"/>

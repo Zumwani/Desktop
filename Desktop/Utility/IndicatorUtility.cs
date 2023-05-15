@@ -18,8 +18,12 @@ public static class IndicatorUtility
         ConfigManager.Weather.PropertyChanged += PropertyChanged;
         SystemEvents.PowerModeChanged += (s, e) =>
         {
-            if (e.Mode == PowerModes.Resume)
+
+            if (e.Mode == PowerModes.Suspend)
+                Stop();
+            else if (e.Mode == PowerModes.Resume)
                 Reload();
+
         };
     }
 
@@ -34,10 +38,7 @@ public static class IndicatorUtility
 
         await Task.Delay(100);
 
-        ActionUtility.StopInvoke(UpdateDateTime);
-        ActionUtility.StopInvoke(UpdateBluetoothDevices);
-        ActionUtility.StopInvoke(UpdateTracker);
-        ActionUtility.StopInvoke(UpdateWeather);
+        Stop();
 
         ActionUtility.Invoke(UpdateDateTime, TimeSpan.FromSeconds(0.01)); //Used by notification progress bars (slower means staggered progress change)
         ActionUtility.Invoke(UpdateBluetoothDevices, ConfigManager.SystemInfo.UpdateInterval);
@@ -46,10 +47,25 @@ public static class IndicatorUtility
 
     }
 
+    static void Stop()
+    {
+
+        ActionUtility.StopInvoke(UpdateDateTime);
+        ActionUtility.StopInvoke(UpdateBluetoothDevices);
+        ActionUtility.StopInvoke(UpdateTracker);
+        ActionUtility.StopInvoke(UpdateWeather);
+
+        Tracker.Value = null;
+        Weather.Value = null;
+        BluetoothDevices.Value = null;
+        DateTime.Value = null;
+
+    }
+
     public static NotifyProperty<Server.Models.SystemInfo?> Tracker { get; } = new() { OnUpdateRequest = UpdateTracker };
-    public static NotifyProperty<Models.Weather> Weather { get; } = new() { OnUpdateRequest = UpdateWeather };
+    public static NotifyProperty<Models.Weather?> Weather { get; } = new() { OnUpdateRequest = UpdateWeather };
     public static NotifyProperty<IEnumerable<BluetoothDevice>> BluetoothDevices { get; } = new() { OnUpdateRequest = UpdateBluetoothDevices };
-    public static NotifyProperty<DateTime> DateTime { get; } = new() { OnUpdateRequest = UpdateDateTime };
+    public static NotifyProperty<DateTime?> DateTime { get; } = new() { OnUpdateRequest = UpdateDateTime };
 
     static async void UpdateWeather() => Weather.Value = await WeatherUtility.Get();
     static async void UpdateBluetoothDevices() => BluetoothDevices.Value = await BluetoothUtility.Get();

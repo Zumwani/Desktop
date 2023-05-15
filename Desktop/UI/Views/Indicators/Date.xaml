@@ -14,7 +14,7 @@
                 </ContextMenu>
             </wpfui:Button.ContextMenu>
 
-            <TextBlock Text="{Binding Value}"/>
+            <TextBlock Text="{Binding Value, TargetNullValue='--', FallbackValue='--'}"/>
 
         </wpfui:Button>
     </DataTemplate>

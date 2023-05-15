@@ -19,8 +19,8 @@ public class Weather : IntervalViewModel
     public override void Update()
     {
         var weather = IndicatorUtility.Weather.Value;
-        Temperature = weather.Temperature;
-        Icon = weather.Icon;
+        Temperature = weather?.Temperature;
+        Icon = weather?.Icon;
     }
 
 }
