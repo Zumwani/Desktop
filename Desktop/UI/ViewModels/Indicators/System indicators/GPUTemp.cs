@@ -9,7 +9,6 @@ public class GPUTemp : SystemTrackerIndicator
     public override SymbolRegular Icon => SymbolRegular.Temperature24;
     public override string? Tooltip => "GPU temperature";
 
-    public override string StringFormat => StringFormats.Temperature;
     public override string Sensor => nameof(SystemInfo.GPUTemp);
 
 }

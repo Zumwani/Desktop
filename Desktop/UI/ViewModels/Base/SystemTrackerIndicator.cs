@@ -15,8 +15,7 @@ public abstract class SystemTrackerIndicator : TrackerIndicator
 
     public string? Value { get; private set; }
 
-    public override void Update()
-    {
-        Value = IndicatorUtility.Tracker.Value?.GetValue(Sensor)?.ToString(StringFormat);
-    }
+    public override void Update() =>
+        Value = IndicatorUtility.Tracker.Value?.GetValue(Sensor);
+
 }

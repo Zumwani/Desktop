@@ -19,6 +19,6 @@ public abstract class SystemTrackerIndicatorMulti : TrackerIndicator
 
     public override void Update()
     {
-        Value = string.Join(Delimiter, Sensors.Select(sensor => IndicatorUtility.Tracker.Value?.GetValue(sensor)?.ToString(StringFormat)));
+        Value = string.Join(Delimiter, Sensors.Select(sensor => IndicatorUtility.Tracker.Value?.GetValue(sensor)));
     }
 }

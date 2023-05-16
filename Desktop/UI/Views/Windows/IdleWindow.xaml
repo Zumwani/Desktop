@@ -9,7 +9,7 @@
             <Border Common.IsVisible="{Binding Config.IsEnabled}">
                 <Grid Common.IsVisible="{Binding IsIdle}">
 
-                    <ContentPresenter Content="{Binding Wallpaper}" Margin="-12"/>
+                    <ContentPresenter Content="{Binding Wallpaper}"/>
 
                     <Border Margin="0,12,0,0" Common.IsVisible="{Binding Config.ShowNotifications}">
                         <ContentPresenter Content="{Binding Notifications}" Common.Scale="2.5" Effect="{DynamicResource Effect.Shadow}"/>

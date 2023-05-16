@@ -9,7 +9,6 @@ public class CPUTemp : SystemTrackerIndicator
     public override SymbolRegular Icon => SymbolRegular.Temperature24;
     public override string? Tooltip => "CPU temperature";
 
-    public override string StringFormat => StringFormats.Temperature;
     public override string Sensor => nameof(SystemInfo.CPUTemp);
 
 }

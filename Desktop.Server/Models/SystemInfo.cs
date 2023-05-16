@@ -6,129 +6,173 @@ namespace Server.Models;
 public class SystemInfo
 {
 
-    public float?[] Values { get; set; } = Enumerable.Repeat<float?>(null, 13).ToArray();
+    public string?[] Values { get; set; } = Enumerable.Repeat<string?>(null, Names.Length).ToArray();
 
-    [JsonIgnore]
-    string[] Names { get; } = new[]
+    static string[] Names { get; } = new string[17]
     {
-
-        nameof(CPUTemp),
-        nameof(CPULoad),
-        nameof(CPUPower),
-
-        nameof(GPUTemp),
-        nameof(GPULoad),
-        nameof(GPUMemoryLoad),
-        nameof(GPUPower),
-        nameof(GPUMemoryUsed),
-        nameof(GPUMemoryTotal),
 
         nameof(BatteryChargeLevel),
         nameof(BatteryRemainingTime),
 
+        nameof(CPUTemp),
+        nameof(CPULoad),
+        nameof(CPUPower),
         nameof(RamUsed),
         nameof(RamTotal),
 
+        nameof(GPUTemp),
+        nameof(GPULoad),
+        nameof(GPUPower),
+        nameof(GPUMemoryUsed),
+        nameof(GPUMemoryTotal),
+
+        nameof(NetworkLoad),
+        nameof(NetworkDataUploaded),
+        nameof(NetworkDataDownloaded),
+        nameof(NetworkThroughputUpload),
+        nameof(NetworkThroughputDownload),
+
     };
 
-    public float? GetValue([CallerMemberName] string? name = null) => Values[Array.IndexOf(Names, name!)];
-    void SetValue(float? value, [CallerMemberName] string? name = null) => Values[Array.IndexOf(Names, name!)] = value;
+    public string? GetValue([CallerMemberName] string? name = null) => Values[Array.IndexOf(Names, name!)];
+    void SetValue(string? value, [CallerMemberName] string? name = null) => Values[Array.IndexOf(Names, name!)] = value;
 
     public override string ToString() =>
         string.Join("\n", Values.Select((value, i) => Names[i] + ": " + value));
 
-    #region Properties
+    #region Properties [18]
+
+    #region Battery [2]
 
     [JsonIgnore]
-    public float? CPUTemp
+    public string? BatteryChargeLevel
     {
         get => GetValue();
         set => SetValue(value);
     }
 
     [JsonIgnore]
-    public float? CPULoad
+    public string? BatteryRemainingTime
+    {
+        get => GetValue();
+        set => SetValue(value);
+    }
+
+    #endregion
+    #region CPU [5]
+
+    [JsonIgnore]
+    public string? CPUTemp
     {
         get => GetValue();
         set => SetValue(value);
     }
 
     [JsonIgnore]
-    public float? CPUPower
+    public string? CPULoad
     {
         get => GetValue();
         set => SetValue(value);
     }
 
     [JsonIgnore]
-    public float? GPUTemp
+    public string? CPUPower
     {
         get => GetValue();
         set => SetValue(value);
     }
 
     [JsonIgnore]
-    public float? GPULoad
+    public string? RamUsed
     {
         get => GetValue();
         set => SetValue(value);
     }
 
     [JsonIgnore]
-    public float? GPUMemoryLoad
+    public string? RamTotal
+    {
+        get => GetValue();
+        set => SetValue(value);
+    }
+
+    #endregion
+    #region GPU [5]
+
+    [JsonIgnore]
+    public string? GPUTemp
     {
         get => GetValue();
         set => SetValue(value);
     }
 
     [JsonIgnore]
-    public float? GPUPower
+    public string? GPULoad
     {
         get => GetValue();
         set => SetValue(value);
     }
 
     [JsonIgnore]
-    public float? GPUMemoryUsed
+    public string? GPUPower
     {
         get => GetValue();
         set => SetValue(value);
     }
 
     [JsonIgnore]
-    public float? GPUMemoryTotal
+    public string? GPUMemoryUsed
     {
         get => GetValue();
         set => SetValue(value);
     }
 
     [JsonIgnore]
-    public float? BatteryChargeLevel
+    public string? GPUMemoryTotal
+    {
+        get => GetValue();
+        set => SetValue(value);
+    }
+
+    #endregion
+    #region Network [5]
+
+    [JsonIgnore]
+    public string? NetworkLoad
     {
         get => GetValue();
         set => SetValue(value);
     }
 
     [JsonIgnore]
-    public float? BatteryRemainingTime
+    public string? NetworkDataUploaded
     {
         get => GetValue();
         set => SetValue(value);
     }
 
     [JsonIgnore]
-    public float? RamUsed
+    public string? NetworkDataDownloaded
     {
         get => GetValue();
         set => SetValue(value);
     }
 
     [JsonIgnore]
-    public float? RamTotal
+    public string? NetworkThroughputUpload
     {
         get => GetValue();
         set => SetValue(value);
     }
+
+    [JsonIgnore]
+    public string? NetworkThroughputDownload
+    {
+        get => GetValue();
+        set => SetValue(value);
+    }
+
+    #endregion
 
     #endregion
 

@@ -8,18 +8,75 @@
         <wpfui:Card HorizontalAlignment="Right" VerticalAlignment="Bottom" HorizontalContentAlignment="Right">
             
             <UniformGrid Columns="1">
+
+                <!--Battery-->
                 <Border Common.IsVisible="{Binding Config.ShowBluetoothDeviceBattery}">
                     <ContentPresenter Content="{Binding BluetoothBattery}"/>
                 </Border>
-                <Border Common.IsVisible="{Binding Config.ShowCpuUsage}">
+
+                <Border Common.IsVisible="{Binding Config.ShowBatteryChargeLevel}">
+                    <ContentPresenter Content="{Binding BatteryChargeLevel}"/>
+                </Border>
+
+                <Border Common.IsVisible="{Binding Config.ShowBatteryRemainingTime}">
+                    <ContentPresenter Content="{Binding BatteryRemainingTime}"/>
+                </Border>
+                
+                <!--CPU-->
+                <Border Common.IsVisible="{Binding Config.ShowCPULoad}">
                     <ContentPresenter Content="{Binding CPULoad}"/>
                 </Border>
-                <Border Common.IsVisible="{Binding Config.ShowCpuTemperature}">
+
+                <Border Common.IsVisible="{Binding Config.ShowCPUPower}">
+                    <ContentPresenter Content="{Binding CPUPower}"/>
+                </Border>
+
+                <Border Common.IsVisible="{Binding Config.ShowCPUTemp}">
                     <ContentPresenter Content="{Binding CPUTemp}"/>
                 </Border>
-                <Border Common.IsVisible="{Binding Config.ShowMemory}">
+
+                <Border Common.IsVisible="{Binding Config.ShowSystemMemory}">
                     <ContentPresenter Content="{Binding SystemMemory}"/>
                 </Border>
+
+                <!--GPU-->
+                <Border Common.IsVisible="{Binding Config.ShowGPULoad}">
+                    <ContentPresenter Content="{Binding GPULoad}"/>
+                </Border>
+
+                <Border Common.IsVisible="{Binding Config.ShowGPUPower}">
+                    <ContentPresenter Content="{Binding GPUPower}"/>
+                </Border>
+
+                <Border Common.IsVisible="{Binding Config.ShowGPUTemp}">
+                    <ContentPresenter Content="{Binding GPUTemp}"/>
+                </Border>
+
+                <Border Common.IsVisible="{Binding Config.ShowGPUMemory}">
+                    <ContentPresenter Content="{Binding GPUMemory}"/>
+                </Border>
+
+                <!--Network-->
+                <Border Common.IsVisible="{Binding Config.ShowNetworkLoad}">
+                    <ContentPresenter Content="{Binding NetworkLoad}"/>
+                </Border>
+
+                <Border Common.IsVisible="{Binding Config.ShowNetworkUploaded}">
+                    <ContentPresenter Content="{Binding NetworkDataUploaded}"/>
+                </Border>
+
+                <Border Common.IsVisible="{Binding Config.ShowNetworkDownloaded}">
+                    <ContentPresenter Content="{Binding NetworkDataDownloaded}"/>
+                </Border>
+
+                <Border Common.IsVisible="{Binding Config.ShowNetworkThroughputUpload}">
+                    <ContentPresenter Content="{Binding NetworkThroughputUpload}"/>
+                </Border>
+
+                <Border Common.IsVisible="{Binding Config.ShowNetworkThroughputDownload}">
+                    <ContentPresenter Content="{Binding NetworkThroughputDownload}"/>
+                </Border>
+                
             </UniformGrid>
             
         </wpfui:Card>
