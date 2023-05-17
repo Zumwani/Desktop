@@ -78,8 +78,8 @@ static class SystemUtility
             gpuTemp = gpu.Find(SensorType.Temperature, "GPU Core");
             gpuLoad = gpu.Find(SensorType.Load, "GPU Core");
             gpuPower = gpu.Find(SensorType.Power, "GPU Package");
-            gpuMemoryUsed = gpu.Find(SensorType.Data, "Memory Used");
-            gpuMemoryTotal = gpu.Find(SensorType.Data, "Memory Total");
+            gpuMemoryUsed = gpu.Find(SensorType.Data, "GPU Memory Used");
+            gpuMemoryTotal = gpu.Find(SensorType.Data, "GPU Memory Total");
 
             networkLoad = network.Find(SensorType.Load, "Network Utilization");
             networkDataUploaded = network.Find(SensorType.Data, "Data Uploaded");
