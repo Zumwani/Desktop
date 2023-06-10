@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Shell;
 using Desktop.Config;
+using Microsoft.Win32;
 using PostSharp.Patterns.Model;
 
 namespace Desktop;
@@ -11,6 +12,8 @@ namespace Desktop;
 [NotifyPropertyChanged]
 public partial class DesktopWindow : Window
 {
+
+    //TODO: Add a idle tracker accuracy, mouse move or input
 
     //TODO: Fix drag start from files
     //TODO: Fix GPU memory
@@ -24,17 +27,31 @@ public partial class DesktopWindow : Window
     //Widgets: FilesWidget, NotificationsWidget, NotesWidget, IndicatorWidget
     //Indicators: Time, Date, Weather, Trackers...
 
-    public ViewModels.DesktopWindow View { get; } = new();
+    public ViewModels.DesktopWindow View { get; private set; } = null!;
 
     public Config.DesktopWindow Config { get; } = ConfigManager.DesktopWindow;
     public bool IsMouseDown { get; set; }
 
     public DesktopWindow()
     {
+
+        Reload();
+        SystemEvents.PowerModeChanged += (s, e) =>
+        {
+
+            if (e.Mode == PowerModes.Resume)
+                Reload();
+
+        };
+
         InitializeWindow();
         InitializeComponent();
         Show();
+
     }
+
+    void Reload() =>
+        View = new();
 
     #region Window
 

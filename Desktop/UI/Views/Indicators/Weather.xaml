@@ -18,6 +18,8 @@
 
             <DockPanel IsHitTestVisible="False" Margin="-6,0,0,0">
 
+                <wpfui:SymbolIcon Margin="12,0,22,0" DockPanel.Dock="{Binding IconDock}" Symbol="TimeAndWeather24" Common.IsCollapsed="{Binding Icon, Converter={converters:HasValue}}" Transition.IsEnabled="False" VerticalAlignment="Center"/>
+
                 <Canvas Width="50" Height="0" DockPanel.Dock="{Binding IconDock}" Common.IsVisible="{Binding Icon, Converter={converters:HasValue}}" Transition.IsEnabled="False">
                     <Border Width="50" Height="50" Margin="0,-25,0,0">
                         <Border.Background>
@@ -25,11 +27,11 @@
                         </Border.Background>
                     </Border>
                 </Canvas>
-
+                
                 <Border Width="8" DockPanel.Dock="{Binding IconDock}" Common.IsVisible="{Binding Icon, Converter={converters:HasValue}}" Transition.IsEnabled="False"/>
-
+                
                 <TextBlock x:Name="TextBlock" VerticalAlignment="Center" Effect="{DynamicResource Effect.Shadow}"
-                           Text="{Binding Temperature, Mode=OneWay, StringFormat='{}{0:N1} °C', TargetNullValue='No location set'}"/>
+                           Text="{Binding Temperature, Mode=OneWay, StringFormat='{}{0:N1} °C', TargetNullValue='--'}"/>
 
             </DockPanel>
 

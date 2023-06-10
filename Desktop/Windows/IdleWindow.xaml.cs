@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 using Desktop.Config;
+using Microsoft.Win32;
 using PostSharp.Patterns.Model;
 
 namespace Desktop;
@@ -13,15 +14,29 @@ public partial class IdleWindow : Window
 {
 
     public bool IsIdle => true;
-    public ViewModels.IdleWindow View { get; } = new();
+    public ViewModels.IdleWindow View { get; private set; } = null!;
 
     public IdleWindow()
     {
+
+        Reload();
+        SystemEvents.PowerModeChanged += (s, e) =>
+        {
+
+            if (e.Mode == PowerModes.Resume)
+                Reload();
+
+        };
+
         ResetBounds();
         InitializeComponent();
         Show();
         ConfigManager.DesktopWindow.PropertyChanged += (s, e) => ResetBounds();
+
     }
+
+    void Reload() =>
+        View = new();
 
     void ResetBounds()
     {
@@ -34,11 +49,13 @@ public partial class IdleWindow : Window
 
     void UiWindow_Loaded(object sender, RoutedEventArgs e)
     {
+
         ActionUtility.Invoke(() => { if (!GetIfMouseOver()) View.IsOpen = true; }, TimeSpan.FromSeconds(0.1));
         ResetBounds();
         Topmost = true;
         Topmost = false;
         Topmost = true;
+
     }
 
     protected override void OnClosing(CancelEventArgs e) =>

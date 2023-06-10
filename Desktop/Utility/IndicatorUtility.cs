@@ -50,6 +50,7 @@ public static class IndicatorUtility
         ActionUtility.Invoke(UpdateBluetoothDevices, ConfigManager.SystemInfo.UpdateInterval);
         ActionUtility.Invoke(UpdateTracker, ConfigManager.SystemInfo.UpdateInterval);
         ActionUtility.Invoke(UpdateWeather, ConfigManager.Weather.UpdateInterval);
+        ActionUtility.Invoke(WeatherInvalidUpdate, TimeSpan.FromSeconds(2));
 
     }
 
@@ -60,11 +61,20 @@ public static class IndicatorUtility
         ActionUtility.StopInvoke(UpdateBluetoothDevices);
         ActionUtility.StopInvoke(UpdateTracker);
         ActionUtility.StopInvoke(UpdateWeather);
+        ActionUtility.StopInvoke(WeatherInvalidUpdate);
 
         Tracker.Value = null;
         Weather.Value = null;
         BluetoothDevices.Value = null;
         DateTime.Value = null;
+
+    }
+
+    static void WeatherInvalidUpdate()
+    {
+
+        if (WeatherUtility.IsValid && Weather.Value?.Icon is null)
+            UpdateWeather();
 
     }
 
