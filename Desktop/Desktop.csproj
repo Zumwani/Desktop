@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Desktop.Server\Desktop.Server.csproj" />
+    <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

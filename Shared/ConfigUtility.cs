@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Win32;
 
@@ -16,7 +14,7 @@ public static class ConfigUtility
 {
 
     static ConfigUtility() =>
-        App.Current.Exit += (s, e) => DoSave();
+        Application.Current.Exit += (s, e) => DoSave();
 
     #region Queue
 
@@ -30,7 +28,7 @@ public static class ConfigUtility
         _ = queue.Remove(key);
         queue.Add(key, action);
 
-        timer ??= new DispatcherTimer(TimeSpan.FromSeconds(0.5), DispatcherPriority.Background, (s, e) => DoSave(), App.Current.Dispatcher);
+        timer ??= new DispatcherTimer(TimeSpan.FromSeconds(0.5), DispatcherPriority.Background, (s, e) => DoSave(), Application.Current.Dispatcher);
         timer.Stop();
         timer.Start();
 

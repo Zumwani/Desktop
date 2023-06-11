@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Linq;
 
 namespace Desktop.Utility;
 
-static class ObservableCollectionUtility
+public static class ObservableCollectionUtility
 {
 
     public static void OnAdded<T>(this ObservableCollection<T> list, Action<T> callback)

@@ -2,7 +2,7 @@
 
 namespace Desktop;
 
-static class PointUtility
+public static class PointUtility
 {
 
     public static bool InRange(this double value, double targetValue, double range) =>
