@@ -51,7 +51,7 @@ public partial class DesktopWindow : Window
     }
 
     void Reload() =>
-        View = new();
+        View = new() { IsLoaded = IsLoaded };
 
     #region Window
 
