@@ -36,7 +36,7 @@
                             <wpfui:SymbolIcon x:Name="ControlIcon"
                                       VerticalAlignment="Center" Filled="{TemplateBinding IconFilled}"
                                       FontSize="{TemplateBinding FontSize}" FontWeight="{TemplateBinding FontWeight}"
-                                      Foreground="{TemplateBinding IconForeground}" Symbol="{TemplateBinding Icon}">
+                                      Foreground="{TemplateBinding Foreground}" Symbol="{TemplateBinding Icon}">
                                 <wpfui:SymbolIcon.Style>
                                     <Style TargetType="wpfui:SymbolIcon" BasedOn="{StaticResource {x:Type wpfui:SymbolIcon}}">
 

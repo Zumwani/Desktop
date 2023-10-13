@@ -14,9 +14,9 @@
 		<PackageReference Include="MahApps.Metro" Version="2.4.9" />
 		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
 		<PackageReference Include="PostSharp.Patterns.Model" Version="2023.0.4" />
-		<PackageReference Include="ShellUtility.Windows" Version="1.0.51" />
+		<PackageReference Include="ShellUtility.Windows" Version="1.0.56" />
 		<PackageReference Include="WindowsHook" Version="1.0.1" />
-		<PackageReference Include="WPF-UI" Version="2.0.3" />
+		<PackageReference Include="WPF-UI" Version="2.1.0" />
 	</ItemGroup>
 	
 	<ItemGroup>
