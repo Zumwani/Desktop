@@ -18,10 +18,6 @@ Contains the following features:
 
 ![](image.png)
 
-## Download
-You can either download ClickOnce.zip by clicking it above, or use this direct link:\
-[ClickOnce.zip](https://raw.githubusercontent.com/Zumwani/Desktop/main/ClickOnce.zip)
-
 ## Credits
 App icon: <img src="https://cdn-icons-png.flaticon.com/512/1597/1597580.png" alt= “” width="22" height="22">\
 <a href="https://www.flaticon.com/free-icons/desktop" title="desktop icons">Desktop icons created by Freepik - Flaticon</a>
