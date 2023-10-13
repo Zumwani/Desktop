@@ -1,5 +1,5 @@
 # Desktop
- A personal desktop app.
+ A personal desktop app for secondary monitor.
 
 Contains the following features:
 * Wallpaper.
@@ -15,6 +15,8 @@ Contains the following features:
 * Dimmer (dims screen when not active).
 * Idle mode, displays widgets, rearranged, in larger font, meant for when AFK.
 * Fix for white line at bottom of primary screen, when on Win11, and taskbar autohide is enabled.
+
+![](image.png)
 
 ## Credits
 App icon: <img src="https://cdn-icons-png.flaticon.com/512/1597/1597580.png" alt= “” width="22" height="22">\
