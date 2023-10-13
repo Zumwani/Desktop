@@ -20,7 +20,7 @@ public class Notifications : ViewModel
 
     public RelayCommand ClearNotificationsCommand { get; } = new(NotificationUtility.ClearAll);
     public RelayCommand CreateTimedCommand { get; } = new(() => NotificationUtility.Notify("this is a timed notification", TimeSpan.FromSeconds(2.5)));
-    public RelayCommand CreatePermanentCommand { get; } = new(() => NotificationUtility.Notify("this is a permanent notification"));
+    public RelayCommand CreatePermanentCommand { get; } = new(() => NotificationUtility.Notify("this is a permanent notification this is a permanent notification this is a permanent notification this is a permanent notification this is a permanent notification this is a permanent notification this is a permanent notification "));
 
     public bool ShowTestButton { get; set; }
 

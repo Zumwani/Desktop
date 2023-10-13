@@ -1,7 +1,10 @@
 ﻿using System.Diagnostics;
+using System.Threading.Tasks;
 using Desktop.Config;
 using Desktop.ViewModels.Helpers;
 using PostSharp.Patterns.Model;
+using ShellUtility.Screens;
+using WindowsHook;
 
 namespace Desktop.ViewModels;
 
@@ -9,8 +12,10 @@ namespace Desktop.ViewModels;
 public class IdleWindow : IntervalViewModel
 {
 
-    public Config.IdleMode Config { get; } = ConfigManager.IdleMode;
-    public Config.General GeneralConfig { get; } = ConfigManager.General;
+    public static IdleWindow Instance { get; } = new();
+
+    public IdleMode Config { get; } = ConfigManager.IdleMode;
+    public General GeneralConfig { get; } = ConfigManager.General;
 
     public Notifications Notifications { get; } = new();
     public Time Time { get; } = new();
@@ -22,19 +27,31 @@ public class IdleWindow : IntervalViewModel
     public bool IsIdle { get; set; }
     public bool IsOpen { get; set; }
 
-    public IdleWindow()
+    private IdleWindow()
     {
         Notifications.Config = Config;
         Tracker.Config = Config;
         Wallpaper.Config = Config;
+        Hook.GlobalEvents().MouseMove += (s, e) => Task.Run(() => { if (IsIdle) Update(); });
+        Config.PropertyChanged += (s, e) => { if (IsIdle) Update(); };
     }
 
     public override void Update()
     {
-        if (Debugger.IsAttached && Config.DisableDelayInDebugMode)
-            IsIdle = true;
-        else
-            IsIdle = Config.IsEnabled && IdleUtility.IsIdle(Config.DelayBeforeOpening);
+
+        IsIdle =
+            (Debugger.IsAttached && Config.DisableDelayInDebugMode) ||
+            IsTVActive() ||
+            (Config.IsEnabled && IdleUtility.IsIdle(Config.DelayBeforeOpening));
+
+    }
+
+    bool IsTVActive()
+    {
+
+        var handle = ShellUtility.Windows.Utility.WindowUtility.GetActiveWindow();
+        return Screen.FromWindowHandle(handle, false)?.Index == 2;
+
     }
 
 }

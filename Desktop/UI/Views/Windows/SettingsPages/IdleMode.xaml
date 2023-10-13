@@ -1,6 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
                     xmlns:viewModels="clr-namespace:Desktop.ViewModels.SettingPages"
                     xmlns:controls="clr-namespace:Desktop.Controls">
 
@@ -24,62 +23,76 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox>
+            <GroupBox Header="Primary monitor">
                 <StackPanel>
-
-                    <CheckBox Content="Show time" IsChecked="{Binding Config.ShowTime}"/>
-                    <CheckBox Content="Show date" IsChecked="{Binding Config.ShowDate}"/>
-                    <CheckBox Content="Show weather" IsChecked="{Binding Config.ShowWeather}"/>
-                    <CheckBox Content="Show notifications" IsChecked="{Binding Config.ShowNotifications}"/>
-                    
-                    
+                    <CheckBox Content="Dim" IsChecked="{Binding Config.DimPrimaryScreen}"/>
+                    <CheckBox Content="Display clock" IsChecked="{Binding Config.DisplayClockOnPrimary}"/>
+                    <CheckBox Content="Display notifications" IsChecked="{Binding Config.DisplayNotificationsOnPrimary}"/>
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Battery">
+            <GroupBox Header="Secondary monitors">
                 <StackPanel>
-                    <CheckBox Content="Show bluetooth battery indicator" IsChecked="{Binding Config.ShowBluetoothDeviceBattery}"/>
-                    <CheckBox Content="Show charge level" IsChecked="{Binding Config.ShowBatteryChargeLevel}"/>
-                    <CheckBox Content="Show remaining time" IsChecked="{Binding Config.ShowBatteryRemainingTime}"/>
+                
+                    <GroupBox>
+                        <StackPanel>
+
+                            <CheckBox Content="Show time" IsChecked="{Binding Config.ShowTime}"/>
+                            <CheckBox Content="Show date" IsChecked="{Binding Config.ShowDate}"/>
+                            <CheckBox Content="Show weather" IsChecked="{Binding Config.ShowWeather}"/>
+                            <CheckBox Content="Show notifications" IsChecked="{Binding Config.ShowNotifications}"/>
+
+
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="Battery">
+                        <StackPanel>
+                            <CheckBox Content="Show bluetooth battery indicator" IsChecked="{Binding Config.ShowBluetoothDeviceBattery}"/>
+                            <CheckBox Content="Show charge level" IsChecked="{Binding Config.ShowBatteryChargeLevel}"/>
+                            <CheckBox Content="Show remaining time" IsChecked="{Binding Config.ShowBatteryRemainingTime}"/>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="CPU">
+                        <StackPanel>
+
+                            <CheckBox Content="Show usage (percent)" IsChecked="{Binding Config.ShowCPULoad}"/>
+                            <CheckBox Content="Show usage (power)" IsChecked="{Binding Config.ShowCPUPower}"/>
+                            <CheckBox Content="Show temperature" IsChecked="{Binding Config.ShowCPUTemp}"/>
+
+                            <CheckBox Content="Show memory (used / total)" IsChecked="{Binding Config.ShowSystemMemory}"/>
+
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="GPU">
+                        <StackPanel>
+
+                            <CheckBox Content="Show usage (percent)" IsChecked="{Binding Config.ShowGPULoad}"/>
+                            <CheckBox Content="Show usage (power)" IsChecked="{Binding Config.ShowGPUPower}"/>
+                            <CheckBox Content="Show temperature" IsChecked="{Binding Config.ShowGPUTemp}"/>
+
+                            <CheckBox Content="Show memory (used / total)" IsChecked="{Binding Config.ShowGPUMemory}"/>
+
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="Network">
+                        <StackPanel>
+
+                            <CheckBox Content="Show usage (percent)" IsChecked="{Binding Config.ShowNetworkLoad}"/>
+                            <CheckBox Content="Show data usage (upload)" IsChecked="{Binding Config.ShowNetworkUploaded}"/>
+                            <CheckBox Content="Show data usage (download)" IsChecked="{Binding Config.ShowNetworkDownloaded}"/>
+                            <CheckBox Content="Show throughput (upload)" IsChecked="{Binding Config.ShowNetworkThroughputUpload}"/>
+                            <CheckBox Content="Show throughput (download)" IsChecked="{Binding Config.ShowNetworkThroughputDownload}"/>
+
+                        </StackPanel>
+                    </GroupBox>
+
                 </StackPanel>
             </GroupBox>
-
-            <GroupBox Header="CPU">
-                <StackPanel>
-
-                    <CheckBox Content="Show usage (percent)" IsChecked="{Binding Config.ShowCPULoad}"/>
-                    <CheckBox Content="Show usage (power)" IsChecked="{Binding Config.ShowCPUPower}"/>
-                    <CheckBox Content="Show temperature" IsChecked="{Binding Config.ShowCPUTemp}"/>
-
-                    <CheckBox Content="Show memory (used / total)" IsChecked="{Binding Config.ShowSystemMemory}"/>
-
-                </StackPanel>
-            </GroupBox>
-
-            <GroupBox Header="GPU">
-                <StackPanel>
-
-                    <CheckBox Content="Show usage (percent)" IsChecked="{Binding Config.ShowGPULoad}"/>
-                    <CheckBox Content="Show usage (power)" IsChecked="{Binding Config.ShowGPUPower}"/>
-                    <CheckBox Content="Show temperature" IsChecked="{Binding Config.ShowGPUTemp}"/>
-
-                    <CheckBox Content="Show memory (used / total)" IsChecked="{Binding Config.ShowGPUMemory}"/>
-
-                </StackPanel>
-            </GroupBox>
-
-            <GroupBox Header="Network">
-                <StackPanel>
-
-                    <CheckBox Content="Show usage (percent)" IsChecked="{Binding Config.ShowNetworkLoad}"/>
-                    <CheckBox Content="Show data usage (upload)" IsChecked="{Binding Config.ShowNetworkUploaded}"/>
-                    <CheckBox Content="Show data usage (download)" IsChecked="{Binding Config.ShowNetworkDownloaded}"/>
-                    <CheckBox Content="Show throughput (upload)" IsChecked="{Binding Config.ShowNetworkThroughputUpload}"/>
-                    <CheckBox Content="Show throughput (download)" IsChecked="{Binding Config.ShowNetworkThroughputDownload}"/>
-
-                </StackPanel>
-            </GroupBox>
-
+            
         </StackPanel>
     </DataTemplate>
     

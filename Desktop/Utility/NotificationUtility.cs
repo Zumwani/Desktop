@@ -7,7 +7,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Desktop.Config;
 using Desktop.Models;
+using Windows.UI.Notifications;
 using Windows.UI.Notifications.Management;
+using Notification = Desktop.Models.Notification;
 
 namespace Desktop.Utility;
 
@@ -113,7 +115,7 @@ static partial class NotificationUtility
 
     static readonly List<Func<Note, bool>> TriggersOn = new()
     {
-        (n) => n.NotifyOnSunday, //DayOfWeek enum starts on sunday, which certainly isn't confusing for 94% of the world
+        (n) => n.NotifyOnSunday, //DayOfWeek enum starts on Sunday, which certainly isn't confusing for 94% of the world
         (n) => n.NotifyOnMonday,
         (n) => n.NotifyOnTuesday,
         (n) => n.NotifyOnWednesday,
@@ -161,7 +163,7 @@ static partial class NotificationUtility
                 return;
 
             var notifications =
-                (await listener.GetNotificationsAsync(Windows.UI.Notifications.NotificationKinds.Toast)).
+                (await listener.GetNotificationsAsync(NotificationKinds.Toast)).
                 Where(n => !list.Contains(n.Id)).
                 ToArray();
 
@@ -170,7 +172,7 @@ static partial class NotificationUtility
 
                 list.Add(notification.Id);
 
-                var binding = notification.Notification.Visual.GetBinding(Windows.UI.Notifications.KnownNotificationBindings.ToastGeneric);
+                var binding = notification.Notification.Visual.GetBinding(KnownNotificationBindings.ToastGeneric);
                 var text = string.Join("\n", binding.GetTextElements().Select(t => t.Text));
 
                 var header = binding.GetTextElements()[0].Text;

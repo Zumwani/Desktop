@@ -9,7 +9,7 @@
 	<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 	<PackageIcon>computer.ico</PackageIcon>
   </PropertyGroup>
-
+	
   <ItemGroup>
     <Resource Include="computer.ico" />
   </ItemGroup>

@@ -1,0 +1,73 @@
+﻿<Window x:Class="Desktop.Windows.IdleWindowPrimary"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:utility="clr-namespace:Desktop.Utility"
+        xmlns:converters="clr-namespace:Desktop.Converters"
+        xmlns:helpers="clr-namespace:Desktop.ViewModels.Helpers"
+        mc:Ignorable="d"
+        Title="IdleWindowPrimary"
+        WindowStyle="None" ResizeMode="NoResize" Cursor="None"
+        Background="{x:Null}" AllowsTransparency="True" ShowInTaskbar="False" Common.IsVisibleInAltTab="False"
+        Topmost="True"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+
+    <Grid Common.IsVisible="{Binding View.IsIdle, Mode=OneWay, FallbackValue=True}">
+        
+        <Rectangle Fill="#AA000000" Common.IsVisible="{Binding View.Config.DimPrimaryScreen}"/>
+
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,64">
+
+            <ItemsControl ItemsSource="{Binding Notifications}" Common.IsVisible="{Binding View.Config.DisplayNotificationsOnPrimary}">
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+
+                        <Border Background="#202020" BorderBrush="DimGray" BorderThickness="1,1,0,1" CornerRadius="3,0,0,3" Margin="0,0,0,12" HorizontalAlignment="Right" Common.IsVisible="{Binding IsVisible, Mode=OneWay}"
+                                DataContext="{Binding Model}">
+                            
+                            <Grid>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid TextBlock.Foreground="White" MaxWidth="2000" MaxHeight="600" TextBlock.FontFamily="Segoe UI Semilight" Margin="22,12">
+
+                                    <TextBlock TextTrimming="CharacterEllipsis" TextWrapping="Wrap" FontSize="52" Common.IsCollapsed="{Binding DuplicateHeaderCount, Converter={converters:IsOver}, ConverterParameter=1}" Transition.IsEnabled="False">
+                                        <Run Text="{Binding Content, Mode=OneWay}"/>
+                                    </TextBlock>
+
+                                    <TextBlock TextTrimming="CharacterEllipsis" TextWrapping="Wrap" FontSize="52" Common.IsVisible="{Binding DuplicateHeaderCount, Converter={converters:IsOver}, ConverterParameter=1}" Transition.IsEnabled="False">
+                                        <Run Text="{Binding DuplicateHeaderCount, Mode=OneWay}"/>
+                                        <Run Text="{Binding Content, Mode=OneWay}"/>
+                                    </TextBlock>
+
+                                </Grid>
+
+                                <ProgressBar Grid.Row="1" Height="6" Background="#AAFFFFFF" Foreground="CornflowerBlue" Margin="2"
+                                             Minimum="{Binding CreationTime.Ticks, Mode=OneWay}"
+                                             Maximum="{Binding EndTime.Ticks, Mode=OneWay}"
+                                             Value="{Binding Source={x:Static helpers:IndicatorUtility.DateTime}, Path=Value.Ticks, Mode=OneWay}"
+                                             Common.IsHidden="{Binding IsPermanent}" Transition.IsEnabled="False"/>
+                                
+                            </Grid>
+                        </Border>
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
+            </ItemsControl>
+            
+            <Border Background="#202020" BorderBrush="DimGray" BorderThickness="1,1,0,1" CornerRadius="3,0,0,3" HorizontalAlignment="Right"
+                    Common.IsVisible="{Binding View.Config.DisplayClockOnPrimary}">
+                <TextBlock Text="{Binding Time, StringFormat=t, FallbackValue='12:00 PM'}" Foreground="White" FontSize="102" FontFamily="Segoe UI Semilight" Margin="22,12"/>
+            </Border>
+        
+        </StackPanel>
+        
+    </Grid>
+    
+</Window>

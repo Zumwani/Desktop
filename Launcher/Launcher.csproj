@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows10.0.17763.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Common-wpf.Settings" Version="1.1.6" />
+		<PackageReference Include="Common-wpf.Utility" Version="2023.5.11.161712" />
+		<PackageReference Include="IronWebScraper" Version="2023.6.1" />
+		<PackageReference Include="MahApps.Metro" Version="2.4.9" />
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+		<PackageReference Include="PostSharp.Patterns.Model" Version="2023.0.4" />
+		<PackageReference Include="ShellUtility.Windows" Version="1.0.51" />
+		<PackageReference Include="WindowsHook" Version="1.0.1" />
+		<PackageReference Include="WPF-UI" Version="2.0.3" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\Shared\Shared.csproj" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <Folder Include="Models\" />
+	  <Folder Include="Utility\" />
+	  <Folder Include="Views\" />
+	  <Folder Include="ViewModels\" />
+	</ItemGroup>
+	
+</Project>

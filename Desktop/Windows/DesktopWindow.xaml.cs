@@ -13,20 +13,6 @@ namespace Desktop;
 public partial class DesktopWindow : Window
 {
 
-    //TODO: Add a idle tracker accuracy, mouse move or input
-
-    //TODO: Fix drag start from files
-    //TODO: Fix GPU memory
-
-    //TODO: Add IndicatorWidget, which can take a list of Stack (root is a vertical stack), stacks can be nested
-    //TODO: Each stack can take a list of Indicator
-    //TODO: Add SpacerIndicator, which expands to consume available space, pushing indicators after it to the end
-    //TODO: Add drag and drop for indicators
-    //TODO: Add drag and drop for widgets
-
-    //Widgets: FilesWidget, NotificationsWidget, NotesWidget, IndicatorWidget
-    //Indicators: Time, Date, Weather, Trackers...
-
     public ViewModels.DesktopWindow View { get; private set; } = null!;
 
     public Config.DesktopWindow Config { get; } = ConfigManager.DesktopWindow;

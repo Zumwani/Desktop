@@ -3,6 +3,7 @@ global using Desktop.Utility;
 global using RelayCommand = Common.Utility.RelayCommand;
 using System.Windows;
 using Desktop.Config;
+using Desktop.Windows;
 
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
 namespace Desktop;
@@ -19,7 +20,8 @@ public partial class App : Application
             ServerUtility.Restart();
 
             MainWindow = new DesktopWindow();
-            _ = new IdleWindow();
+            IdleWindowSecondary.Initialize();
+            _ = new IdleWindowPrimary();
 
             if (ConfigManager.General.IsFirstOpen)
             {

@@ -13,4 +13,8 @@ public class IdleMode : WindowConfig
     public Duration DelayBeforeOpening { get; set; } = Duration.FromMinutes(5);
     public bool DisableDelayInDebugMode { get; set; } = true;
 
+    public bool DimPrimaryScreen { get; set; } = true;
+    public bool DisplayClockOnPrimary { get; set; } = true;
+    public bool DisplayNotificationsOnPrimary { get; set; } = true;
+
 }

@@ -1,23 +1,62 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Desktop.Config;
+using Desktop.ViewModels;
 using Microsoft.Win32;
 using PostSharp.Patterns.Model;
+using ShellUtility.Screens;
 
 namespace Desktop;
 
 [NotifyPropertyChanged]
-public partial class IdleWindow : Window
+public partial class IdleWindowSecondary : Window
 {
 
     public bool IsIdle => true;
     public ViewModels.IdleWindow View { get; private set; } = null!;
 
-    public IdleWindow()
+    static bool isInitialized;
+    public static void Initialize()
     {
+
+        if (isInitialized)
+            return;
+        isInitialized = true;
+
+        SystemEvents.DisplaySettingsChanging += (s, e) => Reinitialize();
+        Reinitialize();
+
+    }
+
+    static IdleWindowSecondary? window;
+    public static async void Reinitialize()
+    {
+
+        if (window is not null && window.IsLoaded)
+        {
+            window.close = true;
+            window.View = null!;
+            window.Close();
+        }
+
+        var rect = Screen.FromIndex(0, false)?.Bounds.ToRect();
+        if (!rect.HasValue)
+        {
+            await Task.Delay(1000);
+            Reinitialize();
+        }
+        else
+            window = new(rect.Value);
+
+    }
+
+    private IdleWindowSecondary(Rect rect)
+    {
+
+        this.rect = rect;
 
         Reload();
         SystemEvents.PowerModeChanged += (s, e) =>
@@ -28,19 +67,16 @@ public partial class IdleWindow : Window
 
         };
 
-        ResetBounds();
         InitializeComponent();
         Show();
-        ConfigManager.DesktopWindow.PropertyChanged += (s, e) => ResetBounds();
 
     }
 
     void Reload() =>
-        View = new();
+        View = IdleWindow.Instance;
 
     void ResetBounds()
     {
-        rect = ShellUtility.Screens.Screen.FromWindowHandle(Application.Current.MainWindow.Handle()).Bounds.ToRect();
         Left = rect.Left - 1;
         Top = rect.Top - 1;
         Width = rect.Width + 2;
@@ -50,7 +86,9 @@ public partial class IdleWindow : Window
     void UiWindow_Loaded(object sender, RoutedEventArgs e)
     {
 
-        ActionUtility.Invoke(() => { if (!GetIfMouseOver()) View.IsOpen = true; }, TimeSpan.FromSeconds(0.1));
+        Reload();
+
+        ActionUtility.Invoke(() => { if (!GetIfMouseOver()) if (View is not null) View.IsOpen = true; }, TimeSpan.FromSeconds(0.1));
         ResetBounds();
         Topmost = true;
         Topmost = false;
@@ -58,8 +96,12 @@ public partial class IdleWindow : Window
 
     }
 
-    protected override void OnClosing(CancelEventArgs e) =>
-        e.Cancel = !Application.Current.Dispatcher.HasShutdownStarted;
+    bool close;
+    protected override void OnClosing(CancelEventArgs e)
+    {
+        if (!close && !Application.Current.Dispatcher.HasShutdownStarted)
+            e.Cancel = true;
+    }
 
     void Window_PreviewMouseDown(object sender, MouseButtonEventArgs e) =>
       View.IsOpen = false;
