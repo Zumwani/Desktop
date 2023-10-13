@@ -4,7 +4,7 @@
 Contains the following features:
 * Wallpaper.
 * Files / folders from Desktop and Downloads folders (supports creating, moving and deleting files).
-* Notifications (supports windows notifications).
+* Notifications (supports windows notifications - no activation / buttons though).
 * Notes (supports notifications, and can be hidden).
 * Time, date and weather widgets.
 * System info widget:
